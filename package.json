@@ -15,6 +15,8 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "latex.js": "^0.12.6"
+    "latex.js": "^0.12.6",
+    "regenerator-runtime": "^0.13.11",
+    "svgdom": "^0.1.14"
   }
 }
