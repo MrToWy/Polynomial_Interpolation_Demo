@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import {LineMaterial} from "three/addons/lines/LineMaterial";
-import {LineGeometry} from "three/addons/lines/LineGeometry";
-import {Line2} from "three/addons/lines/Line2";
+import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 import {CircleGeometry, Mesh, MeshBasicMaterial} from "three";
 
 export function getAxis(x = 0., y = 1., color = 0xffff00, size = 25){
