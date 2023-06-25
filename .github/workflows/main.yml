@@ -11,21 +11,7 @@ on:
 
 jobs:
 
-  prettify:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
-  
-
-    - name: Prettier Action
-      uses: creyD/prettier_action@v4.3
-        
 
 
   build:
