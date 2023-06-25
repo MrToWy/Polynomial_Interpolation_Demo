@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2.js';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
-import {Mesh, MeshBasicMaterial, SphereGeometry} from "three";
+import {CircleGeometry, Mesh, MeshBasicMaterial} from "three";
 
 
 
@@ -21,7 +21,7 @@ document.body.appendChild( renderer.domElement );
 
 scene.add( getAxis(1., 0., 0xFFFFFF) ); // x-axis
 scene.add( getAxis(0., 1., 0xFFFFFF) ); // y-axis
-scene.add( getPoint(10.,10.));
+scene.add( getPoint(10.,10., 10));
 
 
 renderer.render( scene, camera );
@@ -59,7 +59,7 @@ function getAxis(x = 0., y = 1., color = 0xffff00, size = 25){
 }
 
 function getPoint(x,y,radius = 1., color = 0xffff00) {
-  let geo = new SphereGeometry(radius);
+  let geo = new CircleGeometry(radius, 256);
   let mat = new MeshBasicMaterial({color: color});
   let point = new Mesh(geo, mat);
 
