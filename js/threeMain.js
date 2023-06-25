@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime'
 import * as THREE from 'three';
-import {getAxis, getPoint} from './drawableObjects';
+import {getAxis, getLine} from './drawableObjects';
 
 
 const scene = new THREE.Scene();
@@ -15,9 +15,15 @@ renderer.setSize( window.innerHeight, window.innerHeight ); // leave this quadra
 renderer.setClearColor("#141C24")
 document.body.appendChild( renderer.domElement );
 
-scene.add( getAxis(1., 0., 0xFFFFFF) ); // x-axis
-scene.add( getAxis(0., 1., 0xFFFFFF) ); // y-axis
-scene.add( getPoint(10.,10., 10));
+scene.add( getAxis() );
 
+let points = [
+  0,1,0,
+  2,5,0,
+  3,6,0,
+  9,3,0
+];
+
+scene.add(getLine(points));
 
 renderer.render( scene, camera );
