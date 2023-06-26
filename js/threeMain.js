@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import { getAxis, getLine, getPoints } from "./drawableObjects";
+import {getAxis, getLine, getPoints, interpolate} from "./drawableObjects";
 import { Vector3 } from "three";
 
 const scene = new THREE.Scene();
@@ -26,5 +26,6 @@ let points = [point1, point2, point3, point4];
 scene.add(getPoints(points));
 
 scene.add(getLine(points));
+interpolate(points);
 
 renderer.render(scene, camera);

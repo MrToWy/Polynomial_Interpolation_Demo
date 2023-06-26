@@ -1,7 +1,7 @@
-import { Line2 } from "three/examples/jsm/lines/Line2.js";
-import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
-import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
-import { CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3 } from "three";
+import {Line2} from "three/examples/jsm/lines/Line2.js";
+import {LineMaterial} from "three/examples/jsm/lines/LineMaterial.js";
+import {LineGeometry} from "three/examples/jsm/lines/LineGeometry.js";
+import {CircleGeometry, Group, Matrix4, Mesh, MeshBasicMaterial, Vector3, Vector4} from "three";
 
 export function getAxis(color = 0xffffff, size = 25) {
   let origin = new Vector3(0, 0, 0);
@@ -42,7 +42,30 @@ export function getLine(points, color = 0xffff00) {
   return line2;
 }
 
-export function interpolate() {}
+export function interpolate(points) {
+  if(points.length !== 4) throw new Error("Nur 4 Punkte möglich.");
+
+  let matrix = new Matrix4();
+  let x0 = points[0].x;
+  let x1 = points[1].x;
+  let x2 = points[2].x;
+  let x3 = points[3].x;
+  let y0 = points[0].y;
+  let y1 = points[1].y;
+  let y2 = points[2].y;
+  let y3 = points[3].y;
+  matrix.set(
+    1, x0, Math.pow(x0,2), Math.pow(x0,3),
+    1, x1, Math.pow(x1,2), Math.pow(x1,3),
+    1, x2, Math.pow(x2,2), Math.pow(x2,3),
+    1, x3, Math.pow(x3,2), Math.pow(x3,3),
+  )
+
+  let vector = new Vector4(y0,y1,y2,y3);
+  let inverse = matrix.invert();
+
+  return vector.applyMatrix4(inverse);
+}
 
 function concatVector3Array(array) {
   let flatArray = [];
