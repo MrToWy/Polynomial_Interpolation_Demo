@@ -3,7 +3,7 @@ import {LineMaterial} from "three/examples/jsm/lines/LineMaterial.js";
 import {LineGeometry} from "three/examples/jsm/lines/LineGeometry.js";
 import {CircleGeometry, Group, Matrix4, Mesh, MeshBasicMaterial, Vector3, Vector4} from "three";
 
-export function getAxis(color = 0xffffff, size = 25) {
+export function getAxis(size = 25, color = 0xffffff) {
   let origin = new Vector3(0, 0, 0);
   let endOfXAxis = new Vector3(size, 0, 0);
   let endOfYAxis = new Vector3(0, size, 0);
@@ -83,4 +83,16 @@ export function getPoints(pointsArray) {
     group.add(getPoint(point));
   }
   return group;
+}
+
+function calcY(x, polynomVec4) {
+  return polynomVec4.x + polynomVec4.y*x + polynomVec4.z*Math.pow(x,2) + polynomVec4.w*Math.pow(x,3);
+}
+
+export function getPolynom(stepSize, limit, polynomVec4) {
+  let points = [];
+  for (let x = 0; x < limit; x+=stepSize) {
+    points.push(new Vector3(x, calcY(x,polynomVec4),0));
+  }
+  return getLine(points, 0xff0000);
 }

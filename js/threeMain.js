@@ -1,9 +1,10 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAxis, getLine, getPoints, interpolate} from "./drawableObjects";
+import {getAxis, getLine, getPoints, getPolynom, interpolate} from "./drawableObjects";
 import { Vector3 } from "three";
 
 const scene = new THREE.Scene();
+const axisSize = 25;
 
 const aspectRatio = 1; // window.innerWidth / window.innerHeight
 const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
@@ -15,7 +16,7 @@ renderer.setSize(window.innerHeight, window.innerHeight); // leave this quadrati
 renderer.setClearColor("#141C24");
 document.body.appendChild(renderer.domElement);
 
-scene.add(getAxis());
+scene.add(getAxis(axisSize));
 
 let point1 = new Vector3(10, 0, 0);
 let point2 = new Vector3(14, 4, 0);
@@ -26,6 +27,7 @@ let points = [point1, point2, point3, point4];
 scene.add(getPoints(points));
 
 scene.add(getLine(points));
-interpolate(points);
+let polynomVec4 = interpolate(points);
+scene.add(getPolynom(1, axisSize, polynomVec4));
 
 renderer.render(scene, camera);
