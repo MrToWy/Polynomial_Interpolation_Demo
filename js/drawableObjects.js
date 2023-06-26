@@ -1,14 +1,14 @@
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
-import {CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
+import { CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3 } from "three";
 
 export function getAxis(color = 0xffffff, size = 25) {
-  let origin = new Vector3(0,0,0);
-  let endOfXAxis = new Vector3(size, 0,0 );
-  let endOfYAxis = new Vector3(0, size,0 );
+  let origin = new Vector3(0, 0, 0);
+  let endOfXAxis = new Vector3(size, 0, 0);
+  let endOfYAxis = new Vector3(0, size, 0);
 
-  let points = [endOfXAxis,origin,endOfYAxis];
+  let points = [endOfXAxis, origin, endOfYAxis];
 
   return getLine(points, color);
 }
@@ -42,9 +42,7 @@ export function getLine(points, color = 0xffff00) {
   return line2;
 }
 
-export function interpolate() {
-
-}
+export function interpolate() {}
 
 function concatVector3Array(array) {
   let flatArray = [];
