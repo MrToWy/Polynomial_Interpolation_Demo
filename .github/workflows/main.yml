@@ -5,17 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-
-
-
-
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -31,7 +26,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
       - name: 🔨 Install Project
         run: npm ci
       - name: 🔨 Build Project
@@ -47,7 +42,6 @@ jobs:
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
           local-dir: ./dist/
-
 
       - name: Send discord msg to notify for successfull update
         uses: joelwmale/webhook-action@2.1.0

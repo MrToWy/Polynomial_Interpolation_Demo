@@ -1,50 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta http-equiv="content-language" content="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-language" content="en" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script type="module">
-    import { LaTeXJSComponent } from "https://cdn.jsdelivr.net/npm/latex.js/dist/latex.mjs"
-    customElements.define("latex-js", LaTeXJSComponent)
-  </script>
+    <script type="module">
+      import { LaTeXJSComponent } from "https://cdn.jsdelivr.net/npm/latex.js/dist/latex.mjs";
+      customElements.define("latex-js", LaTeXJSComponent);
+    </script>
 
-  <title>LaTeX.js Web Component Test</title>
-</head>
+    <title>LaTeX.js Web Component Test</title>
+  </head>
 
-<body>
-<h1>Compiling LaTeX</h1>
+  <body>
+    <h1>Compiling LaTeX</h1>
 
-<a href="threeDemo.html">Three JS Demo</a>
+    <a href="threeDemo.html">Three JS Demo</a>
 
-  
-<latex-js hyphenate="false">
+    <latex-js hyphenate="false">
+      $ \left( \begin{array}{rrr} x_1 & y_1 & z_1 \\ x_2 & y_2 & z_2 \\ x_3 &
+      y_3 & z_3 \\ \end{array}\right) \cdot \left( \begin{array}{r} a \\ b \\ c
+      \\ \end{array}\right) $
+    </latex-js>
 
-  $
-  \left( \begin{array}{rrr}
-  x_1 & y_1 & z_1  \\
-  x_2 & y_2 & z_2  \\
-  x_3 & y_3 & z_3  \\
-  \end{array}\right) \cdot
-  \left( \begin{array}{r}
-  a   \\
-  b   \\
-  c   \\
-  \end{array}\right)
-  $
-</latex-js>
+    <br />
+    <br />
+    <br />
 
-<br>
-<br>
-<br>
-
-<latex-js>
-  $\vec{v}_{neu} = \textcolor{red}{-r\vec{v}_n} + \vec{v}_t$
-</latex-js>
-
-</body>
-
+    <latex-js>
+      $\vec{v}_{neu} = \textcolor{red}{-r\vec{v}_n} + \vec{v}_t$
+    </latex-js>
+  </body>
 </html>
