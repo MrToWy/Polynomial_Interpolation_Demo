@@ -1,6 +1,7 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import { getAxis, getLine } from "./drawableObjects";
+import {getAxis, getLine, getPoints} from "./drawableObjects";
+import {Vector3} from "three";
 
 const scene = new THREE.Scene();
 
@@ -16,12 +17,13 @@ document.body.appendChild(renderer.domElement);
 
 scene.add(getAxis());
 
-let points = [
-  0,1,0,
-  2,5,0,
-  3,6,0,
-  9,3,0
-];
+let point1 = new Vector3(10,0,0);
+let point2 = new Vector3(14,4,0);
+let point3 = new Vector3(16,8,0);
+let point4 = new Vector3(18,9,0);
+
+let points = [point1,point2,point3,point4];
+scene.add(getPoints(points));
 
 scene.add(getLine(points));
 
