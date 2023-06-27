@@ -54,6 +54,7 @@ function renderLeft() {
   sceneLeft.add(getPoint(punkt3, pointSize, bernsteinColor3));
 
   sceneLeft.add(getHermitePolynom(interpolationStepSize, xAxisSize, points, false));
+  //TODO: Hermite-Kurve zeichnen
 
   rendererLeft.render(sceneLeft, camera);
 }
