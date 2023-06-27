@@ -11,6 +11,10 @@ document.getElementById("medium").addEventListener("click", () => setPointCount(
 document.getElementById("large").addEventListener("click", () => setPointCount(30))
 
 const scene = new THREE.Scene();
+const renderer = new THREE.WebGLRenderer();
+
+document.getElementById("canvas").appendChild(renderer.domElement);
+
 
 function render(){
   scene.clear();
@@ -24,10 +28,9 @@ function render(){
   camera.position.set(0, 0, 14);
   camera.lookAt(0, 0, 0);
 
-  const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerHeight, window.innerHeight); // leave this quadratic, else linewidth will be weird
   renderer.setClearColor("#141C24");
-  document.body.appendChild(renderer.domElement);
+
 
   scene.add(getAxis(-xAxisSize, -yAxisSize, 0x999999));
   scene.add(getAxis(xAxisSize, yAxisSize));
