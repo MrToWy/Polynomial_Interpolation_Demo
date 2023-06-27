@@ -26,9 +26,9 @@ let point5 = new Vector3(3, -5, 0);
 let point6 = new Vector3(20, 21, 0);
 
 let points = [point1, point2, point3, point4, point5, point6];
-scene.add(getPoints(points));
 
 let polynomVec4 = interpolate(points);
 scene.add(getPolynom(.1, axisSize, polynomVec4));
+scene.add(getPoints(points));
 
 renderer.render(scene, camera);
