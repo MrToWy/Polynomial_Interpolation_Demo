@@ -1,8 +1,8 @@
-import {Line2} from "three/examples/jsm/lines/Line2.js";
-import {LineMaterial} from "three/examples/jsm/lines/LineMaterial.js";
-import {LineGeometry} from "three/examples/jsm/lines/LineGeometry.js";
-import {CircleGeometry, Group, Matrix4, Mesh, MeshBasicMaterial, Vector3, Vector4} from "three";
-import * as mathjs from 'mathjs';
+import { Line2 } from "three/examples/jsm/lines/Line2.js";
+import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
+import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
+import {CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
+import * as mathjs from "mathjs";
 
 export function getAxis(size = 25, color = 0xffffff) {
   let origin = new Vector3(0, 0, 0);
@@ -44,15 +44,15 @@ export function getLine(points, color = 0xffff00) {
 }
 
 export function interpolate(points) {
-  if(points.length <= 0) throw new Error("Bitte Punkte übergeben.");
+  if (points.length <= 0) throw new Error("Bitte Punkte übergeben.");
 
   let matrix = [];
   let vector = [];
 
-  let degree = points.length - 1
+  let degree = points.length - 1;
 
   for (const point of points) {
-    let rowArray = []
+    let rowArray = [];
 
     for (let n = 0; n <= degree; n++) {
       rowArray.push(Math.pow(point.x, n));
@@ -61,7 +61,6 @@ export function interpolate(points) {
     vector.push(point.y);
   }
 
-  console.log(matrix)
   let inverse = mathjs.inv(matrix);
 
   return mathjs.multiply(inverse, vector);
@@ -97,8 +96,8 @@ function calcY(x, polynomArray) {
 
 export function getPolynom(stepSize, limit, polynomArray) {
   let points = [];
-  for (let x = 0; x < limit; x+=stepSize) {
-    points.push(new Vector3(x, calcY(x,polynomArray),0));
+  for (let x = 0; x < limit; x += stepSize) {
+    points.push(new Vector3(x, calcY(x, polynomArray), 0));
   }
   return getLine(points, 0xff0000);
 }

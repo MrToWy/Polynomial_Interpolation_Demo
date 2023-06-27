@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAxis, getLine, getPoints, getPolynom, interpolate} from "./drawableObjects";
+import {getAxis, getPoints, getPolynom, interpolate} from "./drawableObjects";
 import { Vector3 } from "three";
 
 const scene = new THREE.Scene();
@@ -28,7 +28,7 @@ let point6 = new Vector3(20, 21, 0);
 let points = [point1, point2, point3, point4, point5, point6];
 
 let polynomVec4 = interpolate(points);
-scene.add(getPolynom(.1, axisSize, polynomVec4));
+scene.add(getPolynom(0.1, axisSize, polynomVec4));
 scene.add(getPoints(points));
 
 renderer.render(scene, camera);
