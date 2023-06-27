@@ -8,14 +8,13 @@ const startTime = Date();
 
 let rungePointCount = 21;
 
-document.getElementById("small").addEventListener("click", () => setPointCount(6))
-document.getElementById("medium").addEventListener("click", () => setPointCount(11))
-document.getElementById("large").addEventListener("click", () => setPointCount(18))
-
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
-
 document.getElementById("canvas").appendChild(renderer.domElement);
+
+document.getElementById("small").addEventListener("click", () => setPointCount(6));
+document.getElementById("medium").addEventListener("click", () => setPointCount(11));
+document.getElementById("large").addEventListener("click", () => setPointCount(18));
 
 
 function render(){
