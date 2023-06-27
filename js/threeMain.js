@@ -6,10 +6,11 @@ const startTime = Date();
 
 const scene = new THREE.Scene();
 const xAxisSize = 5;
-const yAxisSize = 2;
-const pointSize = 0.1;
+const yAxisSize = 5;
+const pointSize = 0.07;
 const interpolationStepSize = 0.01;
-const rungePointCount = 11;
+const rungePointCount = 21;
+
 
 const aspectRatio = 1; // window.innerWidth / window.innerHeight
 const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
@@ -21,6 +22,7 @@ renderer.setSize(window.innerHeight, window.innerHeight); // leave this quadrati
 renderer.setClearColor("#141C24");
 document.body.appendChild(renderer.domElement);
 
+scene.add(getAxis(-xAxisSize, -yAxisSize, 0x999999));
 scene.add(getAxis(xAxisSize, yAxisSize));
 
 let points = getRungePoints(rungePointCount);

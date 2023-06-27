@@ -4,14 +4,14 @@ import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 import {CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
 import * as mathjs from "mathjs";
 
-export function getAxis(xAxisSize = 25, yAxisSize = 25, color = 0xffffff) {
+export function getAxis(xAxisSize = 5, yAxisSize = 5, color = 0xffffff, lineWidth = 0.0025) {
   let origin = new Vector3(0, 0, 0);
   let endOfXAxis = new Vector3(xAxisSize, 0, 0);
   let endOfYAxis = new Vector3(0, yAxisSize, 0);
 
   let points = [endOfXAxis, origin, endOfYAxis];
 
-  return getLine(points, color);
+  return getLine(points, color, lineWidth);
 }
 
 export function getPoint(positionVector, radius = 1, color = 0xffff00) {
@@ -26,12 +26,12 @@ export function getPoint(positionVector, radius = 1, color = 0xffff00) {
   return point;
 }
 
-export function getLine(points, color = 0xffff00) {
+export function getLine(points, color = 0xffff00, lineWidth = 0.0065) {
   let geometry = new LineGeometry();
   geometry.setPositions(concatVector3Array(points));
 
   let mat = new LineMaterial();
-  mat.linewidth = 0.009;
+  mat.linewidth = lineWidth;
   mat.color.set(color);
 
   let line2 = new Line2();
