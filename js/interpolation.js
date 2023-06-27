@@ -25,14 +25,14 @@ export function interpolate(points) {
   return mathjs.multiply(inverse, vector);
 }
 
-export function getPolynom(stepSize, xAxisSize, polynomArray, showNegativeAxis = true) {
+export function getPolynom(stepSize, xAxisSize, polynomArray, showNegativeAxis = true, color = 0xff0000) {
   let points = [];
   let startPoint = showNegativeAxis ? -xAxisSize : 0;
 
   for (let x = startPoint; x < xAxisSize; x += stepSize) {
     points.push(new Vector3(x, calcY(x, polynomArray), 0));
   }
-  return getLine(points, 0xff0000);
+  return getLine(points, color);
 }
 
 export function getRungePoints(pointCount) {

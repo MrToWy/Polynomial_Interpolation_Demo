@@ -8,6 +8,11 @@ const yAxisSize = 1;
 const pointSize = 0.07;
 const interpolationStepSize = 0.01;
 
+const bernsteinColor0 = 0xff0000;
+const bernsteinColor1 = 0x00ff00;
+const bernsteinColor2 = 0x0000ff;
+const bernsteinColor3 = 0xff00ff;
+
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
 document.getElementById("canvasRight").appendChild(renderer.domElement);
@@ -39,10 +44,10 @@ function getBernsteinLines() {
   let bernsteinPolynom2 = [0,0,3,-3];
   let bernsteinPolynom3 = [0,0,0,1];
 
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom0,false));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom1, false));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom2, false));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom3, false));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom0,false, bernsteinColor0));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom1, false, bernsteinColor1));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom2, false, bernsteinColor2));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom3, false, bernsteinColor3));
 
   return bernsteinLines;
 }

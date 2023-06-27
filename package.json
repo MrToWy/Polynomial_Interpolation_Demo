@@ -21,7 +21,8 @@
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
     "parcel-bundler": "^1.12.4",
-    "prettier": "2.8.8"
+    "prettier": "2.8.8",
+    "sass": "^1.63.6"
   },
   "dependencies": {
     "latex.js": "^0.12.6",
