@@ -9,6 +9,7 @@ const xAxisSize = 5;
 const yAxisSize = 2;
 const pointSize = 0.1;
 const interpolationStepSize = 0.01;
+const rungePointCount = 11;
 
 const aspectRatio = 1; // window.innerWidth / window.innerHeight
 const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
@@ -22,7 +23,7 @@ document.body.appendChild(renderer.domElement);
 
 scene.add(getAxis(xAxisSize, yAxisSize));
 
-let points = getRungePoints(21);
+let points = getRungePoints(rungePointCount);
 let polynomArray = interpolate(points);
 scene.add(getPolynom(interpolationStepSize, xAxisSize, polynomArray));
 scene.add(getPoints(points, pointSize));
