@@ -6,9 +6,14 @@ const startTime = Date();
 
 let rungePointCount = 21;
 
+document.getElementById("small").addEventListener("click", () => setPointCount(3))
+document.getElementById("medium").addEventListener("click", () => setPointCount(13))
+document.getElementById("large").addEventListener("click", () => setPointCount(30))
+
+const scene = new THREE.Scene();
 
 function render(){
-  const scene = new THREE.Scene();
+  scene.clear();
   const xAxisSize = 5;
   const yAxisSize = 5;
   const pointSize = 0.07;
