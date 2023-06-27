@@ -1,7 +1,7 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAxis, getLine, getPoint, getPoints} from "../../js/drawableObjects";
-import {getPolynom} from "../../js/interpolation";
+import {getAxis, getLine, getPoint} from "../../js/drawableObjects";
+import {getBernsteinPolynomes, getHermitePolynom, getPolynom} from "../../js/interpolation";
 import {Vector3} from "three";
 
 const xAxisSize = 1;
@@ -47,11 +47,13 @@ function renderLeft() {
   let points = [punkt0,punkt1,punkt2,punkt3];
 
   sceneLeft.add(getLine(points));
-  
+
   sceneLeft.add(getPoint(punkt0, pointSize, bernsteinColor0));
   sceneLeft.add(getPoint(punkt1, pointSize, bernsteinColor1));
   sceneLeft.add(getPoint(punkt2, pointSize, bernsteinColor2));
   sceneLeft.add(getPoint(punkt3, pointSize, bernsteinColor3));
+
+  sceneLeft.add(getHermitePolynom(interpolationStepSize, xAxisSize, points, false));
 
   rendererLeft.render(sceneLeft, camera);
 }
@@ -77,16 +79,13 @@ function renderRight(){
 }
 
 function getBernsteinLines() {
+  let bernsteinPolynomes = getBernsteinPolynomes();
   let bernsteinLines = [];
-  let bernsteinPolynom0 = [1,-3,3,-1];
-  let bernsteinPolynom1 = [0,3,-6,3];
-  let bernsteinPolynom2 = [0,0,3,-3];
-  let bernsteinPolynom3 = [0,0,0,1];
 
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom0,false, bernsteinColor0));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom1, false, bernsteinColor1));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom2, false, bernsteinColor2));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynom3, false, bernsteinColor3));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[0],false, bernsteinColor0));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[1], false, bernsteinColor1));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[2], false, bernsteinColor2));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[3], false, bernsteinColor3));
 
   return bernsteinLines;
 }

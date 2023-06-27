@@ -54,7 +54,7 @@ export function getRungePoints(pointCount) {
   return points;
 }
 
-function calcY(x, polynomArray) {
+export function calcY(x, polynomArray) {
   let result = 0;
 
   for (let n = 0; n < polynomArray.length; n++) {
@@ -62,4 +62,34 @@ function calcY(x, polynomArray) {
   }
 
   return result;
+}
+
+function calcHermiteY(x, points) {
+  let bernsteinPolynomes = getBernsteinPolynomes();
+  let result = 0;
+
+  for (const bernsteinPolynome of bernsteinPolynomes) {
+    result += calcY(x,bernsteinPolynome);
+  }
+
+  return result;
+}
+
+export function getBernsteinPolynomes() {
+  let bernsteinPolynom0 = [1,-3,3,-1];
+  let bernsteinPolynom1 = [0,3,-6,3];
+  let bernsteinPolynom2 = [0,0,3,-3];
+  let bernsteinPolynom3 = [0,0,0,1];
+
+  return [bernsteinPolynom0,bernsteinPolynom1,bernsteinPolynom2,bernsteinPolynom3];
+}
+
+export function getHermitePolynom(stepSize, xAxisSize, points, showNegativeAxis = true, color = 0xff0000) {
+  let hermitePoints = [];
+  let startPoint = showNegativeAxis ? -xAxisSize : 0;
+
+  for (let x = startPoint; x < xAxisSize; x += stepSize) {
+    hermitePoints.push(new Vector3(x, calcHermiteY(x, points), 0));
+  }
+  return getLine(hermitePoints, color);
 }
