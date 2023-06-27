@@ -22,12 +22,13 @@ let point1 = new Vector3(10, 0, 0);
 let point2 = new Vector3(14, 4, 0);
 let point3 = new Vector3(16, 8, 0);
 let point4 = new Vector3(18, 9, 0);
+let point5 = new Vector3(3, -5, 0);
+let point6 = new Vector3(20, 21, 0);
 
-let points = [point1, point2, point3, point4];
+let points = [point1, point2, point3, point4, point5, point6];
 scene.add(getPoints(points));
 
-scene.add(getLine(points));
 let polynomVec4 = interpolate(points);
-scene.add(getPolynom(1, axisSize, polynomVec4));
+scene.add(getPolynom(.1, axisSize, polynomVec4));
 
 renderer.render(scene, camera);

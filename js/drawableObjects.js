@@ -2,6 +2,7 @@ import {Line2} from "three/examples/jsm/lines/Line2.js";
 import {LineMaterial} from "three/examples/jsm/lines/LineMaterial.js";
 import {LineGeometry} from "three/examples/jsm/lines/LineGeometry.js";
 import {CircleGeometry, Group, Matrix4, Mesh, MeshBasicMaterial, Vector3, Vector4} from "three";
+import * as mathjs from 'mathjs';
 
 export function getAxis(size = 25, color = 0xffffff) {
   let origin = new Vector3(0, 0, 0);
@@ -43,28 +44,27 @@ export function getLine(points, color = 0xffff00) {
 }
 
 export function interpolate(points) {
-  if(points.length !== 4) throw new Error("Nur 4 Punkte möglich.");
+  if(points.length <= 0) throw new Error("Bitte Punkte übergeben.");
 
-  let matrix = new Matrix4();
-  let x0 = points[0].x;
-  let x1 = points[1].x;
-  let x2 = points[2].x;
-  let x3 = points[3].x;
-  let y0 = points[0].y;
-  let y1 = points[1].y;
-  let y2 = points[2].y;
-  let y3 = points[3].y;
-  matrix.set(
-    1, x0, Math.pow(x0,2), Math.pow(x0,3),
-    1, x1, Math.pow(x1,2), Math.pow(x1,3),
-    1, x2, Math.pow(x2,2), Math.pow(x2,3),
-    1, x3, Math.pow(x3,2), Math.pow(x3,3),
-  )
+  let matrix = [];
+  let vector = [];
 
-  let vector = new Vector4(y0,y1,y2,y3);
-  let inverse = matrix.invert();
+  let degree = points.length - 1
 
-  return vector.applyMatrix4(inverse);
+  for (const point of points) {
+    let rowArray = []
+
+    for (let n = 0; n <= degree; n++) {
+      rowArray.push(Math.pow(point.x, n));
+    }
+    matrix.push(rowArray);
+    vector.push(point.y);
+  }
+
+  console.log(matrix)
+  let inverse = mathjs.inv(matrix);
+
+  return mathjs.multiply(inverse, vector);
 }
 
 function concatVector3Array(array) {
@@ -85,14 +85,20 @@ export function getPoints(pointsArray) {
   return group;
 }
 
-function calcY(x, polynomVec4) {
-  return polynomVec4.x + polynomVec4.y*x + polynomVec4.z*Math.pow(x,2) + polynomVec4.w*Math.pow(x,3);
+function calcY(x, polynomArray) {
+  let result = 0;
+
+  for (let n = 0; n < polynomArray.length; n++) {
+    result += polynomArray[n] * Math.pow(x, n);
+  }
+
+  return result;
 }
 
-export function getPolynom(stepSize, limit, polynomVec4) {
+export function getPolynom(stepSize, limit, polynomArray) {
   let points = [];
   for (let x = 0; x < limit; x+=stepSize) {
-    points.push(new Vector3(x, calcY(x,polynomVec4),0));
+    points.push(new Vector3(x, calcY(x,polynomArray),0));
   }
   return getLine(points, 0xff0000);
 }

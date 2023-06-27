@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "latex.js": "^0.12.6",
+    "mathjs": "^11.8.2",
     "regenerator-runtime": "^0.13.11",
     "svgdom": "^0.1.14",
     "three": "^0.153.0"
