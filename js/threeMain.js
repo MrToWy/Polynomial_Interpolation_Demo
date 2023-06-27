@@ -6,9 +6,9 @@ const startTime = Date();
 
 let rungePointCount = 21;
 
-document.getElementById("small").addEventListener("click", () => setPointCount(3))
-document.getElementById("medium").addEventListener("click", () => setPointCount(13))
-document.getElementById("large").addEventListener("click", () => setPointCount(30))
+document.getElementById("small").addEventListener("click", () => setPointCount(6))
+document.getElementById("medium").addEventListener("click", () => setPointCount(11))
+document.getElementById("large").addEventListener("click", () => setPointCount(18))
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
