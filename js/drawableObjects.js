@@ -4,10 +4,10 @@ import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 import {CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
 import * as mathjs from "mathjs";
 
-export function getAxis(size = 25, color = 0xffffff) {
+export function getAxis(xAxisSize = 25, yAxisSize = 25, color = 0xffffff) {
   let origin = new Vector3(0, 0, 0);
-  let endOfXAxis = new Vector3(size, 0, 0);
-  let endOfYAxis = new Vector3(0, size, 0);
+  let endOfXAxis = new Vector3(xAxisSize, 0, 0);
+  let endOfYAxis = new Vector3(0, yAxisSize, 0);
 
   let points = [endOfXAxis, origin, endOfYAxis];
 
@@ -76,10 +76,10 @@ function concatVector3Array(array) {
   return flatArray;
 }
 
-export function getPoints(pointsArray) {
+export function getPoints(pointsArray, pointSize) {
   const group = new Group();
   for (const point of pointsArray) {
-    group.add(getPoint(point));
+    group.add(getPoint(point, pointSize));
   }
   return group;
 }
@@ -94,10 +94,29 @@ function calcY(x, polynomArray) {
   return result;
 }
 
-export function getPolynom(stepSize, limit, polynomArray) {
+export function getPolynom(stepSize, xAxisSize, polynomArray) {
   let points = [];
-  for (let x = 0; x < limit; x += stepSize) {
+  for (let x = -xAxisSize; x < xAxisSize; x += stepSize) {
     points.push(new Vector3(x, calcY(x, polynomArray), 0));
   }
   return getLine(points, 0xff0000);
+}
+
+export function getRungePoints(pointCount) {
+  const points = [];
+
+    const degree = pointCount - 1;
+    const leftBoundary = -5;
+    const rightBoundary = 5;
+    const distance = (leftBoundary - rightBoundary) * -1;
+    const stepSize = distance / degree;
+
+    for (let i = 0; i < pointCount; i++) {
+      const x = leftBoundary + i * stepSize;
+      const y = 1. / (1. + Math.pow(x, 2.))
+      points.push(new Vector3(x, y, 0));
+    }
+
+    points.push();
+    return points;
 }

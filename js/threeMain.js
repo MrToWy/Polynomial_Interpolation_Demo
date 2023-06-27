@@ -1,14 +1,18 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAxis, getPoints, getPolynom, interpolate} from "./drawableObjects";
-import { Vector3 } from "three";
+import {getAxis, getPoints, getPolynom, getRungePoints, interpolate} from "./drawableObjects";
+
+const startTime = Date();
 
 const scene = new THREE.Scene();
-const axisSize = 25;
+const xAxisSize = 5;
+const yAxisSize = 2;
+const pointSize = 0.1;
+const interpolationStepSize = 0.01;
 
 const aspectRatio = 1; // window.innerWidth / window.innerHeight
 const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
-camera.position.set(0, 0, 100);
+camera.position.set(0, 0, 14);
 camera.lookAt(0, 0, 0);
 
 const renderer = new THREE.WebGLRenderer();
@@ -16,19 +20,15 @@ renderer.setSize(window.innerHeight, window.innerHeight); // leave this quadrati
 renderer.setClearColor("#141C24");
 document.body.appendChild(renderer.domElement);
 
-scene.add(getAxis(axisSize));
+scene.add(getAxis(xAxisSize, yAxisSize));
 
-let point1 = new Vector3(10, 0, 0);
-let point2 = new Vector3(14, 4, 0);
-let point3 = new Vector3(16, 8, 0);
-let point4 = new Vector3(18, 9, 0);
-let point5 = new Vector3(3, -5, 0);
-let point6 = new Vector3(20, 21, 0);
-
-let points = [point1, point2, point3, point4, point5, point6];
-
-let polynomVec4 = interpolate(points);
-scene.add(getPolynom(0.1, axisSize, polynomVec4));
-scene.add(getPoints(points));
+let points = getRungePoints(21);
+let polynomArray = interpolate(points);
+scene.add(getPolynom(interpolationStepSize, xAxisSize, polynomArray));
+scene.add(getPoints(points, pointSize));
 
 renderer.render(scene, camera);
+
+const endTime = Date();
+const deltaTime = endTime - startTime;
+console.log("Runtime: ", deltaTime)
