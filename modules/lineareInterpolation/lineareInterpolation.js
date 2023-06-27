@@ -30,7 +30,7 @@ function render(){
   camera.position.set(0, 0, 14);
   camera.lookAt(0, 0, 0);
 
-  renderer.setSize(window.innerHeight, window.innerHeight); // leave this quadratic, else linewidth will be weird
+  renderer.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
   renderer.setClearColor("#141C24");
 
   scene.add(getAxis(-xAxisSize, -yAxisSize, 0x999999));

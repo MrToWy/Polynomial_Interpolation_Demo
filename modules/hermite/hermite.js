@@ -13,28 +13,56 @@ const bernsteinColor1 = 0x00ff00;
 const bernsteinColor2 = 0x0000ff;
 const bernsteinColor3 = 0xff00ff;
 
-const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer();
-document.getElementById("canvasRight").appendChild(renderer.domElement);
+const sceneRight = new THREE.Scene();
+const sceneLeft = new THREE.Scene();
+const rendererRight = new THREE.WebGLRenderer();
+const rendererLeft = new THREE.WebGLRenderer();
+document.getElementById("canvasRight").appendChild(rendererRight.domElement);
+document.getElementById("canvasLeft").appendChild(rendererLeft.domElement);
 
-function render(){
-  scene.clear();
+function render() {
+  renderLeft();
+  renderRight();
+}
+
+function renderLeft() {
+  sceneLeft.clear();
 
   const aspectRatio = 1; // window.innerWidth / window.innerHeight
   const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
   camera.position.set(0, 0, 4);
   camera.lookAt(0, 0, 0);
 
-  renderer.setSize(window.innerHeight, window.innerHeight); // leave this quadratic, else linewidth will be weird
-  renderer.setClearColor("#141C24");
+  rendererLeft.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
+  rendererLeft.setClearColor("#922792");
 
-  scene.add(getAxis(xAxisSize, yAxisSize));
+  sceneLeft.add(getAxis(xAxisSize, yAxisSize));
 
   for (const bernsteinLine of getBernsteinLines()) {
-    scene.add(bernsteinLine);
+    sceneLeft.add(bernsteinLine);
   }
 
-  renderer.render(scene, camera);
+  rendererLeft.render(sceneLeft, camera);
+}
+
+function renderRight(){
+  sceneRight.clear();
+
+  const aspectRatio = 1; // window.innerWidth / window.innerHeight
+  const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
+  camera.position.set(0, 0, 4);
+  camera.lookAt(0, 0, 0);
+
+  rendererRight.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
+  rendererRight.setClearColor("#141C24");
+
+  sceneRight.add(getAxis(xAxisSize, yAxisSize));
+
+  for (const bernsteinLine of getBernsteinLines()) {
+    sceneRight.add(bernsteinLine);
+  }
+
+  rendererRight.render(sceneRight, camera);
 }
 
 function getBernsteinLines() {
