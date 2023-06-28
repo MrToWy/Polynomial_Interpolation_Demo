@@ -3,6 +3,7 @@ import * as THREE from "three";
 import {getAxis, getPoint} from "../../js/drawableObjects";
 import {Vector3} from "three";
 import {getBernsteinPolynomes, getPolynom} from "../../js/interpolation";
+import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
 
 
 const scene = new THREE.Scene();
@@ -45,6 +46,10 @@ function onDocumentMouseDown( e ) {
 
   for (const intersect of intersects) {
     console.log(intersect);// TODO: delete
+
+    const control = new TransformControls(camera, renderer.domElement)
+    control.attach(intersect)
+    scene.add(control)
   }
 
   //TODO: Objekte verschieben https://codesandbox.io/s/basic-threejs-example-with-re-use-dsrvn
