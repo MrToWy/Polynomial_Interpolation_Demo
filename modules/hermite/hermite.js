@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAbleitungsVec, getColorLine, getPoint} from "../../js/drawableObjects";
+import {getAbleitungsVec, getPoint} from "../../js/drawableObjects";
 import {getHermitePolynomes, getPolynom, interpolate} from "../../js/interpolation";
 import {Vector3} from "three";
 import {Axis} from "../../js/classes/Axis";
@@ -50,7 +50,6 @@ function renderLeft(points) {
   sceneLeft.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   let polynomArray = interpolate(points);
-  let colorArray = [];
 
   sceneLeft.add(getPolynom(interpolationStepSize, xAxisSize, polynomArray, false,0xff0000, points[0].x, points[2].x));
 
