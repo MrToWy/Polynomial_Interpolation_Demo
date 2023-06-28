@@ -1,7 +1,7 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
 import {getAxis, getLine, getPoint} from "../../js/drawableObjects";
-import {getBernsteinPolynomes, getHermitePolynom, getPolynom} from "../../js/interpolation";
+import {getBernsteinPolynomes, getHermitePolynom, getPolynom, interpolate} from "../../js/interpolation";
 import {Vector3} from "three";
 
 const xAxisSize = 1;
@@ -9,10 +9,10 @@ const yAxisSize = 1;
 const pointSize = 0.02;
 const interpolationStepSize = 0.01;
 
-const bernsteinColor0 = 0xff0000;
-const bernsteinColor1 = 0x00ff00;
-const bernsteinColor2 = 0x0000ff;
-const bernsteinColor3 = 0xff00ff;
+const hermiteColor0 = 0xff0000;
+const hermiteColor1 = 0x00ff00;
+const hermiteColor2 = 0x0000ff;
+const hermiteColor3 = 0xff00ff;
 
 const sceneRight = new THREE.Scene();
 const sceneLeft = new THREE.Scene();
@@ -40,21 +40,22 @@ function renderLeft() {
   sceneLeft.add(getAxis(xAxisSize, yAxisSize));
 
   let punkt0 = new Vector3(0.1,0.1,0);
-  let punkt1 = new Vector3(0.3,0.8,0);
-  let punkt2 = new Vector3(0.7,0.8,0);
-  let punkt3 = new Vector3(0.9,0.1,0);
+  let punkt1 = new Vector3(0.7,0.8,0);
+  let ableitung0 = new Vector3(0.1,0.8,0);
+  let ableitung1 = new Vector3(0.7,0.8,0);
+  ableitung0.isAbleitung = true;
+  ableitung1.isAbleitung = true;
 
-  let points = [punkt0,punkt1,punkt2,punkt3];
-
+  let points = [punkt0,punkt1];
   sceneLeft.add(getLine(points));
+  points.push(ableitung0,ableitung1);
 
-  sceneLeft.add(getPoint(punkt0, pointSize, bernsteinColor0));
-  sceneLeft.add(getPoint(punkt1, pointSize, bernsteinColor1));
-  sceneLeft.add(getPoint(punkt2, pointSize, bernsteinColor2));
-  sceneLeft.add(getPoint(punkt3, pointSize, bernsteinColor3));
+  sceneLeft.add(getPoint(punkt0, pointSize, hermiteColor0));
+  sceneLeft.add(getPoint(punkt1, pointSize, hermiteColor1));
 
-  sceneLeft.add(getHermitePolynom(interpolationStepSize, xAxisSize, points, false));
-  //TODO: Hermite-Kurve zeichnen
+  let polynomArray = interpolate(points);
+  console.log(polynomArray);
+  sceneLeft.add(getPolynom(interpolationStepSize, xAxisSize, polynomArray, false));
 
   rendererLeft.render(sceneLeft, camera);
 }
@@ -83,10 +84,10 @@ function getBernsteinLines() {
   let bernsteinPolynomes = getBernsteinPolynomes();
   let bernsteinLines = [];
 
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[0],false, bernsteinColor0));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[1], false, bernsteinColor1));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[2], false, bernsteinColor2));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[3], false, bernsteinColor3));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[0],false, hermiteColor0));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[1], false, hermiteColor1));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[2], false, hermiteColor2));
+  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[3], false, hermiteColor3));
 
   return bernsteinLines;
 }
