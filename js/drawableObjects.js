@@ -10,7 +10,7 @@ export function getAxis(xAxisSize = 5, yAxisSize = 5, color = 0xffffff, lineWidt
 
   let points = [endOfXAxis, origin, endOfYAxis];
 
-  return getLine(points, color, lineWidth);
+  return new Linie(points).setColor(color).setLineWidth(lineWidth);
 }
 
 export function getPoint(positionVector, radius = 1, color = 0xffff00) {
@@ -23,6 +23,33 @@ export function getPoint(positionVector, radius = 1, color = 0xffff00) {
   point.translateY(positionVector.z);
 
   return point;
+}
+
+export class Linie extends Line2{
+  constructor(points) {
+    super();
+    this.points = points;
+
+    this.geometry = new LineGeometry();
+    this.geometry.setPositions(concatVector3Array(points));
+
+    this.material = new LineMaterial();
+    this.material.linewidth = 0.0025;
+    this.material.color.set(0xeeeeee);
+
+    this.computeLineDistances();
+    this.scale.set(1, 1, 1);
+  }
+
+  setColor(color){
+    this.material.color.set(color);
+    return this;
+  }
+
+  setLineWidth(width){
+    this.material.linewidth = width;
+    return this;
+  }
 }
 
 export function getLine(points, color = 0xffff00, lineWidth = 0.0025) {
