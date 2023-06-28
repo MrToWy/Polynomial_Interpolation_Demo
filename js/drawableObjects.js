@@ -1,7 +1,7 @@
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
-import {CircleGeometry, Color, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
+import {ArrowHelper, CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
 
 export function getAxis(xAxisSize = 5, yAxisSize = 5, color = 0xffffff, lineWidth = 0.0025) {
   let origin = new Vector3(0, 0, 0);
@@ -60,7 +60,7 @@ export function getPoints(pointsArray, pointSize) {
   return group;
 }
 
-export function getColorLine(points, lineWidth = 0.0025){
+export function getColorLine(points, colors, lineWidth = 0.0025){
   const geometry = new LineGeometry();
   geometry.setPositions(concatVector3Array(points));
   geometry.setColors([1,0,0,0,1,0]);
@@ -74,6 +74,12 @@ export function getColorLine(points, lineWidth = 0.0025){
   line2.geometry = geometry;
   line2.computeLineDistances();
   line2.scale.set(1, 1, 1);
+  line2.translateX(-1.5);
 
   return line2;
+}
+
+export function getAbleitungsVec(point, ableitung, color = 0xff0000) {
+  let endPoint = new Vector3(point.x+1,point.y+ableitung.y,0);
+  return getLine([point,endPoint],color, 0.0025);
 }
