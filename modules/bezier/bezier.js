@@ -47,9 +47,9 @@ function onDocumentMouseDown( e ) {
   for (const intersect of intersects) {
     console.log(intersect);// TODO: delete
 
-    const control = new TransformControls(camera, renderer.domElement)
-    control.attach(intersect)
-    scene.add(control)
+    //const control = new TransformControls(camera, renderer.domElement)
+    //control.attach(intersect)
+    //scene.add(control)
   }
 
   //TODO: Objekte verschieben https://codesandbox.io/s/basic-threejs-example-with-re-use-dsrvn
