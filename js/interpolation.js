@@ -15,8 +15,11 @@ export function interpolate(points) {
 
     for (let i = 0; i <= degree; i++) {
       if(point.isAbleitung){
-        rowArray.push((degree-i)*Math.pow(point.x,degree-i-1))
+        let result = i === 0 ? 0 : i*Math.pow(point.x,i-1);
+        //console.log("Ableitung: ",result, "Punkt: ", point.x, "i: ", i, ); TODO:delete
+        rowArray.push(result);
       } else {
+        //console.log("Funktion: ", Math.pow(point.x, i)) TODO:delete
         rowArray.push(Math.pow(point.x, i));
       }
     }
@@ -25,6 +28,8 @@ export function interpolate(points) {
   }
 
   let inverse = mathjs.inv(matrix);
+
+  console.log(mathjs.multiply(inverse, vector));
 
   return mathjs.multiply(inverse, vector);
 }
