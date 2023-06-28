@@ -1,7 +1,8 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {Axis, getPoints} from "../../js/drawableObjects";
+import {getPoints} from "../../js/drawableObjects";
 import {getPolynom, getRungePoints, interpolate} from "../../js/interpolation";
+import {Axis} from "../../js/classes/Axis";
 
 const xAxisSize = 5;
 const yAxisSize = 5;

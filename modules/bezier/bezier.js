@@ -1,8 +1,9 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {Axis, getPoint} from "../../js/drawableObjects";
+import {getPoint} from "../../js/drawableObjects";
 import {Vector3} from "three";
 import {getBernsteinPolynomes, getPolynom} from "../../js/interpolation";
+import {Axis} from "../../js/classes/Axis";
 
 
 const scene = new THREE.Scene();

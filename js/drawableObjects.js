@@ -2,44 +2,7 @@ import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 import {CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
-
-export class Axis extends Linie{
-  constructor() {
-
-    let origin = new Vector3(0, 0, 0);
-    let endOfXAxis = new Vector3(5, 0, 0);
-    let endOfYAxis = new Vector3(0, 5, 0);
-
-    let points = [endOfXAxis, origin, endOfYAxis];
-    super(points).setColor(0xffffff).setLineWidth(0.0025);
-  }
-
-  setXAxisSize(size){
-    this.endOfXAxis = new Vector3(size, 0, 0);
-    return this;
-  }
-
-  setYAxisSize(size){
-    this.endOfYAxis = new Vector3(0, size, 0);
-    return this;
-  }
-
-  setAxisSize(xSize, ySize){
-    this.setXAxisSize(xSize);
-    this.setYAxisSize(ySize);
-    return this;
-  }
-
-  setColor(color){
-    super.setColor(color);
-    return this;
-  }
-
-  setLineWidth(width) {
-    super.setLineWidth(width);
-    return this;
-  }
-}
+import {Linie} from "./classes/Linie";
 
 export function getPoint(positionVector, radius = 1, color = 0xffff00) {
   let geo = new CircleGeometry(radius, 256);
@@ -51,43 +14,6 @@ export function getPoint(positionVector, radius = 1, color = 0xffff00) {
   point.translateY(positionVector.z);
 
   return point;
-}
-
-export class Linie extends Line2{
-  constructor(points) {
-    super();
-    this.points = points;
-
-    this.geometry = new LineGeometry();
-    this.geometry.setPositions(concatVector3Array(points));
-
-    this.material = new LineMaterial();
-    this.material.linewidth = 0.0025;
-    this.material.color.set(0xeeeeee);
-
-    this.computeLineDistances();
-    this.scale.set(1, 1, 1);
-  }
-
-    setColor(color){
-    this.material.color.set(color);
-    return this;
-  }
-
-  setLineWidth(width){
-    this.material.linewidth = width;
-    return this;
-  }
-}
-
-function concatVector3Array(array) {
-  let flatArray = [];
-  for (let i = 0; i < array.length; i++) {
-    flatArray.push(array[i].x);
-    flatArray.push(array[i].y);
-    flatArray.push(array[i].z);
-  }
-  return flatArray;
 }
 
 export function getPoints(pointsArray, pointSize) {
@@ -119,5 +45,5 @@ export function getColorLine(points, colors, lineWidth = 0.0025){
 
 export function getAbleitungsVec(point, ableitung, color = 0xff0000) {
   let endPoint = new Vector3(point.x+1,point.y+ableitung.y,0);
-  return new Linie([point,endPoint]).setColor(color);
+  return new Linie().setColor(color).setPoints([point,endPoint]);
 }
