@@ -4,8 +4,8 @@ import {getAxis, getLine, getPoint} from "../../js/drawableObjects";
 import {getBernsteinPolynomes, getHermitePolynom, getPolynom, interpolate} from "../../js/interpolation";
 import {Vector3} from "three";
 
-let xAxisSize = 3;
-let yAxisSize = 3;
+let xAxisSize = 1;
+let yAxisSize = 1;
 const pointSize = 0.02;
 const interpolationStepSize = 0.01;
 
@@ -31,7 +31,7 @@ function renderLeft() {
 
   const aspectRatio = 1; // window.innerWidth / window.innerHeight
   const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
-  camera.position.set(0, 0, 10);
+  camera.position.set(0, 0, 4);
   camera.lookAt(0, 0, 0);
 
   rendererLeft.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
@@ -39,10 +39,10 @@ function renderLeft() {
 
   sceneLeft.add(getAxis(xAxisSize, yAxisSize));
 
-  let punkt0 = new Vector3(0.,2,0);
-  let punkt1 = new Vector3(0.5,4,0);
-  let ableitung0 = new Vector3(punkt0.x, 0.3,0);
-  let ableitung1 = new Vector3(punkt1.x,0.4,0);
+  let punkt0 = new Vector3(0.1,0.1,0);
+  let punkt1 = new Vector3(0.9,0.9,0);
+  let ableitung0 = new Vector3(punkt0.x, -0.3,0);
+  let ableitung1 = new Vector3(punkt1.x,-0.6,0);
   ableitung0.isAbleitung = true;
   ableitung1.isAbleitung = true;
 
