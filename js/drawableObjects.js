@@ -1,7 +1,7 @@
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
-import {CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
+import {CircleGeometry, Color, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
 
 export function getAxis(xAxisSize = 5, yAxisSize = 5, color = 0xffffff, lineWidth = 0.0025) {
   let origin = new Vector3(0, 0, 0);
@@ -58,4 +58,22 @@ export function getPoints(pointsArray, pointSize) {
     group.add(getPoint(point, pointSize));
   }
   return group;
+}
+
+export function getColorLine(points, lineWidth = 0.0025){
+  const geometry = new LineGeometry();
+  geometry.setPositions(concatVector3Array(points));
+  geometry.setColors([1,0,0,0,1,0]);
+
+  let mat = new LineMaterial();
+  mat.linewidth = lineWidth;
+  mat.vertexColors = true;
+
+  let line2 = new Line2();
+  line2.material = mat;
+  line2.geometry = geometry;
+  line2.computeLineDistances();
+  line2.scale.set(1, 1, 1);
+
+  return line2;
 }

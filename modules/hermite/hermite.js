@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAxis, getPoint} from "../../js/drawableObjects";
+import {getAxis, getColorLine, getPoint} from "../../js/drawableObjects";
 import {getHermitePolynomes, getPolynom, interpolate} from "../../js/interpolation";
 import {Vector3} from "three";
 
@@ -55,6 +55,7 @@ function renderLeft(points) {
   sceneLeft.add(getPoint(points[0], pointSize, hermiteColor0));
   sceneLeft.add(getPoint(points[2], pointSize, hermiteColor1));
 
+  sceneLeft.add(getColorLine([new Vector3(0,0,0),new Vector3(1,1,0)]))
   rendererLeft.render(sceneLeft, camera);
 }
 
