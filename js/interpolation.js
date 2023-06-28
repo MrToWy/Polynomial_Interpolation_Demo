@@ -5,31 +5,10 @@ import {getLine} from "./drawableObjects";
 export function interpolate(points) {
   if (points.length <= 0) throw new Error("Bitte Punkte übergeben.");
 
-  let matrix = [];
-  let vector = [];
-
-  let degree = points.length - 1;
-
-  for (const point of points) {
-    let rowArray = [];
-
-    for (let i = 0; i <= degree; i++) {
-      if(point.isAbleitung){
-        let result = i === 0 ? 0 : i*Math.pow(point.x,i-1);
-        //console.log("Ableitung: ",result, "Punkt: ", point.x, "i: ", i, ); TODO:delete
-        rowArray.push(result);
-      } else {
-        //console.log("Funktion: ", Math.pow(point.x, i)) TODO:delete
-        rowArray.push(Math.pow(point.x, i));
-      }
-    }
-    matrix.push(rowArray);
-    vector.push(point.y);
-  }
+  const [matrix, vector] = getMatrixform(points);
 
   let inverse = mathjs.inv(matrix);
-
-  //console.log(mathjs.multiply(inverse, vector)); TODO:delete
+  //console.log(mathjs.multiply(inverse, vector)); //TODO:delete
 
   return mathjs.multiply(inverse, vector);
 }
@@ -82,4 +61,39 @@ export function getBernsteinPolynomes() {
   let bernsteinPolynom3 = [0,0,0,1];
 
   return [bernsteinPolynom0,bernsteinPolynom1,bernsteinPolynom2,bernsteinPolynom3];
+}
+
+export function getMatrixform(points) {
+  let matrix = [];
+  let vector = [];
+
+  let degree = points.length - 1;
+
+  for (const point of points) {
+    let rowArray = [];
+
+    for (let i = 0; i <= degree; i++) {
+      if(point.isAbleitung){
+        let result = i === 0 ? 0 : i*Math.pow(point.x,i-1);
+        //console.log("Ableitung: ",result, "Punkt: ", point.x, "i: ", i, ); //TODO:delete
+        rowArray.push(result);
+      } else {
+        //console.log("Funktion: ", Math.pow(point.x, i)) //TODO:delete
+        rowArray.push(Math.pow(point.x, i));
+      }
+    }
+    matrix.push(rowArray);
+    vector.push(point.y);
+  }
+  return [matrix, vector];
+}
+
+export function getHermitePolynomes(points) {
+  const [matrix, _] = getMatrixform(points);
+
+  let inverse = mathjs.inv(matrix);
+  let trans = mathjs.transpose(inverse);
+  console.log(trans); //TODO:delete
+
+  return trans;
 }
