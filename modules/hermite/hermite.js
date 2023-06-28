@@ -1,7 +1,7 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAxis, getLine, getPoint} from "../../js/drawableObjects";
-import {getBernsteinPolynomes, getHermitePolynom, getPolynom, interpolate} from "../../js/interpolation";
+import {getAxis, getPoint} from "../../js/drawableObjects";
+import {getPolynom, interpolate} from "../../js/interpolation";
 import {Vector3} from "three";
 
 let xAxisSize = 1;
@@ -74,23 +74,7 @@ function renderRight(){
 
   sceneRight.add(getAxis(xAxisSize, yAxisSize));
 
-  for (const bernsteinLine of getBernsteinLines()) {
-    sceneRight.add(bernsteinLine);
-  }
-
   rendererRight.render(sceneRight, camera);
-}
-
-function getBernsteinLines() {
-  let bernsteinPolynomes = getBernsteinPolynomes();
-  let bernsteinLines = [];
-
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[0],false, hermiteColor0));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[1], false, hermiteColor1));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[2], false, hermiteColor2));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[3], false, hermiteColor3));
-
-  return bernsteinLines;
 }
 
 render();
