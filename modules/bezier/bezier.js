@@ -10,9 +10,17 @@ const renderer = new THREE.WebGLRenderer();
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2;
 
+const height = window.innerHeight;
+const width = window.innerWidth;
+
+const aspectRatio = width / height; // width / height
+const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
+camera.position.set(0, 0, 4);
+camera.lookAt(0, 0, 0);
+
 let xAxisSize = 1;
 let yAxisSize = 1;
-const pointSize = 0.02;
+const pointSize = 0.2;
 const interpolationStepSize = 0.01;
 
 const hermiteColor0 = 0xff0000;
@@ -20,30 +28,23 @@ const hermiteColor1 = 0x00ff00;
 const hermiteColor2 = 0x0000ff;
 const hermiteColor3 = 0xff00ff;
 
-const aspectRatio = 1; // window.innerWidth / window.innerHeight
-const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
-camera.position.set(0, 0, 5);
-camera.lookAt(0, 0, 0);
-
 document.getElementById("canvas").appendChild(renderer.domElement);
-document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+window.addEventListener( 'click', onDocumentMouseDown, false );
 
 
 function onDocumentMouseDown( e ) {
   e.preventDefault();
 
-  pointer.x = (e.clientX / window.innerWidth/2) * 2 - 1;
-  pointer.y = -(e.clientY / window.innerWidth/2) * 2 + 1;
-  console.log(pointer.x, pointer.y);
+  pointer.x = (e.clientX / width) * 2 - 1;
+  pointer.y = -(e.clientY / height) * 2 + 1;
 
   raycaster.setFromCamera(pointer, camera);
 
   // calculate clicked objects
   const intersects = raycaster.intersectObjects(scene.children);
-  console.log(intersects.length);
 
   for (const intersect of intersects) {
-    console.log(intersect);
+    console.log(intersect);// TODO: delete
   }
 
   //TODO: Objekte verschieben https://codesandbox.io/s/basic-threejs-example-with-re-use-dsrvn
@@ -54,12 +55,9 @@ function render() {
 
   xAxisSize = 1;
   yAxisSize = 1;
-  const aspectRatio = 1; // window.innerWidth / window.innerHeight
-  const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
-  camera.position.set(0, 0, 4);
-  camera.lookAt(0, 0, 0);
 
-  renderer.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
+  renderer.setPixelRatio(Math.min(Math.max(1, window.devicePixelRatio),2));
+  renderer.setSize(width, height); // leave this quadratic, else linewidth will be weird
   renderer.setClearColor("#141C24");
 
   scene.add(getAxis(xAxisSize, yAxisSize));
@@ -68,12 +66,7 @@ function render() {
     scene.add(bernsteinLine);
   }
 
-  renderer.render(scene, camera);
-  renderer.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
-  renderer.setClearColor("#141C24");
-
-  scene.add(getAxis(xAxisSize, yAxisSize));
-  scene.add(getPoint(new Vector3(2,0,0),0.5));
+  scene.add(getPoint(new Vector3(-1,0,0),pointSize));
 
   renderer.render(scene, camera);
 }

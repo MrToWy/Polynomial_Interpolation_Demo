@@ -25,7 +25,7 @@ export function getPoint(positionVector, radius = 1, color = 0xffff00) {
   return point;
 }
 
-export function getLine(points, color = 0xffff00, lineWidth = 0.0065) {
+export function getLine(points, color = 0xffff00, lineWidth = 0.0025) {
   let geometry = new LineGeometry();
   geometry.setPositions(concatVector3Array(points));
 
