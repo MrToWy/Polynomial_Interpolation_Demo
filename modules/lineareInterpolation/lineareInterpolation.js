@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAxis, getPoints} from "../../js/drawableObjects";
+import {Axis, getPoints} from "../../js/drawableObjects";
 import {getPolynom, getRungePoints, interpolate} from "../../js/interpolation";
 
 const xAxisSize = 5;
@@ -33,8 +33,8 @@ function render(){
   renderer.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
   renderer.setClearColor("#141C24");
 
-  scene.add(getAxis(-xAxisSize, -yAxisSize, 0x999999));
-  scene.add(getAxis(xAxisSize, yAxisSize));
+  scene.add(new Axis().setAxisSize(-xAxisSize, -yAxisSize).setColor(0x999999));
+  scene.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   let points = getRungePoints(rungePointCount);
   let polynomArray = interpolate(points);

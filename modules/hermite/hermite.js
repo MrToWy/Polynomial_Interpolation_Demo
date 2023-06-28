@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAbleitungsVec, getAxis, getColorLine, getPoint} from "../../js/drawableObjects";
+import {Axis, getAbleitungsVec, getColorLine, getPoint} from "../../js/drawableObjects";
 import {getHermitePolynomes, getPolynom, interpolate} from "../../js/interpolation";
 import {Vector3} from "three";
 
@@ -46,7 +46,7 @@ function renderLeft(points) {
   rendererLeft.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
   rendererLeft.setClearColor("#922792");
 
-  sceneLeft.add(getAxis(xAxisSize, yAxisSize));
+  sceneLeft.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   let polynomArray = interpolate(points);
   let colorArray = [];
@@ -75,7 +75,7 @@ function renderRight(points){
   rendererRight.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
   rendererRight.setClearColor("#141C24");
 
-  sceneRight.add(getAxis(xAxisSize, yAxisSize));
+  sceneRight.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   let polynomMatrix = getHermitePolynomes(points);
 

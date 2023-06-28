@@ -1,9 +1,8 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getAxis, getPoint} from "../../js/drawableObjects";
+import {Axis, getPoint} from "../../js/drawableObjects";
 import {Vector3} from "three";
 import {getBernsteinPolynomes, getPolynom} from "../../js/interpolation";
-import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
 
 
 const scene = new THREE.Scene();
@@ -65,7 +64,7 @@ function render() {
   renderer.setSize(width, height); // leave this quadratic, else linewidth will be weird
   renderer.setClearColor("#141C24");
 
-  scene.add(getAxis(xAxisSize, yAxisSize));
+  scene.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   for (const bernsteinLine of getBernsteinLines()) {
     scene.add(bernsteinLine);

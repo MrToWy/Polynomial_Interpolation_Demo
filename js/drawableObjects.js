@@ -3,14 +3,42 @@ import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 import {CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
 
-export function getAxis(xAxisSize = 5, yAxisSize = 5, color = 0xffffff, lineWidth = 0.0025) {
-  let origin = new Vector3(0, 0, 0);
-  let endOfXAxis = new Vector3(xAxisSize, 0, 0);
-  let endOfYAxis = new Vector3(0, yAxisSize, 0);
+export class Axis extends Linie{
+  constructor() {
 
-  let points = [endOfXAxis, origin, endOfYAxis];
+    let origin = new Vector3(0, 0, 0);
+    let endOfXAxis = new Vector3(5, 0, 0);
+    let endOfYAxis = new Vector3(0, 5, 0);
 
-  return new Linie(points).setColor(color).setLineWidth(lineWidth);
+    let points = [endOfXAxis, origin, endOfYAxis];
+    super(points).setColor(0xffffff).setLineWidth(0.0025);
+  }
+
+  setXAxisSize(size){
+    this.endOfXAxis = new Vector3(size, 0, 0);
+    return this;
+  }
+
+  setYAxisSize(size){
+    this.endOfYAxis = new Vector3(0, size, 0);
+    return this;
+  }
+
+  setAxisSize(xSize, ySize){
+    this.setXAxisSize(xSize);
+    this.setYAxisSize(ySize);
+    return this;
+  }
+
+  setColor(color){
+    super.setColor(color);
+    return this;
+  }
+
+  setLineWidth(width) {
+    super.setLineWidth(width);
+    return this;
+  }
 }
 
 export function getPoint(positionVector, radius = 1, color = 0xffff00) {
@@ -41,7 +69,7 @@ export class Linie extends Line2{
     this.scale.set(1, 1, 1);
   }
 
-  setColor(color){
+    setColor(color){
     this.material.color.set(color);
     return this;
   }
