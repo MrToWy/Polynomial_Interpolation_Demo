@@ -1,32 +1,16 @@
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
-import {CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
+import {Group, Vector3} from "three";
 import {Linie} from "./classes/Linie";
+import {Point} from "./classes/Point";
 
-export class Point extends Mesh{
-  constructor(positionVector) {
-    this.positionVector = positionVector;
 
-  }
-}
-
-export function getPoint(positionVector, radius = 1, color = 0xffff00) {
-  let geo = new CircleGeometry(radius, 256);
-  let mat = new MeshBasicMaterial({ color: color });
-  let point = new Mesh(geo, mat);
-
-  point.translateX(positionVector.x);
-  point.translateY(positionVector.y);
-  point.translateY(positionVector.z);
-
-  return point;
-}
 
 export function getPoints(pointsArray, pointSize) {
   const group = new Group();
   for (const point of pointsArray) {
-    group.add(getPoint(point, pointSize));
+    group.add(new Point(point).setRadius(pointSize));
   }
   return group;
 }

@@ -1,9 +1,9 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getPoint} from "../../js/drawableObjects";
 import {Vector3} from "three";
 import {getBernsteinPolynomes, getPolynom} from "../../js/interpolation";
 import {Axis} from "../../js/classes/Axis";
+import {Point} from "../../js/classes/Point";
 
 
 const scene = new THREE.Scene();
@@ -71,7 +71,7 @@ function render() {
     scene.add(bernsteinLine);
   }
 
-  scene.add(getPoint(new Vector3(-1,0,0),pointSize));
+  scene.add(new Point(new Vector3(-1,0,0)).setRadius(pointSize));
 
   renderer.render(scene, camera);
 }
