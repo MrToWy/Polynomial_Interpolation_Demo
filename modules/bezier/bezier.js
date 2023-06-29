@@ -56,9 +56,6 @@ function renderLeft() {
 }
 
 function renderRight() {
-  xAxisSize = 1;
-  yAxisSize = 1;
-
   sceneRight.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   for (const bernsteinLine of getBernsteinLines()) {
