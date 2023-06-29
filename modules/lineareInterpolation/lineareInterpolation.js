@@ -1,8 +1,9 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getPoints} from "../../js/drawableObjects";
 import {getPolynom, getRungePoints, interpolate} from "../../js/interpolation";
 import {Axis} from "../../js/classes/Axis";
+import {Group} from "three";
+import {Point} from "../../js/classes/Point";
 
 const xAxisSize = 5;
 const yAxisSize = 5;
@@ -52,4 +53,12 @@ function render(){
 function setPointCount(count){
   rungePointCount = count;
   render()
+}
+
+function getPoints(pointsArray, pointSize) {
+  const group = new Group();
+  for (const point of pointsArray) {
+    group.add(new Point(point).setRadius(pointSize));
+  }
+  return group;
 }
