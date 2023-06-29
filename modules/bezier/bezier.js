@@ -5,6 +5,8 @@ import {getBernsteinPolynomes} from "../../js/interpolation";
 import {Axis} from "../../js/classes/Axis";
 import {Point} from "../../js/classes/Point";
 import {Polynom} from "../../js/classes/Polynom";
+import {TransformControls} from "three/examples/jsm/controls/TransformControls";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 
 const scene = new THREE.Scene();
@@ -22,7 +24,7 @@ camera.lookAt(0, 0, 0);
 
 let xAxisSize = 1;
 let yAxisSize = 1;
-const pointSize = 0.2;
+const pointSize = 0.04;
 const interpolationStepSize = 0.01;
 
 const hermiteColor0 = 0xff0000;
@@ -34,6 +36,12 @@ document.getElementById("canvas").appendChild(renderer.domElement);
 window.addEventListener( 'click', onDocumentMouseDown, false );
 
 
+let control = new TransformControls(camera, renderer.domElement);
+control.addEventListener('change', () => renderer.render(scene,camera));
+control.showZ = false;
+scene.add(control);
+
+
 function onDocumentMouseDown( e ) {
   e.preventDefault();
 
@@ -43,17 +51,20 @@ function onDocumentMouseDown( e ) {
   raycaster.setFromCamera(pointer, camera);
 
   // calculate clicked objects
-  const intersects = raycaster.intersectObjects(scene.children);
+  const intersects = raycaster.intersectObjects(scene.children).filter(obj => {
+    return obj.object instanceof Point;
+  });
 
-  for (const intersect of intersects) {
-    console.log(intersect);// TODO: delete
-
-    //const control = new TransformControls(camera, renderer.domElement)
-    //control.attach(intersect)
-    //scene.add(control)
+  if(intersects.length === 0){
+    control.detach();
+    renderer.render(scene, camera);
   }
 
-  //TODO: Objekte verschieben https://codesandbox.io/s/basic-threejs-example-with-re-use-dsrvn
+  for (const intersect of intersects) {
+    control.attach(intersect.object);
+    scene.add(control)
+    renderer.render(scene, camera);
+  }
 }
 
 function render() {
@@ -72,7 +83,13 @@ function render() {
     scene.add(bernsteinLine);
   }
 
-  scene.add(new Point(new Vector3(-1,0,0)).setRadius(pointSize));
+  let point = new Point(new Vector3(-1,0,0)).setRadius(pointSize);
+  //control.attach(point)
+
+  //control.attach(point);
+  //scene.add(control);
+
+  scene.add(point);
 
   renderer.render(scene, camera);
 }
