@@ -8,24 +8,21 @@ import {AbleitungsVector} from "../../js/classes/AbleitungsVector";
 import {Polynom} from "../../js/classes/Polynom";
 import {Camera} from "../../js/classes/Camera";
 import {Renderer} from "../../js/classes/Renderer";
-
-let xAxisSize = 1;
-let yAxisSize = 1;
-const pointSize = 0.02;
-const interpolationStepSize = 0.01;
-
-const height = window.innerHeight;
-const width = window.innerWidth/2;
-
-const hermiteColor0 = 0xff0000;
-const hermiteColor1 = 0x00ff00;
-const hermiteColor2 = 0x0000ff;
-const hermiteColor3 = 0xff00ff;
+import {
+  COLOR_0,
+  COLOR_1,
+  COLOR_2,
+  COLOR_3,
+  DRAW_STEP_SIZE,
+  POINT_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH,
+  X_AXIS_SIZE,
+  Y_AXIS_SIZE
+} from "../../js/constants";
 
 const sceneRight = new Scene();
 const sceneLeft = new Scene();
-const rendererRight = new Renderer(width, height);
-const rendererLeft = new Renderer(width, height);
+const rendererRight = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
+const rendererLeft = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
 document.getElementById("canvasRight").appendChild(rendererRight.domElement);
 document.getElementById("canvasLeft").appendChild(rendererLeft.domElement);
 
@@ -46,17 +43,17 @@ function render() {
 function renderLeft(points) {
   sceneLeft.clear();
 
-  const camera = new Camera(width, height);
+  const camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-  sceneLeft.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
+  sceneLeft.add(new Axis().setAxisSize(X_AXIS_SIZE, Y_AXIS_SIZE));
 
   let polynomArray = interpolate(points);
 
-  sceneLeft.add(new Polynom(interpolationStepSize, xAxisSize, polynomArray).setShowNegativeAxis(false).setColor(0xff0000).setBoundarys(points[0].x, points[2].x));
+  sceneLeft.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomArray).setShowNegativeAxis(false).setColor(0xff0000).setBoundarys(points[0].x, points[2].x));
 
-  sceneLeft.add(new Point(points[0]).setRadius(pointSize).setColor(hermiteColor0));
+  sceneLeft.add(new Point(points[0]).setRadius(POINT_SIZE).setColor(COLOR_0));
   sceneLeft.add(new AbleitungsVector(points[0], points[1]));
-  sceneLeft.add(new Point(points[2]).setRadius(pointSize).setColor(hermiteColor1));
+  sceneLeft.add(new Point(points[2]).setRadius(POINT_SIZE).setColor(COLOR_1));
   sceneLeft.add(new AbleitungsVector(points[2], points[3]));
 
 
@@ -67,18 +64,16 @@ function renderLeft(points) {
 function renderRight(points){
   sceneRight.clear();
 
-  xAxisSize = 1;
-  yAxisSize = 1;
-  const camera = new Camera(width, height);
+  const camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-  sceneRight.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
+  sceneRight.add(new Axis().setAxisSize(X_AXIS_SIZE, Y_AXIS_SIZE));
 
   let polynomMatrix = getHermitePolynomes(points);
 
-  sceneRight.add(new Polynom(interpolationStepSize, xAxisSize, polynomMatrix[0]).setShowNegativeAxis(false).setColor(0xff0000));
-  sceneRight.add(new Polynom(interpolationStepSize, xAxisSize, polynomMatrix[1]).setShowNegativeAxis(false).setColor(0x00ff00));
-  sceneRight.add(new Polynom(interpolationStepSize, xAxisSize, polynomMatrix[2]).setShowNegativeAxis(false).setColor(0x0000ff));
-  sceneRight.add(new Polynom(interpolationStepSize, xAxisSize, polynomMatrix[3]).setShowNegativeAxis(false).setColor(0xff00ff));
+  sceneRight.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[0]).setShowNegativeAxis(false).setColor(COLOR_0));
+  sceneRight.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[1]).setShowNegativeAxis(false).setColor(COLOR_1));
+  sceneRight.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2));
+  sceneRight.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3));
 
   rendererRight.render(sceneRight, camera);
 }

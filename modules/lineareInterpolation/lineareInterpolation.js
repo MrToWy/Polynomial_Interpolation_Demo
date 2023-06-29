@@ -6,21 +6,15 @@ import {Point} from "../../js/classes/Point";
 import {Polynom} from "../../js/classes/Polynom";
 import {Camera} from "../../js/classes/Camera";
 import {Renderer} from "../../js/classes/Renderer";
+import {DRAW_STEP_SIZE, POINT_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH} from "../../js/constants";
 
 const xAxisSize = 5;
 const yAxisSize = 5;
-const pointSize = 0.07;
-const interpolationStepSize = 0.01;
 
-const startTime = Date();
-
-let rungePointCount = 21;
-
-const height = window.innerHeight;
-const width = window.innerWidth/2;
+let rungePointCount = 0;
 
 const scene = new Scene();
-const renderer = new Renderer(width, height);
+const renderer = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
 document.getElementById("canvas").appendChild(renderer.domElement);
 
 document.getElementById("small").addEventListener("click", () => setPointCount(6));
@@ -31,21 +25,17 @@ document.getElementById("large").addEventListener("click", () => setPointCount(1
 function render(){
   scene.clear();
 
-  const camera = new Camera(width, height).setZposition(14);
+  const camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT).setZposition(14);
 
   scene.add(new Axis().setAxisSize(-xAxisSize, -yAxisSize).setColor(0x999999));
   scene.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   let points = getRungePoints(rungePointCount);
   let polynomArray = interpolate(points);
-  scene.add(new Polynom(interpolationStepSize, xAxisSize, polynomArray));
-  scene.add(getPoints(points, pointSize));
+  scene.add(new Polynom(DRAW_STEP_SIZE, xAxisSize, polynomArray));
+  scene.add(getPoints(points, POINT_SIZE));
 
   renderer.render(scene, camera);
-
-  const endTime = Date();
-  const deltaTime = endTime - startTime;
-  console.log("Runtime: ", deltaTime)
 }
 
 function setPointCount(count){
