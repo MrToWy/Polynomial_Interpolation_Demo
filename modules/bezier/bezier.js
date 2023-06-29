@@ -38,18 +38,25 @@ let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(pointSize);
 let point2 = new Point(new Vector3(0.8,0.9,0)).setRadius(pointSize);
 let point3 = new Point(new Vector3(0.9,0.1,0)).setRadius(pointSize);
 
-let curve;
+let linie0 = new Linie().setPoints([point0.position,point1.position]);
+let linie1 = new Linie().setPoints([point1.position,point2.position]);
+let linie2 = new Linie().setPoints([point2.position,point3.position]);
+
+let curves;
 
 document.getElementById("canvasLeft").appendChild(rendererLeft.domElement);
 document.getElementById("canvasRight").appendChild(rendererRight.domElement);
 window.addEventListener( 'click', onDocumentMouseDown, false );
 document.getElementById("pause").addEventListener('click',e => togglePause(e));
 
-let currentT = 1;
+let currentT = 0.5;
 let pause = true;
 const animationsSpeed = 0.003;
 
-let transformControl = new TransformControl(cameraLeft, rendererLeft, () => renderCasteljauCurve());
+let transformControl = new TransformControl(cameraLeft, rendererLeft, () => {
+  renderCasteljauCurve();
+  renderCasteljauLines();
+});
 sceneLeft.add(transformControl);
 
 
@@ -68,7 +75,9 @@ function renderLeft() {
   sceneLeft.add(point2);
   sceneLeft.add(point3);
 
-  sceneLeft.add(new Axis().setAxisSize(2*xAxisSize, yAxisSize));
+  sceneLeft.add(linie0);
+  sceneLeft.add(linie1);
+  sceneLeft.add(linie2);
 
   renderCasteljauCurve();
 
@@ -111,11 +120,19 @@ function deCasteljau(t){
 function drawDeCasteljau(counter) {
   let stepSize = 0.01;
   let curve = [];
+  let lines = [];
   for (let t = 0; t <= counter; t+= stepSize) {
     let result = deCasteljau(1 - t);
     curve.push(result[5]);
   }
-  return new Linie().setPoints(curve);
+
+  let casteljauPoints = deCasteljau(1- counter);
+  lines.push(new Linie().setPoints([casteljauPoints[0], casteljauPoints[1]]).setColor(0x0000ff));
+  lines.push(new Linie().setPoints([casteljauPoints[1], casteljauPoints[2]]).setColor(0x0000ff));
+  lines.push(new Linie().setPoints([casteljauPoints[3], casteljauPoints[4]]).setColor(0xff0000));
+
+  lines.push(new Linie().setPoints(curve));
+  return lines;
 }
 
 function lerp(a, b, t) {
@@ -181,12 +198,30 @@ function animate() {
 }
 
 function renderCasteljauCurve() {
-  sceneLeft.remove(curve);
-  curve = drawDeCasteljau(currentT);
-  sceneLeft.add(curve);
+  if(curves && curves.length > 0)
+  for (const curve of curves) {
+    sceneLeft.remove(curve);
+  }
+  curves = drawDeCasteljau(currentT);
+
+  for (const curve of curves) {
+    sceneLeft.add(curve);
+  }
   rendererLeft.render(sceneLeft, cameraLeft);
 }
 
+function renderCasteljauLines() {
+  sceneLeft.remove(linie0);
+  sceneLeft.remove(linie1);
+  sceneLeft.remove(linie2);
+  linie0 = new Linie().setPoints([point0.position,point1.position]);
+  linie1 = new Linie().setPoints([point1.position,point2.position]);
+  linie2 = new Linie().setPoints([point2.position,point3.position]);
+  sceneLeft.add(linie0);
+  sceneLeft.add(linie1);
+  sceneLeft.add(linie2);
+  rendererLeft.render(sceneLeft, cameraLeft);
+}
 
 render();
 animate(currentT);
