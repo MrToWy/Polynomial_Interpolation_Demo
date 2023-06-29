@@ -6,6 +6,7 @@ import {Axis} from "../../js/classes/Axis";
 import {Point} from "../../js/classes/Point";
 import {Polynom} from "../../js/classes/Polynom";
 import {TransformControl} from "../../js/classes/TransformControl";
+import {Camera} from "../../js/classes/Camera";
 
 
 const scene = new THREE.Scene();
@@ -14,12 +15,9 @@ const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2;
 
 const height = window.innerHeight;
-const width = window.innerWidth;
+const width = window.innerWidth/2;
 
-const aspectRatio = width / height; // width / height
-const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
-camera.position.set(0, 0, 4);
-camera.lookAt(0, 0, 0);
+const camera = new Camera(width, height);
 
 let xAxisSize = 1;
 let yAxisSize = 1;
@@ -31,7 +29,7 @@ const hermiteColor1 = 0x00ff00;
 const hermiteColor2 = 0x0000ff;
 const hermiteColor3 = 0xff00ff;
 
-document.getElementById("canvas").appendChild(renderer.domElement);
+document.getElementById("canvasLeft").appendChild(renderer.domElement);
 window.addEventListener( 'click', onDocumentMouseDown, false );
 
 let transformControl = new TransformControl(camera, renderer, () => renderer.render(scene,camera));
@@ -80,10 +78,9 @@ function render() {
   }
 
   let point = new Point(new Vector3(-1,0,0)).setRadius(pointSize);
-  //control.attach(point)
 
-  //control.attach(point);
-  //scene.add(control);
+  scene.add(new Axis().setAxisSize(xAxisSize, yAxisSize).translateX(-1));
+
 
   scene.add(point);
 

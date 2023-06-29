@@ -7,11 +7,15 @@ import {Point} from "../../js/classes/Point";
 import {ColorLine} from "../../js/classes/ColorLine";
 import {AbleitungsVector} from "../../js/classes/AbleitungsVector";
 import {Polynom} from "../../js/classes/Polynom";
+import {Camera} from "../../js/classes/Camera";
 
 let xAxisSize = 1;
 let yAxisSize = 1;
 const pointSize = 0.02;
 const interpolationStepSize = 0.01;
+
+const height = window.innerHeight;
+const width = window.innerWidth/2;
 
 const hermiteColor0 = 0xff0000;
 const hermiteColor1 = 0x00ff00;
@@ -42,12 +46,9 @@ function render() {
 function renderLeft(points) {
   sceneLeft.clear();
 
-  const aspectRatio = 1; // window.innerWidth / window.innerHeight
-  const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
-  camera.position.set(0, 0, 4);
-  camera.lookAt(0, 0, 0);
+  const camera = new Camera(width, height);
 
-  rendererLeft.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
+  rendererLeft.setSize(width, height); // leave this quadratic, else linewidth will be weird
   rendererLeft.setClearColor("#922792");
 
   sceneLeft.add(new Axis().setAxisSize(xAxisSize, yAxisSize));

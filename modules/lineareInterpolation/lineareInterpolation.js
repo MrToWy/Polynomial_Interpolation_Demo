@@ -5,6 +5,7 @@ import {Axis} from "../../js/classes/Axis";
 import {Group} from "three";
 import {Point} from "../../js/classes/Point";
 import {Polynom} from "../../js/classes/Polynom";
+import {Camera} from "../../js/classes/Camera";
 
 const xAxisSize = 5;
 const yAxisSize = 5;
@@ -15,6 +16,8 @@ const startTime = Date();
 
 let rungePointCount = 21;
 
+const height = window.innerHeight;
+const width = window.innerWidth/2;
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
@@ -28,10 +31,7 @@ document.getElementById("large").addEventListener("click", () => setPointCount(1
 function render(){
   scene.clear();
 
-  const aspectRatio = 1; // window.innerWidth / window.innerHeight
-  const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
-  camera.position.set(0, 0, 14);
-  camera.lookAt(0, 0, 0);
+  const camera = new Camera(width, height).setZposition(14);
 
   renderer.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
   renderer.setClearColor("#141C24");
