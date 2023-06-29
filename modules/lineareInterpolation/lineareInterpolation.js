@@ -6,6 +6,7 @@ import {Group} from "three";
 import {Point} from "../../js/classes/Point";
 import {Polynom} from "../../js/classes/Polynom";
 import {Camera} from "../../js/classes/Camera";
+import {Renderer} from "../../js/classes/Renderer";
 
 const xAxisSize = 5;
 const yAxisSize = 5;
@@ -20,7 +21,7 @@ const height = window.innerHeight;
 const width = window.innerWidth/2;
 
 const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer();
+const renderer = new Renderer(width, height);
 document.getElementById("canvas").appendChild(renderer.domElement);
 
 document.getElementById("small").addEventListener("click", () => setPointCount(6));
@@ -32,9 +33,6 @@ function render(){
   scene.clear();
 
   const camera = new Camera(width, height).setZposition(14);
-
-  renderer.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
-  renderer.setClearColor("#141C24");
 
   scene.add(new Axis().setAxisSize(-xAxisSize, -yAxisSize).setColor(0x999999));
   scene.add(new Axis().setAxisSize(xAxisSize, yAxisSize));

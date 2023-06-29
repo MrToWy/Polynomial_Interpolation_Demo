@@ -8,6 +8,7 @@ import {ColorLine} from "../../js/classes/ColorLine";
 import {AbleitungsVector} from "../../js/classes/AbleitungsVector";
 import {Polynom} from "../../js/classes/Polynom";
 import {Camera} from "../../js/classes/Camera";
+import {Renderer} from "../../js/classes/Renderer";
 
 let xAxisSize = 1;
 let yAxisSize = 1;
@@ -24,8 +25,8 @@ const hermiteColor3 = 0xff00ff;
 
 const sceneRight = new THREE.Scene();
 const sceneLeft = new THREE.Scene();
-const rendererRight = new THREE.WebGLRenderer();
-const rendererLeft = new THREE.WebGLRenderer();
+const rendererRight = new Renderer(width, height);
+const rendererLeft = new Renderer(width, height);
 document.getElementById("canvasRight").appendChild(rendererRight.domElement);
 document.getElementById("canvasLeft").appendChild(rendererLeft.domElement);
 
@@ -48,9 +49,6 @@ function renderLeft(points) {
 
   const camera = new Camera(width, height);
 
-  rendererLeft.setSize(width, height); // leave this quadratic, else linewidth will be weird
-  rendererLeft.setClearColor("#922792");
-
   sceneLeft.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   let polynomArray = interpolate(points);
@@ -72,13 +70,7 @@ function renderRight(points){
 
   xAxisSize = 1;
   yAxisSize = 1;
-  const aspectRatio = 1; // window.innerWidth / window.innerHeight
-  const camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 500);
-  camera.position.set(0, 0, 4);
-  camera.lookAt(0, 0, 0);
-
-  rendererRight.setSize(window.innerWidth/2, window.innerWidth/2); // leave this quadratic, else linewidth will be weird
-  rendererRight.setClearColor("#141C24");
+  const camera = new Camera(width, height);
 
   sceneRight.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 

@@ -7,15 +7,15 @@ import {Point} from "../../js/classes/Point";
 import {Polynom} from "../../js/classes/Polynom";
 import {TransformControl} from "../../js/classes/TransformControl";
 import {Camera} from "../../js/classes/Camera";
-
-
-const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer();
-const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2;
+import {Renderer} from "../../js/classes/Renderer";
 
 const height = window.innerHeight;
 const width = window.innerWidth/2;
+
+const scene = new THREE.Scene();
+const renderer = new Renderer(width, height);
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2;
 
 const camera = new Camera(width, height);
 
@@ -66,10 +66,6 @@ function render() {
 
   xAxisSize = 1;
   yAxisSize = 1;
-
-  renderer.setPixelRatio(Math.min(Math.max(1, window.devicePixelRatio),2));
-  renderer.setSize(width, height); // leave this quadratic, else linewidth will be weird
-  renderer.setClearColor("#141C24");
 
   scene.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
