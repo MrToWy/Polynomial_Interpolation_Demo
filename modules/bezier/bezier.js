@@ -66,12 +66,14 @@ function render() {
 function renderLeft() {
   sceneLeft.clear();
 
+  cameraLeft.translateX(1).translateY(0.5).setLookAt(1,0.5,0);
+
   sceneLeft.add(point0);
   sceneLeft.add(point1);
   sceneLeft.add(point2);
   sceneLeft.add(point3);
 
-  sceneLeft.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
+  sceneLeft.add(new Axis().setAxisSize(2*xAxisSize, yAxisSize));
 
   curve = drawDeCasteljau(points);
   sceneLeft.add(curve);
