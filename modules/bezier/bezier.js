@@ -11,12 +11,15 @@ import {Renderer} from "../../js/classes/Renderer";
 const height = window.innerHeight;
 const width = window.innerWidth/2;
 
-const scene = new Scene();
-const renderer = new Renderer(width, height);
+const sceneLeft = new Scene();
+const sceneRight = new Scene();
+const rendererLeft = new Renderer(width, height);
+const rendererRight = new Renderer(width, height);
 const raycaster = new Raycaster();
 const pointer = new Vector2;
 
-const camera = new Camera(width, height);
+const cameraLeft = new Camera(width, height);
+const cameraRight = new Camera(width, height);
 
 let xAxisSize = 1;
 let yAxisSize = 1;
@@ -28,58 +31,41 @@ const hermiteColor1 = 0x00ff00;
 const hermiteColor2 = 0x0000ff;
 const hermiteColor3 = 0xff00ff;
 
-document.getElementById("canvasLeft").appendChild(renderer.domElement);
+document.getElementById("canvasLeft").appendChild(rendererLeft.domElement);
+document.getElementById("canvasRight").appendChild(rendererRight.domElement);
 window.addEventListener( 'click', onDocumentMouseDown, false );
 
-let transformControl = new TransformControl(camera, renderer, () => renderer.render(scene,camera));
-scene.add(transformControl);
+let transformControl = new TransformControl(cameraLeft, rendererLeft, () => rendererLeft.render(sceneLeft,cameraLeft));
+sceneLeft.add(transformControl);
 
-
-function onDocumentMouseDown( e ) {
-  e.preventDefault();
-
-  pointer.x = (e.clientX / width) * 2 - 1;
-  pointer.y = -(e.clientY / height) * 2 + 1;
-
-  raycaster.setFromCamera(pointer, camera);
-
-  // calculate clicked objects
-  const intersects = raycaster.intersectObjects(scene.children).filter(obj => {
-    return obj.object instanceof Point;
-  });
-
-  if(intersects.length === 0){
-    transformControl.detach();
-    renderer.render(scene, camera);
-  }
-
-  for (const intersect of intersects) {
-    transformControl.attach(intersect.object);
-    scene.add(transformControl)
-    renderer.render(scene, camera);
-  }
-}
 
 function render() {
-  scene.clear();
+  sceneLeft.clear();
+  renderLeft();
+  renderRight();
+}
 
+function renderLeft() {
+  sceneLeft.clear();
+  let point = new Point(new Vector3(0,0,0)).setRadius(pointSize);
+  sceneLeft.add(point);
+
+  sceneLeft.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
+
+  rendererLeft.render(sceneLeft, cameraLeft);
+}
+
+function renderRight() {
+  sceneLeft.clear();
   xAxisSize = 1;
   yAxisSize = 1;
 
-  scene.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
+  sceneRight.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   for (const bernsteinLine of getBernsteinLines()) {
-    scene.add(bernsteinLine);
+    sceneRight.add(bernsteinLine);
   }
-
-  let point = new Point(new Vector3(-1,0,0)).setRadius(pointSize);
-
-  scene.add(new Axis().setAxisSize(xAxisSize, yAxisSize).translateX(-1));
-
-
-  scene.add(point);
-
-  renderer.render(scene, camera);
+  rendererRight.render(sceneRight, cameraRight);
 }
 
 function getBernsteinLines() {
@@ -94,6 +80,31 @@ function getBernsteinLines() {
   return bernsteinLines;
 }
 
-render();
+function onDocumentMouseDown( e ) {
+  e.preventDefault();
 
+  pointer.x = (e.clientX / width) * 2 - 1;
+  pointer.y = -(e.clientY / height) * 2 + 1;
+
+  raycaster.setFromCamera(pointer, cameraLeft);
+
+  // calculate clicked objects
+  const intersects = raycaster.intersectObjects(sceneLeft.children).filter(obj => {
+    return obj.object instanceof Point;
+  });
+
+  if(intersects.length === 0){
+    transformControl.detach();
+    rendererLeft.render(sceneLeft, cameraLeft);
+  }
+
+  for (const intersect of intersects) {
+    transformControl.attach(intersect.object);
+    sceneLeft.add(transformControl)
+    rendererLeft.render(sceneLeft, cameraLeft);
+  }
+}
+
+
+render();
 
