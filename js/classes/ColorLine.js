@@ -6,8 +6,4 @@ export class ColorLine extends Linie{
     this.material.vertexColors = true;
     this.geometry.setColors(colors);
   }
-
-  setLineWidth(width) {
-    return super.setLineWidth(width);
-  }
 }
