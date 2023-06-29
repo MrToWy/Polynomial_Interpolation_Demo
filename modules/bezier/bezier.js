@@ -1,6 +1,5 @@
 import "regenerator-runtime/runtime";
-import * as THREE from "three";
-import {Vector3} from "three";
+import {Raycaster, Scene, Vector2, Vector3} from "three";
 import {getBernsteinPolynomes} from "../../js/interpolation";
 import {Axis} from "../../js/classes/Axis";
 import {Point} from "../../js/classes/Point";
@@ -12,10 +11,10 @@ import {Renderer} from "../../js/classes/Renderer";
 const height = window.innerHeight;
 const width = window.innerWidth/2;
 
-const scene = new THREE.Scene();
+const scene = new Scene();
 const renderer = new Renderer(width, height);
-const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2;
+const raycaster = new Raycaster();
+const pointer = new Vector2;
 
 const camera = new Camera(width, height);
 

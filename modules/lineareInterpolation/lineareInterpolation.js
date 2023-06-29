@@ -1,8 +1,7 @@
 import "regenerator-runtime/runtime";
-import * as THREE from "three";
 import {getRungePoints, interpolate} from "../../js/interpolation";
 import {Axis} from "../../js/classes/Axis";
-import {Group} from "three";
+import {Group, Scene} from "three";
 import {Point} from "../../js/classes/Point";
 import {Polynom} from "../../js/classes/Polynom";
 import {Camera} from "../../js/classes/Camera";
@@ -20,7 +19,7 @@ let rungePointCount = 21;
 const height = window.innerHeight;
 const width = window.innerWidth/2;
 
-const scene = new THREE.Scene();
+const scene = new Scene();
 const renderer = new Renderer(width, height);
 document.getElementById("canvas").appendChild(renderer.domElement);
 

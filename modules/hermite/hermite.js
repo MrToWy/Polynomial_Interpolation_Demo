@@ -1,7 +1,6 @@
 import "regenerator-runtime/runtime";
-import * as THREE from "three";
 import {getHermitePolynomes, interpolate} from "../../js/interpolation";
-import {Vector3} from "three";
+import {Scene, Vector3} from "three";
 import {Axis} from "../../js/classes/Axis";
 import {Point} from "../../js/classes/Point";
 import {ColorLine} from "../../js/classes/ColorLine";
@@ -23,8 +22,8 @@ const hermiteColor1 = 0x00ff00;
 const hermiteColor2 = 0x0000ff;
 const hermiteColor3 = 0xff00ff;
 
-const sceneRight = new THREE.Scene();
-const sceneLeft = new THREE.Scene();
+const sceneRight = new Scene();
+const sceneLeft = new Scene();
 const rendererRight = new Renderer(width, height);
 const rendererLeft = new Renderer(width, height);
 document.getElementById("canvasRight").appendChild(rendererRight.domElement);
