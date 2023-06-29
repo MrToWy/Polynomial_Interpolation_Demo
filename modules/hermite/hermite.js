@@ -5,6 +5,7 @@ import {getHermitePolynomes, getPolynom, interpolate} from "../../js/interpolati
 import {Vector3} from "three";
 import {Axis} from "../../js/classes/Axis";
 import {Point} from "../../js/classes/Point";
+import {ColorLine} from "../../js/classes/ColorLine";
 
 let xAxisSize = 1;
 let yAxisSize = 1;
@@ -59,7 +60,8 @@ function renderLeft(points) {
   sceneLeft.add(new Point(points[2]).setRadius(pointSize).setColor(hermiteColor1));
   sceneLeft.add(getAbleitungsVec(points[2],points[3]));
 
-  //sceneLeft.add(getColorLine([new Vector3(0,0,0),new Vector3(1,1,0)]));
+
+  sceneLeft.add(new ColorLine([new Vector3(0,0,0),new Vector3(1,1,0)], [1,0,0,0,1,0]).translateX(-1));
   rendererLeft.render(sceneLeft, camera);
 }
 
