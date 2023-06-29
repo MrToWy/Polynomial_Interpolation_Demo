@@ -9,55 +9,53 @@ import {Camera} from "../../js/classes/Camera";
 import {Renderer} from "../../js/classes/Renderer";
 import {calculateOffset} from "../../js/helpers"
 import {Linie} from "../../js/classes/Linie";
+import {
+  ANIMATION_SPEED,
+  COLOR_0,
+  COLOR_1,
+  COLOR_2,
+  COLOR_3, DRAW_STEP_SIZE, POINT_SIZE,
+  WINDOW_HEIGHT,
+  WINDOW_WIDTH,
+  X_AXIS_SIZE,
+  Y_AXIS_SIZE
+} from "../../js/constants";
 
-const height = window.innerHeight*0.95;
-const width = window.innerWidth/2;
 
 const sceneLeft = new Scene();
 const sceneRight = new Scene();
-const rendererLeft = new Renderer(width, height);
-const rendererRight = new Renderer(width, height);
+const rendererLeft = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
+const rendererRight = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
 const raycaster = new Raycaster();
 const pointer = new Vector2;
 
-const cameraLeft = new Camera(width, height);
-const cameraRight = new Camera(width, height);
+const cameraLeft = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
+const cameraRight = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-let xAxisSize = 1;
-let yAxisSize = 1;
-const pointSize = 0.04;
-const interpolationStepSize = 0.01;
-
-const hermiteColor0 = 0xff0000;
-const hermiteColor1 = 0x00ff00;
-const hermiteColor2 = 0x0000ff;
-const hermiteColor3 = 0xff00ff;
-
-let point0 = new Point(new Vector3(0.1,0.1,0)).setRadius(pointSize);
-let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(pointSize);
-let point2 = new Point(new Vector3(0.8,0.9,0)).setRadius(pointSize);
-let point3 = new Point(new Vector3(0.9,0.1,0)).setRadius(pointSize);
+let point0 = new Point(new Vector3(0.1,0.1,0)).setRadius(POINT_SIZE);
+let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(POINT_SIZE);
+let point2 = new Point(new Vector3(0.8,0.9,0)).setRadius(POINT_SIZE);
+let point3 = new Point(new Vector3(0.9,0.1,0)).setRadius(POINT_SIZE);
 
 let linie0 = new Linie().setPoints([point0.position,point1.position]);
 let linie1 = new Linie().setPoints([point1.position,point2.position]);
 let linie2 = new Linie().setPoints([point2.position,point3.position]);
 
-let curves;
-
-document.getElementById("canvasLeft").appendChild(rendererLeft.domElement);
-document.getElementById("canvasRight").appendChild(rendererRight.domElement);
-window.addEventListener( 'click', onDocumentMouseDown, false );
-document.getElementById("pause").addEventListener('click',e => togglePause(e));
+let curves = [];
 
 let currentT = 0.5;
 let pause = true;
-const animationsSpeed = 0.003;
 
 let transformControl = new TransformControl(cameraLeft, rendererLeft, () => {
   renderCasteljauCurve();
   renderCasteljauLines();
 });
 sceneLeft.add(transformControl);
+
+document.getElementById("canvasLeft").appendChild(rendererLeft.domElement);
+document.getElementById("canvasRight").appendChild(rendererRight.domElement);
+window.addEventListener( 'click', onDocumentMouseDown, false );
+document.getElementById("pause").addEventListener('click',e => togglePause(e));
 
 
 function render() {
@@ -86,7 +84,7 @@ function renderLeft() {
 
 function renderRight() {
   sceneRight.clear();
-  sceneRight.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
+  sceneRight.add(new Axis().setAxisSize(X_AXIS_SIZE, Y_AXIS_SIZE));
 
   for (const bernsteinLine of getBernsteinLines()) {
     sceneRight.add(bernsteinLine);
@@ -98,10 +96,10 @@ function getBernsteinLines() {
   let bernsteinPolynomes = getBernsteinPolynomes();
   let bernsteinLines = [];
 
-  bernsteinLines.push(new Polynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[0]).setShowNegativeAxis(false).setColor(hermiteColor0));
-  bernsteinLines.push(new Polynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[1]).setShowNegativeAxis(false).setColor(hermiteColor1));
-  bernsteinLines.push(new Polynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[2]).setShowNegativeAxis(false).setColor(hermiteColor2));
-  bernsteinLines.push(new Polynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[3]).setShowNegativeAxis(false).setColor(hermiteColor3));
+  bernsteinLines.push(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[0]).setShowNegativeAxis(false).setColor(COLOR_0));
+  bernsteinLines.push(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[1]).setShowNegativeAxis(false).setColor(COLOR_1));
+  bernsteinLines.push(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[2]).setShowNegativeAxis(false).setColor(COLOR_2));
+  bernsteinLines.push(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[3]).setShowNegativeAxis(false).setColor(COLOR_3));
 
   return bernsteinLines;
 }
@@ -153,8 +151,8 @@ function onDocumentMouseDown( e ) {
 
   let posX = e.clientX+offset.x;
   let posY = e.clientY+offset.y;
-  pointer.x = (posX / width) * 2 - 1;
-  pointer.y = -(posY / height) * 2 + 1;
+  pointer.x = (posX / WINDOW_WIDTH) * 2 - 1;
+  pointer.y = -(posY / WINDOW_HEIGHT) * 2 + 1;
 
   raycaster.setFromCamera(pointer, cameraLeft);
 
@@ -188,7 +186,7 @@ function togglePause(e) {
 function animate() {
   if(pause) return;
 
-  currentT += animationsSpeed;
+  currentT += ANIMATION_SPEED;
 
   if(currentT > 1) currentT = 0;
 
