@@ -8,6 +8,7 @@ import {TransformControl} from "../../js/classes/TransformControl";
 import {Camera} from "../../js/classes/Camera";
 import {Renderer} from "../../js/classes/Renderer";
 import {calculateOffset} from "../../js/helpers"
+import {Linie} from "../../js/classes/Linie";
 
 const height = window.innerHeight;
 const width = window.innerWidth/2;
@@ -32,31 +33,54 @@ const hermiteColor1 = 0x00ff00;
 const hermiteColor2 = 0x0000ff;
 const hermiteColor3 = 0xff00ff;
 
+let point0Vec = new Vector3(0.1,0.1,0);
+let point1Vec = new Vector3(0.2,0.9,0);
+let point2Vec = new Vector3(0.8,0.9,0);
+let point3Vec = new Vector3(0.9,0.1,0);
+let point0 = new Point(point0Vec).setRadius(pointSize);
+let point1 = new Point(point1Vec).setRadius(pointSize);
+let point2 = new Point(point2Vec).setRadius(pointSize);
+let point3 = new Point(point3Vec).setRadius(pointSize);
+
+let points = [point0Vec, point1Vec, point2Vec, point3Vec];
+let curve;
+
 document.getElementById("canvasLeft").appendChild(rendererLeft.domElement);
 document.getElementById("canvasRight").appendChild(rendererRight.domElement);
 window.addEventListener( 'click', onDocumentMouseDown, false );
 
-let transformControl = new TransformControl(cameraLeft, rendererLeft, () => rendererLeft.render(sceneLeft,cameraLeft));
+let transformControl = new TransformControl(cameraLeft, rendererLeft, () => {
+  sceneLeft.remove(curve);
+  curve = drawDeCasteljau(points);
+  sceneLeft.add(curve);
+  rendererLeft.render(sceneLeft, cameraLeft);
+});
 sceneLeft.add(transformControl);
 
 
 function render() {
-  sceneLeft.clear();
-  sceneRight.clear();
   renderLeft();
   renderRight();
 }
 
 function renderLeft() {
-  let point = new Point(new Vector3(0,0,0)).setRadius(pointSize);
-  sceneLeft.add(point);
+  sceneLeft.clear();
+
+  sceneLeft.add(point0);
+  sceneLeft.add(point1);
+  sceneLeft.add(point2);
+  sceneLeft.add(point3);
 
   sceneLeft.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
+
+  curve = drawDeCasteljau(points);
+  sceneLeft.add(curve);
 
   rendererLeft.render(sceneLeft, cameraLeft);
 }
 
 function renderRight() {
+  sceneRight.clear();
   sceneRight.add(new Axis().setAxisSize(xAxisSize, yAxisSize));
 
   for (const bernsteinLine of getBernsteinLines()) {
@@ -75,6 +99,38 @@ function getBernsteinLines() {
   bernsteinLines.push(new Polynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[3]).setShowNegativeAxis(false).setColor(hermiteColor3));
 
   return bernsteinLines;
+}
+
+function deCasteljau(points, t){
+  let a = lerpVector(point0.position, point1.position, t);
+  let b = lerpVector(point1.position, point2.position, t);
+  let c = lerpVector(point2.position, point3.position, t);
+  let d = lerpVector(a, b, t);
+  let e = lerpVector(b, c, t);
+  let p = lerpVector(d, e, t);
+
+  return [a,b,c,d,e,p];
+}
+
+function drawDeCasteljau(points) {
+  let stepSize = 0.01;
+  let curve = [];
+  for (let t = 0; t <= 1; t+= stepSize) {
+    let result = deCasteljau(points,t);
+    curve.push(result[5]);
+  }
+  return new Linie().setPoints(curve);
+}
+
+function lerp(a, b, t) {
+  return a * t + (1. - t) * b;
+}
+
+function lerpVector(vecA, vecB, t) {
+  let aX = lerp(vecA.x, vecB.x, t);
+  let aY = lerp(vecA.y, vecB.y, t);
+
+  return new Vector3(aX, aY, 0);
 }
 
 function onDocumentMouseDown( e ) {
