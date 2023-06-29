@@ -41,12 +41,12 @@ sceneLeft.add(transformControl);
 
 function render() {
   sceneLeft.clear();
+  sceneRight.clear();
   renderLeft();
   renderRight();
 }
 
 function renderLeft() {
-  sceneLeft.clear();
   let point = new Point(new Vector3(0,0,0)).setRadius(pointSize);
   sceneLeft.add(point);
 
@@ -56,7 +56,6 @@ function renderLeft() {
 }
 
 function renderRight() {
-  sceneLeft.clear();
   xAxisSize = 1;
   yAxisSize = 1;
 
