@@ -1,6 +1,5 @@
 import * as mathjs from "mathjs";
 import {Vector3} from "three";
-import {Linie} from "./classes/Linie";
 
 export function interpolate(points) {
   if (points.length <= 0) throw new Error("Bitte Punkte übergeben.");
@@ -13,17 +12,7 @@ export function interpolate(points) {
   return mathjs.multiply(inverse, vector);
 }
 
-export function getPolynom(stepSize, xAxisSize, polynomArray, showNegativeAxis = true, color = 0xff0000, leftBoundaryX = null, rightBoundaryX= null) {
-  let points = [];
-  let startPoint = showNegativeAxis ? -xAxisSize : 0;
 
-  for (let x = startPoint; x < xAxisSize; x += stepSize) {
-    if(leftBoundaryX !== null && leftBoundaryX > x) continue;
-    if(rightBoundaryX !== null && rightBoundaryX < x) continue;
-    points.push(new Vector3(x, calcY(x, polynomArray), 0));
-  }
-  return new Linie().setColor(color).setPoints(points);
-}
 
 export function getRungePoints(pointCount) {
   const points = [];

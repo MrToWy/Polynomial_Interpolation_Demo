@@ -1,11 +1,12 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getHermitePolynomes, getPolynom, interpolate} from "../../js/interpolation";
+import {getHermitePolynomes, interpolate} from "../../js/interpolation";
 import {Vector3} from "three";
 import {Axis} from "../../js/classes/Axis";
 import {Point} from "../../js/classes/Point";
 import {ColorLine} from "../../js/classes/ColorLine";
 import {AbleitungsVector} from "../../js/classes/AbleitungsVector";
+import {Polynom} from "../../js/classes/Polynom";
 
 let xAxisSize = 1;
 let yAxisSize = 1;
@@ -53,7 +54,7 @@ function renderLeft(points) {
 
   let polynomArray = interpolate(points);
 
-  sceneLeft.add(getPolynom(interpolationStepSize, xAxisSize, polynomArray, false,0xff0000, points[0].x, points[2].x));
+  sceneLeft.add(new Polynom(interpolationStepSize, xAxisSize, polynomArray).setShowNegativeAxis(false).setColor(0xff0000).setBoundarys(points[0].x, points[2].x));
 
   sceneLeft.add(new Point(points[0]).setRadius(pointSize).setColor(hermiteColor0));
   sceneLeft.add(new AbleitungsVector(points[0], points[1]));
@@ -82,11 +83,10 @@ function renderRight(points){
 
   let polynomMatrix = getHermitePolynomes(points);
 
-  sceneRight.add(getPolynom(interpolationStepSize, xAxisSize, polynomMatrix[0], false,0xff0000));
-  sceneRight.add(getPolynom(interpolationStepSize, xAxisSize, polynomMatrix[1], false,0x00ff00));
-  sceneRight.add(getPolynom(interpolationStepSize, xAxisSize, polynomMatrix[2], false,0x0000ff));
-  sceneRight.add(getPolynom(interpolationStepSize, xAxisSize, polynomMatrix[3], false,0xff00ff));
-
+  sceneRight.add(new Polynom(interpolationStepSize, xAxisSize, polynomMatrix[0]).setShowNegativeAxis(false).setColor(0xff0000));
+  sceneRight.add(new Polynom(interpolationStepSize, xAxisSize, polynomMatrix[1]).setShowNegativeAxis(false).setColor(0x00ff00));
+  sceneRight.add(new Polynom(interpolationStepSize, xAxisSize, polynomMatrix[2]).setShowNegativeAxis(false).setColor(0x0000ff));
+  sceneRight.add(new Polynom(interpolationStepSize, xAxisSize, polynomMatrix[3]).setShowNegativeAxis(false).setColor(0xff00ff));
 
   rendererRight.render(sceneRight, camera);
 }

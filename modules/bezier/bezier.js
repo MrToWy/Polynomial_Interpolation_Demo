@@ -1,9 +1,10 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
 import {Vector3} from "three";
-import {getBernsteinPolynomes, getPolynom} from "../../js/interpolation";
+import {getBernsteinPolynomes} from "../../js/interpolation";
 import {Axis} from "../../js/classes/Axis";
 import {Point} from "../../js/classes/Point";
+import {Polynom} from "../../js/classes/Polynom";
 
 
 const scene = new THREE.Scene();
@@ -80,10 +81,10 @@ function getBernsteinLines() {
   let bernsteinPolynomes = getBernsteinPolynomes();
   let bernsteinLines = [];
 
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[0],false, hermiteColor0));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[1], false, hermiteColor1));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[2], false, hermiteColor2));
-  bernsteinLines.push(getPolynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[3], false, hermiteColor3));
+  bernsteinLines.push(new Polynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[0]).setShowNegativeAxis(false).setColor(hermiteColor0));
+  bernsteinLines.push(new Polynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[1]).setShowNegativeAxis(false).setColor(hermiteColor1));
+  bernsteinLines.push(new Polynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[2]).setShowNegativeAxis(false).setColor(hermiteColor2));
+  bernsteinLines.push(new Polynom(interpolationStepSize,xAxisSize,bernsteinPolynomes[3]).setShowNegativeAxis(false).setColor(hermiteColor3));
 
   return bernsteinLines;
 }

@@ -1,9 +1,10 @@
 import "regenerator-runtime/runtime";
 import * as THREE from "three";
-import {getPolynom, getRungePoints, interpolate} from "../../js/interpolation";
+import {getRungePoints, interpolate} from "../../js/interpolation";
 import {Axis} from "../../js/classes/Axis";
 import {Group} from "three";
 import {Point} from "../../js/classes/Point";
+import {Polynom} from "../../js/classes/Polynom";
 
 const xAxisSize = 5;
 const yAxisSize = 5;
@@ -40,7 +41,7 @@ function render(){
 
   let points = getRungePoints(rungePointCount);
   let polynomArray = interpolate(points);
-  scene.add(getPolynom(interpolationStepSize, xAxisSize, polynomArray));
+  scene.add(new Polynom(interpolationStepSize, xAxisSize, polynomArray));
   scene.add(getPoints(points, pointSize));
 
   renderer.render(scene, camera);
