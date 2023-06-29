@@ -5,8 +5,7 @@ import {getBernsteinPolynomes} from "../../js/interpolation";
 import {Axis} from "../../js/classes/Axis";
 import {Point} from "../../js/classes/Point";
 import {Polynom} from "../../js/classes/Polynom";
-import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {TransformControl} from "../../js/classes/TransformControl";
 
 
 const scene = new THREE.Scene();
@@ -35,11 +34,8 @@ const hermiteColor3 = 0xff00ff;
 document.getElementById("canvas").appendChild(renderer.domElement);
 window.addEventListener( 'click', onDocumentMouseDown, false );
 
-
-let control = new TransformControls(camera, renderer.domElement);
-control.addEventListener('change', () => renderer.render(scene,camera));
-control.showZ = false;
-scene.add(control);
+let transformControl = new TransformControl(camera, renderer, () => renderer.render(scene,camera));
+scene.add(transformControl);
 
 
 function onDocumentMouseDown( e ) {
@@ -56,13 +52,13 @@ function onDocumentMouseDown( e ) {
   });
 
   if(intersects.length === 0){
-    control.detach();
+    transformControl.detach();
     renderer.render(scene, camera);
   }
 
   for (const intersect of intersects) {
-    control.attach(intersect.object);
-    scene.add(control)
+    transformControl.attach(intersect.object);
+    scene.add(transformControl)
     renderer.render(scene, camera);
   }
 }
