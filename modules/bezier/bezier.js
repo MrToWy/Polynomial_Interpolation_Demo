@@ -10,7 +10,7 @@ import {Renderer} from "../../js/classes/Renderer";
 import {calculateOffset} from "../../js/helpers"
 import {Linie} from "../../js/classes/Linie";
 
-const height = window.innerHeight;
+const height = window.innerHeight*0.95;
 const width = window.innerWidth/2;
 
 const sceneLeft = new Scene();
@@ -43,11 +43,15 @@ let curve;
 document.getElementById("canvasLeft").appendChild(rendererLeft.domElement);
 document.getElementById("canvasRight").appendChild(rendererRight.domElement);
 window.addEventListener( 'click', onDocumentMouseDown, false );
+document.getElementById("pause").addEventListener('click',e => togglePause(e));
+
+let currentT = 1;
+let pause = false;
 
 let transformControl = new TransformControl(cameraLeft, rendererLeft, () => {
-  //sceneLeft.remove(curve);
-  //curve = drawDeCasteljau();
-  //sceneLeft.add(curve);
+  sceneLeft.remove(curve);
+  curve = drawDeCasteljau(currentT);
+  sceneLeft.add(curve);
   rendererLeft.render(sceneLeft, cameraLeft);
 });
 sceneLeft.add(transformControl);
@@ -70,8 +74,8 @@ function renderLeft() {
 
   sceneLeft.add(new Axis().setAxisSize(2*xAxisSize, yAxisSize));
 
-  //curve = drawDeCasteljau();
-  //sceneLeft.add(curve);
+  curve = drawDeCasteljau(currentT);
+  sceneLeft.add(curve);
 
   rendererLeft.render(sceneLeft, cameraLeft);
 }
@@ -159,16 +163,26 @@ function onDocumentMouseDown( e ) {
   }
 }
 
+function togglePause(e) {
+  pause = !pause;
+  e = e || window.event;
+  var target = e.target || e.srcElement;
+  target.innerHTML = pause ? "Play" : "Pause";
+  if(!pause) animate(currentT);
+
+}
+
 function animate(counter) {
+  if(pause) return;
   requestAnimationFrame(animate);
-  let t = (counter % 3000.) / 3000.;
+  currentT = (counter % 3000.) / 3000.;
   sceneLeft.remove(curve);
-  curve = drawDeCasteljau(t);
+  curve = drawDeCasteljau(currentT);
   sceneLeft.add(curve);
   rendererLeft.render(sceneLeft, cameraLeft);
 }
 
 
 render();
-animate(1);
+animate(currentT);
 
