@@ -7,6 +7,7 @@ import {Polynom} from "../../js/classes/Polynom";
 import {TransformControl} from "../../js/classes/TransformControl";
 import {Camera} from "../../js/classes/Camera";
 import {Renderer} from "../../js/classes/Renderer";
+import {calculateOffset} from "../../js/helpers"
 
 const height = window.innerHeight;
 const width = window.innerWidth/2;
@@ -79,8 +80,12 @@ function getBernsteinLines() {
 function onDocumentMouseDown( e ) {
   e.preventDefault();
 
-  pointer.x = (e.clientX / width) * 2 - 1;
-  pointer.y = -(e.clientY / height) * 2 + 1;
+  const offset = calculateOffset(document.getElementById("canvasLeft")); //or some other element
+
+  let posX = e.clientX+offset.x;
+  let posY = e.clientY+offset.y;
+  pointer.x = (posX / width) * 2 - 1;
+  pointer.y = -(posY / height) * 2 + 1;
 
   raycaster.setFromCamera(pointer, cameraLeft);
 
