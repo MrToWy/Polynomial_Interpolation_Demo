@@ -4,6 +4,13 @@ import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 import {CircleGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
 import {Linie} from "./classes/Linie";
 
+export class Point extends Mesh{
+  constructor(positionVector) {
+    this.positionVector = positionVector;
+
+  }
+}
+
 export function getPoint(positionVector, radius = 1, color = 0xffff00) {
   let geo = new CircleGeometry(radius, 256);
   let mat = new MeshBasicMaterial({ color: color });
