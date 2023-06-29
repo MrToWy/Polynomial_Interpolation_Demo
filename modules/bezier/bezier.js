@@ -46,14 +46,10 @@ window.addEventListener( 'click', onDocumentMouseDown, false );
 document.getElementById("pause").addEventListener('click',e => togglePause(e));
 
 let currentT = 1;
-let pause = false;
+let pause = true;
+const animationsSpeed = 0.003;
 
-let transformControl = new TransformControl(cameraLeft, rendererLeft, () => {
-  sceneLeft.remove(curve);
-  curve = drawDeCasteljau(currentT);
-  sceneLeft.add(curve);
-  rendererLeft.render(sceneLeft, cameraLeft);
-});
+let transformControl = new TransformControl(cameraLeft, rendererLeft, () => renderCasteljauCurve());
 sceneLeft.add(transformControl);
 
 
@@ -74,8 +70,7 @@ function renderLeft() {
 
   sceneLeft.add(new Axis().setAxisSize(2*xAxisSize, yAxisSize));
 
-  curve = drawDeCasteljau(currentT);
-  sceneLeft.add(curve);
+  renderCasteljauCurve();
 
   rendererLeft.render(sceneLeft, cameraLeft);
 }
@@ -165,17 +160,27 @@ function onDocumentMouseDown( e ) {
 
 function togglePause(e) {
   pause = !pause;
-  e = e || window.event;
-  var target = e.target || e.srcElement;
-  target.innerHTML = pause ? "Play" : "Pause";
-  if(!pause) animate(currentT);
-
+  if(pause){
+    e.target.innerHTML = "Play";
+  } else {
+    e.target.innerHTML = "Pause";
+    animate(currentT);
+  }
 }
 
-function animate(counter) {
+function animate() {
   if(pause) return;
+
+  currentT += animationsSpeed;
+
+  if(currentT > 1) currentT = 0;
+
+  renderCasteljauCurve();
+
   requestAnimationFrame(animate);
-  currentT = (counter % 3000.) / 3000.;
+}
+
+function renderCasteljauCurve() {
   sceneLeft.remove(curve);
   curve = drawDeCasteljau(currentT);
   sceneLeft.add(curve);
