@@ -6,7 +6,7 @@ import {Point} from "../../js/classes/Point";
 import {Polynom} from "../../js/classes/Polynom";
 import {Camera} from "../../js/classes/Camera";
 import {Renderer} from "../../js/classes/Renderer";
-import {DRAW_STEP_SIZE, POINT_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH} from "../../js/constants";
+import {DRAW_STEP_SIZE, POINT_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH_FULL} from "../../js/constants";
 
 const xAxisSize = 5;
 const yAxisSize = 5;
@@ -14,7 +14,7 @@ const yAxisSize = 5;
 let rungePointCount = 0;
 
 const scene = new Scene();
-const renderer = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
+const renderer = new Renderer(WINDOW_WIDTH_FULL, WINDOW_HEIGHT);
 document.getElementById("canvas").appendChild(renderer.domElement);
 
 document.getElementById("small").addEventListener("click", () => setPointCount(6));
@@ -25,7 +25,7 @@ document.getElementById("large").addEventListener("click", () => setPointCount(1
 function render(){
   scene.clear();
 
-  const camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT).setZposition(14);
+  const camera = new Camera(WINDOW_WIDTH_FULL, WINDOW_HEIGHT).setZposition(14);
 
   scene.add(new Axis().setAxisSize(-xAxisSize, -yAxisSize).setColor(0x999999));
   scene.add(new Axis().setAxisSize(xAxisSize, yAxisSize));

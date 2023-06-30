@@ -3,8 +3,9 @@ export const Y_AXIS_SIZE = 1;
 export const POINT_SIZE = 0.04;
 export const DRAW_STEP_SIZE = 0.01;
 export const ANIMATION_SPEED = 0.003;
-export const WINDOW_HEIGHT = window.innerHeight*0.97;
+export const WINDOW_HEIGHT = window.innerHeight*0.95;
 export const WINDOW_WIDTH = window.innerWidth/2;
+export const WINDOW_WIDTH_FULL = window.innerWidth;
 
 // COLORS
 export const COLOR_0 = 0xFF0000;

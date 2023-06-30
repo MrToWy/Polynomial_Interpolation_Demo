@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #141C24;
 }
 
 h1 {
@@ -7,4 +8,13 @@ h1 {
   left: 5%;
   top: 5%;
   color: white;
+}
+
+button {
+  height: 2em;
+  font-size: 1em;
+
+  &:hover {
+    background-color: pink;
+  }
 }
