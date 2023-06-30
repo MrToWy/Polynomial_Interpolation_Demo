@@ -20,6 +20,7 @@ import {
   X_AXIS_SIZE,
   Y_AXIS_SIZE
 } from "../../js/constants";
+import {Ring} from "../../js/classes/Ring";
 
 
 const sceneLeft = new Scene();
@@ -32,10 +33,10 @@ const pointer = new Vector2;
 const cameraLeft = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 const cameraRight = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-let point0 = new Point(new Vector3(0.1,0.1,0)).setRadius(POINT_SIZE);
+let point0 = new Point(new Vector3(0.1,-0.5,0)).setRadius(POINT_SIZE);
 let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(POINT_SIZE);
-let point2 = new Point(new Vector3(0.8,0.9,0)).setRadius(POINT_SIZE);
-let point3 = new Point(new Vector3(0.9,0.1,0)).setRadius(POINT_SIZE);
+let point2 = new Point(new Vector3(1.8,0.9,0)).setRadius(POINT_SIZE);
+let point3 = new Point(new Vector3(1.9,-0.5,0)).setRadius(POINT_SIZE);
 
 let linie0 = new Linie().setPoints([point0.position,point1.position]);
 let linie1 = new Linie().setPoints([point1.position,point2.position]);
@@ -118,19 +119,26 @@ function deCasteljau(t){
 function drawDeCasteljau(counter) {
   let stepSize = 0.01;
   let curve = [];
-  let lines = [];
+  let objects = [];
   for (let t = 0; t <= counter; t+= stepSize) {
     let result = deCasteljau(1 - t);
     curve.push(result[5]);
   }
 
   let casteljauPoints = deCasteljau(1- counter);
-  lines.push(new Linie().setPoints([casteljauPoints[0], casteljauPoints[1]]).setColor(0x0000ff));
-  lines.push(new Linie().setPoints([casteljauPoints[1], casteljauPoints[2]]).setColor(0x0000ff));
-  lines.push(new Linie().setPoints([casteljauPoints[3], casteljauPoints[4]]).setColor(0xff0000));
+  objects.push(new Linie().setPoints([casteljauPoints[0], casteljauPoints[1]]).setColor(COLOR_0));
+  objects.push(new Linie().setPoints([casteljauPoints[1], casteljauPoints[2]]).setColor(COLOR_0));
+  objects.push(new Linie().setPoints([casteljauPoints[3], casteljauPoints[4]]).setColor(COLOR_1));
 
-  lines.push(new Linie().setPoints(curve));
-  return lines;
+  objects.push(new Linie().setPoints(curve).setColor(COLOR_2));
+
+  objects.push(new Ring(casteljauPoints[0]).setColor(COLOR_0))
+  objects.push(new Ring(casteljauPoints[1]).setColor(COLOR_0))
+  objects.push(new Ring(casteljauPoints[2]).setColor(COLOR_0))
+  objects.push(new Ring(casteljauPoints[3]).setColor(COLOR_1))
+  objects.push(new Ring(casteljauPoints[4]).setColor(COLOR_1))
+  objects.push(new Ring(casteljauPoints[5]).setColor(COLOR_2))
+  return objects;
 }
 
 function lerp(a, b, t) {
