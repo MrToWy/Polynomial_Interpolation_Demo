@@ -1,4 +1,5 @@
 import {WebGLRenderer} from "three";
+import {CLEAR_COLOR} from "../constants";
 
 export class Renderer extends WebGLRenderer{
 
@@ -6,7 +7,7 @@ export class Renderer extends WebGLRenderer{
     super();
 
     this.setSize(width, height);
-    this.setClearColor('#141C24');
+    this.setClearColor(CLEAR_COLOR);
   }
 
 }
