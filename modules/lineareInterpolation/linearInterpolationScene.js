@@ -8,8 +8,8 @@ import {Point} from "../../js/classes/Point";
 
 export class LinearInterpolationScene extends Szene{
 
-  constructor() {
-    super("canvas");
+  constructor(domElementId) {
+    super(domElementId);
     this.changeAxisSize(5, 5);
 
     this.rungePointCount = 6;
