@@ -63,6 +63,22 @@ function render() {
   renderRight();
 }
 
+window.addEventListener( 'resize', onWindowResize, false );
+
+
+function onWindowResize(){
+
+  cameraLeft.aspect = (window.innerWidth/2) / (window.innerHeight*0.95);
+  cameraLeft.updateProjectionMatrix();
+
+  cameraRight.aspect = (window.innerWidth/2) / (window.innerHeight*0.95);
+  cameraRight.updateProjectionMatrix();
+
+  rendererRight.setSize( window.innerWidth/2, (window.innerHeight*0.95) );
+  rendererLeft.setSize( window.innerWidth/2, (window.innerHeight*0.95) );
+
+}
+
 function renderLeft() {
   sceneLeft.clear();
 
