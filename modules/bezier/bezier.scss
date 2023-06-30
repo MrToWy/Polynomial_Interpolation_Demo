@@ -10,6 +10,12 @@
   }
 }
 
-#pause {
+#buttons {
+  display: grid;
+  grid-template-columns: 50% 50%;
 
+  #pause {
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
