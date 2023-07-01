@@ -1,13 +1,15 @@
+@import "constants";
+
 body {
   margin: 0;
-  background-color: #141C24;
+  background-color: var(--bg-color);
 }
 
 h1 {
   position: absolute;
   left: 1em;
   top: 1em;
-  color: white;
+  color: var(--h1-font-color);
   margin: 0;
 }
 
@@ -22,31 +24,35 @@ button {
   border-radius: 4rem;
   border: 0;
   width: 15em;
-  background-color: #555555;
-  color: whitesmoke;
+  background-color: var(--bt-color);
+  color: var(--bt-font-color);
 
   &:hover {
-    background-color: whitesmoke;
-    color: #555555;
+    background-color: var(--bt-font-color);
     cursor: pointer;
   }
 }
 
+
+
+///////////// STYLE INDEX.HTML \\\\\\\\\\\\\\
 #links {
   display: flex;
   justify-content: space-around;
 
   .card {
+    padding: 1em;
     display: flex;
     align-items: center;
     text-align: center;
 
     margin: 1em;
     width: 25em;
+    min-width: 20%;
     height: 40em;
     border-radius: 2rem;
 
-    background-color: white;
+    background-color: var(--card-color);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -85,7 +91,7 @@ button {
     font-size: 2rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    opacity: .8;
     font-weight: 900;
   }
 }
+
