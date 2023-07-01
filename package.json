@@ -6,7 +6,7 @@
   "license": "",
   "author": "",
   "scripts": {
-    "build": "parcel build ./*.html & parcel build modules/**/*.html",
+    "build": "parcel build index.html",
     "dev": "parcel index.html --open",
     "prettify": "npx prettier --write .",
     "start": "npm run build && npm run dev",
