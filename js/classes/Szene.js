@@ -10,6 +10,7 @@ export class Szene extends Scene{
     super();
 
     this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT).setZposition(14);
+    console.log(this.camera)
     this.renderer = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
     document.getElementById(domElementId).appendChild(this.renderer.domElement);
 

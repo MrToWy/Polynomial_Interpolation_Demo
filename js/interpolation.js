@@ -12,7 +12,27 @@ export function interpolate(points) {
   return mathjs.multiply(inverse, vector);
 }
 
+export function deCasteljau(t, point0, point1, point2, point3){
+  let a = lerpVector(point0.position, point1.position, t);
+  let b = lerpVector(point1.position, point2.position, t);
+  let c = lerpVector(point2.position, point3.position, t);
+  let d = lerpVector(a, b, t);
+  let e = lerpVector(b, c, t);
+  let p = lerpVector(d, e, t);
 
+  return [a,b,c,d,e,p];
+}
+
+export function lerp(a, b, t) {
+  return a * t + (1. - t) * b;
+}
+
+export function lerpVector(vecA, vecB, t) {
+  let aX = lerp(vecA.x, vecB.x, t);
+  let aY = lerp(vecA.y, vecB.y, t);
+
+  return new Vector3(aX, aY, 0);
+}
 
 export function getRungePoints(pointCount) {
   const points = [];
