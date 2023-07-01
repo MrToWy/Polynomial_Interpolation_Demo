@@ -9,8 +9,8 @@ export class Szene extends Scene{
   constructor(domElementId) {
     super();
 
-    this.camera = new Camera(WINDOW_WIDTH_FULL, WINDOW_HEIGHT).setZposition(14);
-    this.renderer = new Renderer(WINDOW_WIDTH_FULL, WINDOW_HEIGHT);
+    this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT).setZposition(14);
+    this.renderer = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
     document.getElementById(domElementId).appendChild(this.renderer.domElement);
 
     this.xAxisSize = X_AXIS_SIZE;
