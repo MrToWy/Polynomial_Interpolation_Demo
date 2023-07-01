@@ -3,14 +3,19 @@
   justify-content: space-around;
 }
 
-#grid {
+.grid {
   display: grid;
   grid-template-columns: 50% 50%;
 
   #canvasLeft {
     grid-column-start: 1;
   }
-  #canvasRight {
+
+  #buttons {
+    grid-column-start: 1;
+  }
+
+  #texte {
     grid-column-start: 2;
   }
 }
