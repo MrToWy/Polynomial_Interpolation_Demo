@@ -88,7 +88,8 @@ button {
 
   .heading {
     margin: auto;
-    font-size: 2rem;
+    word-break: break-word;
+    font-size: clamp(1rem, 3vw, 4rem);
     letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: 900;
