@@ -44,8 +44,25 @@ button {
     margin: 1em;
     width: 25em;
     height: 40em;
-    background-color: whitesmoke;
     border-radius: 2rem;
+
+    background-color: white;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &.card1{
+      background-image: url("../img/lineareInterpolation.png");
+    }
+
+    &.card2{
+      background-image: url("../img/hermite.png");
+    }
+
+    &.card3{
+      background-image: url("../img/bezier.svg");
+    }
+
 
     &:hover{
       background-color: gray;
