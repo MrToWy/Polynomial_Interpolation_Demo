@@ -1,6 +1,6 @@
 import {Scene} from "three";
 import {Renderer} from "./Renderer";
-import {WINDOW_HEIGHT, WINDOW_WIDTH_FULL, X_AXIS_SIZE, Y_AXIS_SIZE} from "../constants";
+import {WINDOW_HEIGHT, WINDOW_WIDTH, X_AXIS_SIZE, Y_AXIS_SIZE} from "../constants";
 import {Camera} from "./Camera";
 import {Axis} from "./Axis";
 
@@ -35,7 +35,7 @@ export class Szene extends Scene{
   }
 
   render(){
-    console.log("r")
+    console.log("r"); //TODO: TOBI DU VERGISST DEIN LÖSCHEN TODO!!!
     this.renderer.render(this, this.camera);
     return this;
   }
