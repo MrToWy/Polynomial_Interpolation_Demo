@@ -35,7 +35,6 @@ export class Szene extends Scene{
   }
 
   render(){
-    console.log("r"); //TODO: TOBI DU VERGISST DEIN LÖSCHEN TODO!!!
     this.renderer.render(this, this.camera);
     return this;
   }
