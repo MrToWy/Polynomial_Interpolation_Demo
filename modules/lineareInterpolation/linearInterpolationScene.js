@@ -1,9 +1,10 @@
 import {Szene} from "../../js/classes/Szene";
 import {getRungePoints, interpolate} from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
-import {DRAW_STEP_SIZE, POINT_SIZE} from "../../js/constants";
+import {COLOR_1, DRAW_STEP_SIZE, POINT_SIZE} from "../../js/constants";
 import {Group} from "three";
 import {Point} from "../../js/classes/Point";
+import {Linie} from "../../js/classes/Linie";
 
 export class LinearInterpolationScene extends Szene{
 
@@ -26,6 +27,10 @@ export class LinearInterpolationScene extends Szene{
     let polynomArray = interpolate(points);
     this.add(new Polynom(DRAW_STEP_SIZE, this.xAxisSize, polynomArray));
     this.add(this.getPoints(points, POINT_SIZE));
+
+
+    // draw actual runge curve
+    this.add(new Linie().setPoints(getRungePoints(500)).setColor(COLOR_1));
 
     super.render();
   }
