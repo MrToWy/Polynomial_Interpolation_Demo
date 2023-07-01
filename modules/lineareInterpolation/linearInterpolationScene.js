@@ -1,5 +1,4 @@
 import {Szene} from "../../js/classes/Szene";
-import {Axis} from "../../js/classes/Axis";
 import {getRungePoints, interpolate} from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
 import {DRAW_STEP_SIZE, POINT_SIZE} from "../../js/constants";
