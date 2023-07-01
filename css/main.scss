@@ -49,6 +49,7 @@ button {
 
     &:hover{
       background-color: gray;
+      cursor: pointer;
 
       .heading{
         transform: scale(1);
