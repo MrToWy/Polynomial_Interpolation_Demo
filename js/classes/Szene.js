@@ -29,7 +29,6 @@ export class Szene extends Scene{
     const positiveAxis = new Axis().setAxisSize(this.xAxisSize, this.yAxisSize);
 
     this.addElements([negativeAxis, positiveAxis])
-    console.log("added") //TODO: TOBI DU VERGISST DEIN LÖSCHEN TODO!!!
 
     return this;
   }
