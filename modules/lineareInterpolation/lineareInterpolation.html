@@ -5,6 +5,11 @@
     <title>Linear Interpolation</title>
     <link rel="stylesheet" type="text/css" href="../../css/main.scss">
     <link rel="stylesheet" type="text/css" href="lineareInterpolation.scss">
+
+    <script type="module">
+      import { LaTeXJSComponent } from "https://cdn.jsdelivr.net/npm/latex.js/dist/latex.mjs";
+      customElements.define("latex-js", LaTeXJSComponent);
+    </script>
   </head>
   <body>
   <h1>Lineare Interpolation</h1>
@@ -15,11 +20,24 @@
     <div id="texte">
       <div class="flip">
         <div class="front">
-          <h2>Grenzen der Interpolation</h2>
+          <h2>Was ist ein Polynom?</h2>
         </div>
         <div class="back">
-          <h3>Grenzen</h3>
-          <p>Alles blöd...</p>
+          <h3>Definition Polynom</h3>
+          <p>Ein Polynom besteht aus der Summe von Termen der Form k⋅xⁿ, wobei k eine beliebige Zahl und n eine positive ganze Zahl ist.</p>
+          <latex-js>
+            $\Large{x(t) = \displaystyle\sum_{i=0}^{m} \alpha_i \cdot t^i }$
+          </latex-js>
+        </div>
+      </div>
+      <div class="flip">
+        <div class="front">
+          <h2>Was ist die Interpolationsaufgabe?</h2>
+        </div>
+        <div class="back">
+          <h3>Die Interpolationsaufgabe</h3>
+          <p>Die Interpolationsaufgabe ist ein Verfahren, dass versucht zu gegebene Datenpunkten ein Polynom zu finden, welches diese Punkte durchläuft.</p>
+          <p>Mithilfe dieses Polynoms können dann Zwischenwerte zwischen den Datenpunkten ausgerechnet werden.</p>
         </div>
       </div>
       <div class="flip">
@@ -28,16 +46,8 @@
         </div>
         <div class="back">
           <h3>Grenzen</h3>
-          <p>Alles blöd...</p>
-        </div>
-      </div>
-      <div class="flip">
-        <div class="front">
-          <h2>Grenzen der Interpolation</h2>
-        </div>
-        <div class="back">
-          <h3>Grenzen</h3>
-          <p>Alles blöd...</p>
+          <p>Die Polynominterpolation hat gewisse Grenzen, würde man eine stetige Funktion interpolieren, so würden die Interpolationspolynome nicht unbedingt sich an diese Funktion annähern.</p>
+          <p>Je höher der Polynomgrad, desto größer kann auch der maximale Fehler der Schätzung sein.</p>
         </div>
       </div>
     </div>

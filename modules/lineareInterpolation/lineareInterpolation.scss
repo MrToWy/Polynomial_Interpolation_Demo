@@ -21,20 +21,19 @@
   }
 }
 
-// base
 .flip {
-  >.front, >.back {
+  .front, .back {
     display: block;
     transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
     transition-duration: 1s;
     transition-property: transform, opacity;
   }
 
-  >.front {
+  .front {
     transform: rotateY(0deg);
   }
 
-  >.back {
+  .back {
     position: absolute;
     opacity: 0;
     top: 0;
@@ -45,10 +44,10 @@
   }
 
   &:hover {
-    >.front {
+    .front {
       transform: rotateY(180deg);
     }
-    >.back {
+    .back {
       opacity: 1;
       transform: rotateY(0deg);
     }
