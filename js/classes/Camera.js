@@ -17,4 +17,10 @@ export class Camera extends PerspectiveCamera{
     this.lookAt(x, y, z);
     return this;
   }
+
+  move(x, y){
+    this.translateX(x);
+    this.translateY(y);
+    this.lookAt(x, y, 0);
+  }
 }

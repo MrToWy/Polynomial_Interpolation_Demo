@@ -15,6 +15,7 @@ export class HermiteScene extends Szene{
     super(domElementId);
     this.points = points;
     this.polynomArray = interpolate(this.points);
+    this.camera.move(0.9, 0.9);
   }
 
   render() {
