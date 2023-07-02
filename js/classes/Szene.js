@@ -1,6 +1,6 @@
 import {Scene} from "three";
 import {Renderer} from "./Renderer";
-import {WINDOW_HEIGHT, WINDOW_WIDTH, X_AXIS_SIZE, Y_AXIS_SIZE} from "../constants";
+import {GREY, WINDOW_HEIGHT, WINDOW_WIDTH, X_AXIS_SIZE, Y_AXIS_SIZE} from "../constants";
 import {Camera} from "./Camera";
 import {Axis} from "./Axis";
 
@@ -26,7 +26,7 @@ export class Szene extends Scene{
 
   addAxis(showNegativeAxis = true){
     if(showNegativeAxis) {
-      const negativeAxis = new Axis().setAxisSize(-this.xAxisSize, -this.yAxisSize).setColor(0x999999);
+      const negativeAxis = new Axis().setAxisSize(-this.xAxisSize, -this.yAxisSize).setColor(GREY);
       this.add(negativeAxis);
     }
     const positiveAxis = new Axis().setAxisSize(this.xAxisSize, this.yAxisSize);

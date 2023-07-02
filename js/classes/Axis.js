@@ -1,5 +1,6 @@
 import {Vector3} from "three";
 import {Linie} from "./Linie";
+import {WHITE} from "../constants";
 
 export class Axis extends Linie{
   constructor() {
@@ -10,7 +11,7 @@ export class Axis extends Linie{
 
     this.points = [this.endOfXAxis, this.origin, this.endOfYAxis];
 
-    this.setColor(0xffffff).setLineWidth(0.0025).setPoints(this.points);
+    this.setColor(WHITE).setLineWidth(0.0025).setPoints(this.points);
   }
 
   setXAxisSize(size){

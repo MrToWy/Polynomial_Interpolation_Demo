@@ -95,10 +95,8 @@ export function getMatrixform(points) {
     for (let i = 0; i <= degree; i++) {
       if(point.isAbleitung){
         let result = i === 0 ? 0 : i*Math.pow(point.x,i-1);
-        //console.log("Ableitung: ",result, "Punkt: ", point.x, "i: ", i, ); //TODO:delete
         rowArray.push(result);
       } else {
-        //console.log("Funktion: ", Math.pow(point.x, i)) //TODO:delete
         rowArray.push(Math.pow(point.x, i));
       }
     }
@@ -113,7 +111,6 @@ export function getHermitePolynomes(points) {
 
   let inverse = mathjs.inv(matrix);
   let trans = mathjs.transpose(inverse);
-  console.log(trans); //TODO:delete
 
   return trans;
 }
