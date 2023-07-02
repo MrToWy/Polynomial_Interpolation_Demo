@@ -1,4 +1,3 @@
-import {Szene} from "../../js/classes/Szene";
 import {calcY, calcYAbleitung, interpolate} from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
 import {ANIMATION_SPEED, COLOR_0, COLOR_1, DRAW_STEP_SIZE, POINT_SIZE, X_AXIS_SIZE} from "../../js/constants";
@@ -7,10 +6,11 @@ import {AbleitungsVector} from "../../js/classes/AbleitungsVector";
 import {ColorLine} from "../../js/classes/ColorLine";
 import {Vector3} from "three";
 import {Ring} from "../../js/classes/Ring";
+import {AnimatedScene} from "../../js/classes/AnimatedScene";
 
 let currentT = 0.5;
 
-export class HermiteScene extends Szene{
+export class HermiteScene extends AnimatedScene{
   constructor(domElementId, points) {
     super(domElementId);
     this.points = points;
@@ -48,16 +48,5 @@ export class HermiteScene extends Szene{
 
     requestAnimationFrame(() => sceneObject.animate(sceneObject));
     return sceneObject;
-  }
-
-  // todo: doppelter Code (casteljauScene)
-  togglePause(e, sceneObject) {
-    sceneObject.pause = !sceneObject.pause;
-    if(sceneObject.pause){
-      e.target.innerHTML = "Play";
-    } else {
-      e.target.innerHTML = "Pause";
-      sceneObject.animate(sceneObject);
-    }
   }
 }

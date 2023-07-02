@@ -1,4 +1,3 @@
-import {Szene} from "../../js/classes/Szene";
 import {Point} from "../../js/classes/Point";
 import {Raycaster, Vector2, Vector3} from "three";
 import {ANIMATION_SPEED, COLOR_0, COLOR_1, COLOR_2, POINT_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH} from "../../js/constants";
@@ -7,6 +6,7 @@ import {calculateOffset} from "../../js/helpers";
 import {TransformControl} from "../../js/classes/TransformControl";
 import {Ring} from "../../js/classes/Ring";
 import {deCasteljau} from "../../js/interpolation";
+import {AnimatedScene} from "../../js/classes/AnimatedScene";
 
 let currentT = 0.5;
 let point0 = new Point(new Vector3(0.1,-0.5,0)).setRadius(POINT_SIZE);
@@ -21,7 +21,7 @@ let linie2 = new Linie().setPoints([point2.position,point3.position]);
 let curves = [];
 
 
-export class CasteljauScene extends Szene{
+export class CasteljauScene extends AnimatedScene{
 
   constructor(domElementId) {
     super(domElementId);
@@ -50,16 +50,6 @@ export class CasteljauScene extends Szene{
     this.addElements(curves)
 
     return super.render()
-  }
-
-  togglePause(e, sceneObject) {
-    sceneObject.pause = !sceneObject.pause;
-    if(sceneObject.pause){
-      e.target.innerHTML = "Play";
-    } else {
-      e.target.innerHTML = "Pause";
-      sceneObject.animate(sceneObject);
-    }
   }
 
   animate(sceneObject) {
