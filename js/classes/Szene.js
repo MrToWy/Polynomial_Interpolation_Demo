@@ -15,6 +15,7 @@ export class Szene extends Scene{
 
     this.xAxisSize = X_AXIS_SIZE;
     this.yAxisSize = Y_AXIS_SIZE;
+    this.pause = true;
   }
 
   changeAxisSize(x, y){
