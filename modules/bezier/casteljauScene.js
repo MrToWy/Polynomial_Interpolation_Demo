@@ -22,17 +22,11 @@ let linie2 = new Linie().setPoints([point2.position,point3.position]);
 let curves = [];
 
 
-
 export class CasteljauScene extends Szene{
 
   constructor(domElementId) {
     super(domElementId);
-    console.log("cam", this.camera)
     this.domElementId = domElementId;
-
-    window.addEventListener( 'click', this.onDocumentMouseDown, false );
-    document.getElementById("pause").addEventListener('click',e => this.togglePause(e));
-
 
     this.transformControl = new TransformControl(this.camera, this.renderer, () => {
       this.renderCasteljauCurve();
@@ -56,29 +50,30 @@ export class CasteljauScene extends Szene{
     curves = this.drawDeCasteljau(currentT);
     this.addElements(curves)
 
-    super.render()
+    return super.render()
   }
 
-  togglePause(e) {
-    pause = !pause;
-    if(this.pause){
+  togglePause(e, sceneObject) {
+    sceneObject.pause = !sceneObject.pause;
+    if(sceneObject.pause){
       e.target.innerHTML = "Play";
     } else {
       e.target.innerHTML = "Pause";
-      this.animate(currentT);
+      sceneObject.animate(sceneObject);
     }
   }
 
-  animate() {
-    if(pause) return;
+  animate(sceneObject) {
+    if(sceneObject.pause) return;
 
     currentT += ANIMATION_SPEED;
 
     if(currentT > 1) currentT = 0;
 
-    this.renderCasteljauCurve();
+    sceneObject.renderCasteljauCurve();
 
-    requestAnimationFrame(this.animate);
+    requestAnimationFrame(() => sceneObject.animate(sceneObject));
+    return sceneObject;
   }
 
   renderCasteljauCurve() {
@@ -130,31 +125,31 @@ export class CasteljauScene extends Szene{
     return objects;
   }
 
-  onDocumentMouseDown( e ) {
+  onDocumentMouseDown( e, sceneObject ) {
     e.preventDefault();
 
-    const offset = calculateOffset(document.getElementById(this.domElementId)); //or some other element
+    const offset = calculateOffset(document.getElementById(sceneObject.domElementId)); //or some other element
 
     let posX = e.clientX+offset.x;
     let posY = e.clientY+offset.y;
     let pointer = new Vector2((posX / WINDOW_WIDTH) * 2 - 1, -(posY / WINDOW_HEIGHT) * 2 + 1)
     let raycaster = new Raycaster();
-    raycaster.setFromCamera(pointer, this.camera);
+    raycaster.setFromCamera(pointer, sceneObject.camera);
 
     // calculate clicked objects
-    const intersects = raycaster.intersectObjects(this.children).filter(obj => {
+    const intersects = raycaster.intersectObjects(sceneObject.children).filter(obj => {
       return obj.object instanceof Point;
     });
 
     if(intersects.length === 0){
-      this.transformControl.detach();
-      this.renderer.render(this, this.camera);
+      sceneObject.transformControl.detach();
+      sceneObject.render();
     }
 
     for (const intersect of intersects) {
-      this.transformControl.attach(intersect.object);
-      this.add(this.transformControl)
-      this.renderer.render(this, this.camera);
+      sceneObject.transformControl.attach(intersect.object);
+      sceneObject.add(sceneObject.transformControl)
+      sceneObject.render();
     }
   }
 

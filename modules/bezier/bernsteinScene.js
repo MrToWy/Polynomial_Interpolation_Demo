@@ -10,7 +10,7 @@ export class BernsteinScene extends Szene{
 
   render() {
     this.clear();
-    this.addAxis();
+    this.addAxis(false);
     this.addElements(this.getBernsteinLines());
 
     return super.render();
