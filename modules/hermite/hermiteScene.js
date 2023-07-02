@@ -30,23 +30,15 @@ export class HermiteScene extends AnimatedScene{
   }
 
   animate(sceneObject){
-    if(sceneObject.pause) return;
 
-    currentT += ANIMATION_SPEED;
-    if(currentT > 1) currentT = 0;
+    super.animate(sceneObject, () => {
 
-    this.clear();
+      let y = calcY(currentT, this.polynomArray);
+      let ySteigung = calcYAbleitung(currentT, this.polynomArray);
 
-    let y = calcY(currentT, this.polynomArray);
-    let ySteigung = calcYAbleitung(currentT, this.polynomArray);
+      sceneObject.add(new Ring(new Vector3(currentT, y)).setRadius(0.01, 0.02));
+      sceneObject.add(new AbleitungsVector(currentT, y, ySteigung));
 
-    sceneObject.add(new Ring(new Vector3(currentT, y)).setRadius(0.01, 0.02));
-    sceneObject.add(new AbleitungsVector(currentT, y, ySteigung));
-
-    sceneObject.render();
-
-
-    requestAnimationFrame(() => sceneObject.animate(sceneObject));
-    return sceneObject;
+    })
   }
 }
