@@ -10,6 +10,7 @@ export class LinearInterpolationScene extends Szene{
 
   constructor(domElementId) {
     super(domElementId);
+    this.camera.setZposition(14);
     this.changeAxisSize(5, 5);
 
     this.rungePointCount = 6;

@@ -9,7 +9,7 @@ export class Szene extends Scene{
   constructor(domElementId) {
     super();
 
-    this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT).setZposition(14);
+    this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
     this.renderer = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
     document.getElementById(domElementId).appendChild(this.renderer.domElement);
 
@@ -24,11 +24,14 @@ export class Szene extends Scene{
     return this;
   }
 
-  addAxis(){
-    const negativeAxis = new Axis().setAxisSize(-this.xAxisSize, -this.yAxisSize).setColor(0x999999);
+  addAxis(showNegativeAxis = true){
+    if(showNegativeAxis) {
+      const negativeAxis = new Axis().setAxisSize(-this.xAxisSize, -this.yAxisSize).setColor(0x999999);
+      this.add(negativeAxis);
+    }
     const positiveAxis = new Axis().setAxisSize(this.xAxisSize, this.yAxisSize);
 
-    this.addElements([negativeAxis, positiveAxis])
+    this.add(positiveAxis);
 
     return this;
   }
