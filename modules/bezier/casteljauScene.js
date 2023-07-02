@@ -60,9 +60,9 @@ export class CasteljauScene extends AnimatedScene{
     let bezierArrow3 = lerpVector(bezierArrowOrigin, point3.position, bezierArrowLengths[3]);
 
     this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow0]).setColor(COLOR_0));
-    this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow1]).setColor(COLOR_1));
-    this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow2]).setColor(COLOR_2));
-    this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow3]).setColor(COLOR_3));
+    this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow1]).setColor(COLOR_1).move(bezierArrow0.x-bezierArrowOrigin.x, bezierArrow0.y-bezierArrowOrigin.y));
+    this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow2]).setColor(COLOR_2).move(bezierArrow1.x-2*bezierArrowOrigin.x+bezierArrow0.x, bezierArrow1.y-2*bezierArrowOrigin.y+bezierArrow0.y));
+    this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow3]).setColor(COLOR_3).move(bezierArrow2.x-3*bezierArrowOrigin.x+bezierArrow0.x+bezierArrow1.x, bezierArrow2.y-3*bezierArrowOrigin.y+bezierArrow0.y+bezierArrow1.y));
 
 
     curves = this.drawDeCasteljau(currentT);

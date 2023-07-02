@@ -28,6 +28,13 @@ export class Linie extends Line2{
     this.computeLineDistances();
     return this;
   }
+
+  move(x, y){
+    this.translateX(x);
+    this.translateY(y);
+
+    return this;
+  }
 }
 
 function concatVector3Array(array) {
