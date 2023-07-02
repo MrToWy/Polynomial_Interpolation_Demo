@@ -32,6 +32,7 @@ export class BasisScene extends AnimatedScene{
     this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2));
     this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3));
 
+    this.addMovingLineToAxis(currentT, this);
 
     return super.render();
   }
@@ -43,13 +44,7 @@ export class BasisScene extends AnimatedScene{
     if(currentT > 1) currentT = 0;
 
     this.clear();
-
-    let startOfWhiteLine = new Vector3(currentT, -0.3);
-    let endOfWhiteLine = new Vector3(currentT, 1.2);
-    sceneObject.add(new Linie().setPoints([startOfWhiteLine, endOfWhiteLine]).setColor(GREY))
-
     sceneObject.render();
-
 
     requestAnimationFrame(() => sceneObject.animate(sceneObject));
     return sceneObject;

@@ -5,8 +5,11 @@ import {BernsteinScene} from "./bernsteinScene";
 
 let casteljauScene = new CasteljauScene("canvasLeft").render()
 
-new BernsteinScene("canvasRight").render()
+let bernsteinScene = new BernsteinScene("canvasRight").render()
 
 
 window.addEventListener( 'click', (e) => casteljauScene.onDocumentMouseDown(e, casteljauScene), false );
-document.getElementById("pause").addEventListener('click',e => casteljauScene.togglePause(e, casteljauScene));
+document.getElementById("pause").addEventListener('click',e => {
+  casteljauScene.togglePause(e, casteljauScene);
+  bernsteinScene.togglePause(e, bernsteinScene);
+});

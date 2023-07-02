@@ -1,19 +1,34 @@
-import {Szene} from "../../js/classes/Szene";
 import {getBernsteinPolynomes} from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
-import {COLOR_0, COLOR_1, COLOR_2, COLOR_3, DRAW_STEP_SIZE, X_AXIS_SIZE} from "../../js/constants";
+import {ANIMATION_SPEED, COLOR_0, COLOR_1, COLOR_2, COLOR_3, DRAW_STEP_SIZE, X_AXIS_SIZE} from "../../js/constants";
+import {AnimatedScene} from "../../js/classes/AnimatedScene";
 
-export class BernsteinScene extends Szene{
+let currentT = 0.5;
+
+export class BernsteinScene extends AnimatedScene{
   constructor(domElementId) {
     super(domElementId);
   }
 
   render() {
-    this.clear();
     this.addAxis(false);
     this.addElements(this.getBernsteinLines());
+    this.addMovingLineToAxis(currentT, this);
 
     return super.render();
+  }
+
+  animate(sceneObject){
+    if(sceneObject.pause) return;
+
+    currentT += ANIMATION_SPEED;
+    if(currentT > 1) currentT = 0;
+
+    this.clear();
+    sceneObject.render();
+
+    requestAnimationFrame(() => sceneObject.animate(sceneObject));
+    return sceneObject;
   }
 
   getBernsteinLines() {
