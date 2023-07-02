@@ -2,9 +2,11 @@ import {Vector3} from "three";
 import {Linie} from "./Linie";
 
 export class AbleitungsVector extends Linie{
-  constructor(point, ableitung) {
+  constructor(x, y, ySteigung) {
     super();
-    this.setPoints([point, new Vector3(point.x+1, point.y+ableitung.y, 0)])
+    this.setPoints([new Vector3(), new Vector3(x, ySteigung)])
     this.setColor(0xff0000);
+    this.translateX(x);
+    this.translateY(y);
   }
 }

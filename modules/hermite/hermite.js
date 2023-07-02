@@ -30,5 +30,7 @@ ableitung1.isAbleitung = true;
 
 let points = [punkt0,ableitung0,punkt1,ableitung1];
 
-new HermiteScene("canvasLeft", points).render()
+let hermiteScene = new HermiteScene("canvasLeft", points).render()
 new BasisScene("canvasRight", points).render()
+
+document.getElementById("pause").addEventListener('click',e => hermiteScene.togglePause(e, hermiteScene));

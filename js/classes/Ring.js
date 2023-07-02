@@ -17,4 +17,9 @@ export class Ring extends Mesh{
     this.material = new MeshBasicMaterial({color: color});
     return this;
   }
+
+  setRadius(inner, outer){
+    this.geometry = new RingGeometry(inner, outer);
+    return this;
+  }
 }

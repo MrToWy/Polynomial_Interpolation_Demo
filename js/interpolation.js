@@ -7,7 +7,6 @@ export function interpolate(points) {
   const [matrix, vector] = getMatrixform(points);
 
   let inverse = mathjs.inv(matrix);
-  //console.log(mathjs.multiply(inverse, vector)); //TODO:delete
 
   return mathjs.multiply(inverse, vector);
 }
@@ -58,6 +57,18 @@ export function calcY(x, polynomArray) {
 
   for (let n = 0; n < polynomArray.length; n++) {
     result += polynomArray[n] * Math.pow(x, n);
+  }
+
+  return result;
+}
+
+export function calcYAbleitung(x, polynomArray){
+
+  let grad = polynomArray.length - 1;
+  let result = 0;
+
+  for (let i = 0; i < grad; i++) {
+    result += (grad-i) * polynomArray[grad-i] * Math.pow(x, grad - i - 1)
   }
 
   return result;
