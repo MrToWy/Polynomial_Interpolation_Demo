@@ -6,7 +6,7 @@ export class Point extends Mesh{
     this.positionVector = positionVector;
 
     this.material = new MeshBasicMaterial({ color: 0xffff00 });
-    this.geometry = new CircleGeometry(1, 64);
+    this.geometry = new CircleGeometry(0.02, 64);
 
     this.translateX(positionVector.x);
     this.translateY(positionVector.y);
