@@ -8,7 +8,6 @@ import {TransformControl} from "../../js/classes/TransformControl";
 import {Ring} from "../../js/classes/Ring";
 import {deCasteljau} from "../../js/interpolation";
 
-let pause = false;
 let currentT = 0.5;
 let point0 = new Point(new Vector3(0.1,-0.5,0)).setRadius(POINT_SIZE);
 let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(POINT_SIZE);

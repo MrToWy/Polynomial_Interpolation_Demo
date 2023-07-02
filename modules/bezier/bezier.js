@@ -4,7 +4,6 @@ import {BernsteinScene} from "./bernsteinScene";
 
 
 let casteljauScene = new CasteljauScene("canvasLeft").render()
-casteljauScene.animate(casteljauScene)
 
 new BernsteinScene("canvasRight").render()
 
