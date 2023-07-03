@@ -99,11 +99,11 @@ export class CasteljauScene extends AnimatedScene{
     let curve = [];
     let objects = [];
     for (let t = 0; t <= counter; t+= stepSize) {
-      let result = deCasteljau(1 - t, point0, point1, point2, point3);
+      let result = deCasteljau( t, point0, point1, point2, point3);
       curve.push(result[5]);
     }
 
-    let casteljauPoints = deCasteljau(1- counter, point0, point1, point2, point3);
+    let casteljauPoints = deCasteljau( counter, point0, point1, point2, point3);
     objects.push(new Linie().setPoints([casteljauPoints[0], casteljauPoints[1]]).setColor(COLOR_4));
     objects.push(new Linie().setPoints([casteljauPoints[1], casteljauPoints[2]]).setColor(COLOR_4));
     objects.push(new Linie().setPoints([casteljauPoints[3], casteljauPoints[4]]).setColor(COLOR_5));
@@ -121,10 +121,10 @@ export class CasteljauScene extends AnimatedScene{
 
   getBezierArrowLengths(){
     let bernsteinPolynomes = getBernsteinPolynomes();
-    let arrow0length = 1 - calcY(this.currentT, bernsteinPolynomes[0]);
-    let arrow1length = 1 - calcY(this.currentT, bernsteinPolynomes[1]);
-    let arrow2length = 1 - calcY(this.currentT, bernsteinPolynomes[2]);
-    let arrow3length = 1 - calcY(this.currentT, bernsteinPolynomes[3]);
+    let arrow0length = calcY(this.currentT, bernsteinPolynomes[0]);
+    let arrow1length = calcY(this.currentT, bernsteinPolynomes[1]);
+    let arrow2length = calcY(this.currentT, bernsteinPolynomes[2]);
+    let arrow3length = calcY(this.currentT, bernsteinPolynomes[3]);
 
     return [arrow0length, arrow1length, arrow2length, arrow3length]
   }

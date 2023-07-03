@@ -23,7 +23,7 @@ export function deCasteljau(t, point0, point1, point2, point3){
 }
 
 export function lerp(a, b, t) {
-  return a * t + (1. - t) * b;
+  return a * (1. - t) + t * b;
 }
 
 export function lerpVector(vecA, vecB, t) {
