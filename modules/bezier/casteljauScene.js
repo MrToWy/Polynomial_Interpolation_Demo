@@ -29,7 +29,8 @@ let linie2 = new Linie().setPoints([point2.position,point3.position]).setColor(W
 let bezierArrowOrigin = new Vector3(1, -0.2);
 
 let sceneObjects = [];
-let joinArrows = true;
+
+let showBezierOrOther = "other"; // casteljau or other
 
 
 export class CasteljauScene extends AnimatedScene{
@@ -38,10 +39,14 @@ export class CasteljauScene extends AnimatedScene{
     super(domElementId);
     this.domElementId = domElementId;
 
+    this.step = 1;
+
     this.transformControl = new TransformControl(this.camera, this.renderer, () => {
       this.removeAllObjects();
+
       this.addDeCasteljau();
-      this.addBezierArrows(joinArrows);
+      this.addOther();
+
       this.renderCasteljauLines();
       this.renderer.render(this, this.camera);
     });
@@ -54,10 +59,10 @@ export class CasteljauScene extends AnimatedScene{
 
     this.removeAllObjects();
     this.addPoints();
-    this.addOuterLines();
-    this.addDeCasteljau();
 
-    this.addBezierArrows(joinArrows);
+    this.addDeCasteljau();
+    this.addOther();
+
 
     return super.render()
   }
@@ -133,13 +138,47 @@ export class CasteljauScene extends AnimatedScene{
   }
 
    addDeCasteljau() {
-     this.addCasteljauPointStep1();
-     this.addCasteljauLinesStep1();
-     this.addCasteljauPointStep2();
-     this.addCasteljauLinesStep2();
-     this.addCasteljauPointStep3();
-     this.addCasteljauCurve();
+
+    if (showBezierOrOther === "other") return;
+
+      switch (true) {
+        case this.step > 4:
+          this.addCasteljauCurve();
+
+        case this.step > 3:
+          this.addCasteljauLinesStep2();
+
+          this.addCasteljauPointStep3();
+
+        case this.step > 2:
+          this.addCasteljauLinesStep1();
+
+          this.addCasteljauPointStep2();
+
+        case this.step > 1:
+          this.addCasteljauPointStep1();
+          this.addOuterLines();
+      }
+
      this.addElements(sceneObjects);
+  }
+
+  addOther() {
+    if (showBezierOrOther !== "other") return;
+
+    let joinArrows = false;
+    switch (true) {
+      case this.step > 2:
+        this.addCasteljauCurve();
+
+      case this.step > 1:
+        joinArrows = true;
+
+      case this.step > 0:
+        this.addBezierArrows(joinArrows);
+    }
+
+    this.addElements(sceneObjects);
   }
 
   addBezierArrows(joinArrows){
