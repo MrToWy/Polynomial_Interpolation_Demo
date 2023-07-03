@@ -23,19 +23,12 @@ export class HermiteScene extends AnimatedScene{
 
     this.add(new ColorLine([new Vector3(0,0,0),new Vector3(1,1,0)], [1,0,0,0,1,0]).translateX(-1));
 
+    let y = calcY(this.currentT, this.polynomArray);
+    let ySteigung = calcYAbleitung(this.currentT, this.polynomArray);
+
+    this.add(new Ring(new Vector3(this.currentT, y)).setRadius(0.01, 0.02));
+    this.add(new AbleitungsVector(this.currentT, y, ySteigung));
+
     return super.render();
-  }
-
-  animate(sceneObject){
-
-    super.animate(sceneObject, () => {
-
-      let y = calcY(this.currentT, this.polynomArray);
-      let ySteigung = calcYAbleitung(this.currentT, this.polynomArray);
-
-      sceneObject.add(new Ring(new Vector3(this.currentT, y)).setRadius(0.01, 0.02));
-      sceneObject.add(new AbleitungsVector(this.currentT, y, ySteigung));
-
-    })
   }
 }
