@@ -8,6 +8,15 @@
   #canvasRight {
     grid-column-start: 2;
   }
+  #buttonContainer {
+    grid-column-start: 2;
+    display: inline;
+
+    button {
+
+    }
+
+  }
 }
 
 #buttons {
