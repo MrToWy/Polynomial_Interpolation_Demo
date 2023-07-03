@@ -28,7 +28,8 @@ let linie2 = new Linie().setPoints([point2.position,point3.position]).setColor(W
 
 let bezierArrowOrigin = new Vector3(1, -0.2);
 
-let curves = [];
+let sceneObjects = [];
+let joinArrows = true;
 
 
 export class CasteljauScene extends AnimatedScene{
@@ -38,8 +39,9 @@ export class CasteljauScene extends AnimatedScene{
     this.domElementId = domElementId;
 
     this.transformControl = new TransformControl(this.camera, this.renderer, () => {
-      this.removeAllCurves();
+      this.removeAllObjects();
       this.addDeCasteljau();
+      this.addBezierArrows(joinArrows);
       this.renderCasteljauLines();
       this.renderer.render(this, this.camera);
     });
@@ -50,29 +52,12 @@ export class CasteljauScene extends AnimatedScene{
   render(){
     this.clear();
 
-    this.removeAllCurves();
+    this.removeAllObjects();
     this.addPoints();
     this.addOuterLines();
     this.addDeCasteljau();
 
-
-    /*
-        this.add(new Ring(bezierArrowOrigin).setRadius(0, 0.02));
-        let bezierArrowLengths = this.getBezierArrowLengths()
-        let bezierArrow0 = lerpVector(bezierArrowOrigin, point0.position, bezierArrowLengths[0]);
-        let bezierArrow1 = lerpVector(bezierArrowOrigin, point1.position, bezierArrowLengths[1]);
-        let bezierArrow2 = lerpVector(bezierArrowOrigin, point2.position, bezierArrowLengths[2]);
-        let bezierArrow3 = lerpVector(bezierArrowOrigin, point3.position, bezierArrowLengths[3]);
-
-        this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow0]).setColor(COLOR_0));
-        this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow1]).setColor(COLOR_1).move(bezierArrow0.x-bezierArrowOrigin.x, bezierArrow0.y-bezierArrowOrigin.y));
-        this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow2]).setColor(COLOR_2).move(bezierArrow1.x-2*bezierArrowOrigin.x+bezierArrow0.x, bezierArrow1.y-2*bezierArrowOrigin.y+bezierArrow0.y));
-        this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow3]).setColor(COLOR_3).move(bezierArrow2.x-3*bezierArrowOrigin.x+bezierArrow0.x+bezierArrow1.x, bezierArrow2.y-3*bezierArrowOrigin.y+bezierArrow0.y+bezierArrow1.y));
-
-    */
-        //curves = this.drawDeCasteljau(this.currentT);
-        //this.addElements(curves)
-
+    this.addBezierArrows(joinArrows);
 
     return super.render()
   }
@@ -87,31 +72,31 @@ export class CasteljauScene extends AnimatedScene{
 
   addCasteljauPointStep1(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    curves.push(new Ring(casteljauPoints[0]).setColor(COLOR_4));
-    curves.push(new Ring(casteljauPoints[1]).setColor(COLOR_4));
-    curves.push(new Ring(casteljauPoints[2]).setColor(COLOR_4));
+    sceneObjects.push(new Ring(casteljauPoints[0]).setColor(COLOR_4));
+    sceneObjects.push(new Ring(casteljauPoints[1]).setColor(COLOR_4));
+    sceneObjects.push(new Ring(casteljauPoints[2]).setColor(COLOR_4));
   }
 
   addCasteljauLinesStep1(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    curves.push(new Linie().setPoints([casteljauPoints[0], casteljauPoints[1]]).setColor(COLOR_4));
-    curves.push(new Linie().setPoints([casteljauPoints[1], casteljauPoints[2]]).setColor(COLOR_4));
+    sceneObjects.push(new Linie().setPoints([casteljauPoints[0], casteljauPoints[1]]).setColor(COLOR_4));
+    sceneObjects.push(new Linie().setPoints([casteljauPoints[1], casteljauPoints[2]]).setColor(COLOR_4));
   }
 
   addCasteljauPointStep2(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    curves.push(new Ring(casteljauPoints[3]).setColor(COLOR_5));
-    curves.push(new Ring(casteljauPoints[4]).setColor(COLOR_5));
+    sceneObjects.push(new Ring(casteljauPoints[3]).setColor(COLOR_5));
+    sceneObjects.push(new Ring(casteljauPoints[4]).setColor(COLOR_5));
   }
 
   addCasteljauLinesStep2(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    curves.push(new Linie().setPoints([casteljauPoints[3], casteljauPoints[4]]).setColor(COLOR_5));
+    sceneObjects.push(new Linie().setPoints([casteljauPoints[3], casteljauPoints[4]]).setColor(COLOR_5));
   }
 
   addCasteljauPointStep3(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    curves.push(new Ring(casteljauPoints[5]).setColor(COLOR_6))
+    sceneObjects.push(new Ring(casteljauPoints[5]).setColor(COLOR_6))
   }
 
   addCasteljauCurve(){
@@ -122,16 +107,16 @@ export class CasteljauScene extends AnimatedScene{
       curve.push(result[5]);
     }
 
-    curves.push(new Linie().setPoints(curve).setColor(COLOR_6));
+    sceneObjects.push(new Linie().setPoints(curve).setColor(COLOR_6));
   }
 
-  removeAllCurves(){
-    if(curves && curves.length > 0) {
-      for (const curve of curves) {
+  removeAllObjects(){
+    if(sceneObjects && sceneObjects.length > 0) {
+      for (const curve of sceneObjects) {
         this.remove(curve);
       }
     }
-    curves = [];
+    sceneObjects = [];
   }
 
   renderCasteljauLines() {
@@ -154,7 +139,30 @@ export class CasteljauScene extends AnimatedScene{
      this.addCasteljauLinesStep2();
      this.addCasteljauPointStep3();
      this.addCasteljauCurve();
-     this.addElements(curves);
+     this.addElements(sceneObjects);
+  }
+
+  addBezierArrows(joinArrows){
+    this.add(new Ring(bezierArrowOrigin).setRadius(0, 0.02));
+
+    let bezierArrowLengths = this.getBezierArrowLengths();
+    let bezierArrow0 = lerpVector(bezierArrowOrigin, point0.position, bezierArrowLengths[0]);
+    let bezierArrow1 = lerpVector(bezierArrowOrigin, point1.position, bezierArrowLengths[1]);
+    let bezierArrow2 = lerpVector(bezierArrowOrigin, point2.position, bezierArrowLengths[2]);
+    let bezierArrow3 = lerpVector(bezierArrowOrigin, point3.position, bezierArrowLengths[3]);
+
+    let arrow0 = new Linie().setPoints([bezierArrowOrigin, bezierArrow0]).setColor(COLOR_0);
+    let arrow1 = new Linie().setPoints([bezierArrowOrigin, bezierArrow1]).setColor(COLOR_1);
+    let arrow2 = new Linie().setPoints([bezierArrowOrigin, bezierArrow2]).setColor(COLOR_2);
+    let arrow3 = new Linie().setPoints([bezierArrowOrigin, bezierArrow3]).setColor(COLOR_3);
+
+    if(joinArrows){
+      arrow1.move(bezierArrow0.x-bezierArrowOrigin.x, bezierArrow0.y-bezierArrowOrigin.y);
+      arrow2.move(bezierArrow1.x-2*bezierArrowOrigin.x+bezierArrow0.x, bezierArrow1.y-2*bezierArrowOrigin.y+bezierArrow0.y);
+      arrow3.move(bezierArrow2.x-3*bezierArrowOrigin.x+bezierArrow0.x+bezierArrow1.x, bezierArrow2.y-3*bezierArrowOrigin.y+bezierArrow0.y+bezierArrow1.y);
+    }
+    sceneObjects.push(arrow0,arrow1,arrow2,arrow3);
+    this.addElements([arrow0,arrow1,arrow2,arrow3]);
   }
 
   getBezierArrowLengths(){

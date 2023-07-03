@@ -3,13 +3,13 @@ import {CasteljauScene} from "./casteljauScene";
 import {BernsteinScene} from "./bernsteinScene";
 
 
-let casteljauScene = new CasteljauScene("canvasLeft").render()
+let casteljauScene = new CasteljauScene("canvasLeft").render();
 
-//let bernsteinScene = new BernsteinScene("canvasRight")//.render()
+let bernsteinScene = new BernsteinScene("canvasRight").render();
 
 
 window.addEventListener( 'click', (e) => casteljauScene.onDocumentMouseDown(e, casteljauScene), false );
 document.getElementById("pause").addEventListener('click',e => {
   casteljauScene.togglePause(e, casteljauScene);
-  //bernsteinScene.togglePause(e, bernsteinScene);
+  bernsteinScene.togglePause(e, bernsteinScene);
 });
