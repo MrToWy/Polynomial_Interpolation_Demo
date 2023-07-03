@@ -25,7 +25,7 @@ export class BasisScene extends AnimatedScene{
     this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2));
     this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3));
 
-    this.addMovingLineToAxis(this.currentT, this);
+    this.addMovingLineToAxis();
 
     return super.render();
   }

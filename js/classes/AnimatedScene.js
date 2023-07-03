@@ -22,10 +22,10 @@ export class AnimatedScene extends Szene{
     }
   }
 
-  addMovingLineToAxis(currentT, sceneObject){
-    let startOfWhiteLine = new Vector3(currentT, -0.3);
-    let endOfWhiteLine = new Vector3(currentT, 1.2);
-    sceneObject.add(new Linie().setPoints([startOfWhiteLine, endOfWhiteLine]).setColor(GREY))
+  addMovingLineToAxis(){
+    let startOfWhiteLine = new Vector3(this.currentT, -0.3);
+    let endOfWhiteLine = new Vector3(this.currentT, 1.2);
+    this.add(new Linie().setPoints([startOfWhiteLine, endOfWhiteLine]).setColor(GREY))
   }
 
   animate(sceneObject, runBetweenClearAndRender = null){
