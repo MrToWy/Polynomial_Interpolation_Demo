@@ -9,9 +9,6 @@ import {
   X_AXIS_SIZE
 } from "../../js/constants";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
-
-let currentT = 0.5;
-
 export class BasisScene extends AnimatedScene{
   constructor(domElementId, points) {
     super(domElementId);
@@ -28,7 +25,7 @@ export class BasisScene extends AnimatedScene{
     this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2));
     this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3));
 
-    this.addMovingLineToAxis(currentT, this);
+    this.addMovingLineToAxis(this.currentT, this);
 
     return super.render();
   }

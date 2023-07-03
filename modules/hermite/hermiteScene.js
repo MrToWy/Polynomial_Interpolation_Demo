@@ -1,15 +1,12 @@
 import {calcY, calcYAbleitung, interpolate} from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
-import {ANIMATION_SPEED, COLOR_0, COLOR_1, DRAW_STEP_SIZE, POINT_SIZE, X_AXIS_SIZE} from "../../js/constants";
+import {COLOR_0, COLOR_1, DRAW_STEP_SIZE, POINT_SIZE, X_AXIS_SIZE} from "../../js/constants";
 import {Point} from "../../js/classes/Point";
 import {AbleitungsVector} from "../../js/classes/AbleitungsVector";
 import {ColorLine} from "../../js/classes/ColorLine";
 import {Vector3} from "three";
 import {Ring} from "../../js/classes/Ring";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
-
-let currentT = 0.5;
-
 export class HermiteScene extends AnimatedScene{
   constructor(domElementId, points) {
     super(domElementId);
@@ -33,11 +30,11 @@ export class HermiteScene extends AnimatedScene{
 
     super.animate(sceneObject, () => {
 
-      let y = calcY(currentT, this.polynomArray);
-      let ySteigung = calcYAbleitung(currentT, this.polynomArray);
+      let y = calcY(this.currentT, this.polynomArray);
+      let ySteigung = calcYAbleitung(this.currentT, this.polynomArray);
 
-      sceneObject.add(new Ring(new Vector3(currentT, y)).setRadius(0.01, 0.02));
-      sceneObject.add(new AbleitungsVector(currentT, y, ySteigung));
+      sceneObject.add(new Ring(new Vector3(this.currentT, y)).setRadius(0.01, 0.02));
+      sceneObject.add(new AbleitungsVector(this.currentT, y, ySteigung));
 
     })
   }
