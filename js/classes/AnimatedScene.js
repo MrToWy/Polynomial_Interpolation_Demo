@@ -3,12 +3,12 @@ import {Vector3} from "three";
 import {Linie} from "./Linie";
 import {ANIMATION_SPEED, GREY} from "../constants";
 
-let currentT = 0.5;
 
 export class AnimatedScene extends Szene{
   constructor(domElementId) {
     super(domElementId);
 
+    this.currentT = 0.5;
     this.pause = true;
   }
 
@@ -31,14 +31,12 @@ export class AnimatedScene extends Szene{
   animate(sceneObject, runBetweenClearAndRender = null){
     if(sceneObject.pause) return;
 
-    currentT += ANIMATION_SPEED;
-    if(currentT > 1) currentT = 0;
+    this.currentT += ANIMATION_SPEED;
+    if(this.currentT > 1) this.currentT = 0;
 
     this.clear();
 
-    if(runBetweenClearAndRender !== null){
-      runBetweenClearAndRender();
-    }
+    runBetweenClearAndRender?.();
 
     sceneObject.render();
 

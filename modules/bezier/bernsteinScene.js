@@ -3,8 +3,6 @@ import {Polynom} from "../../js/classes/Polynom";
 import {COLOR_0, COLOR_1, COLOR_2, COLOR_3, DRAW_STEP_SIZE, X_AXIS_SIZE} from "../../js/constants";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
 
-let currentT = 0.5;
-
 export class BernsteinScene extends AnimatedScene{
   constructor(domElementId) {
     super(domElementId);
@@ -13,7 +11,7 @@ export class BernsteinScene extends AnimatedScene{
   render() {
     this.addAxis(false);
     this.addElements(this.getBernsteinLines());
-    this.addMovingLineToAxis(currentT, this);
+    this.addMovingLineToAxis(this.currentT, this);
 
     return super.render();
   }
