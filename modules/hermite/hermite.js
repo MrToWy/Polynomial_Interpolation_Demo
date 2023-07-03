@@ -1,23 +1,5 @@
 import "regenerator-runtime/runtime";
-import {getHermitePolynomes, interpolate} from "../../js/interpolation";
-import {Scene, Vector3} from "three";
-import {Axis} from "../../js/classes/Axis";
-import {Point} from "../../js/classes/Point";
-import {ColorLine} from "../../js/classes/ColorLine";
-import {AbleitungsVector} from "../../js/classes/AbleitungsVector";
-import {Polynom} from "../../js/classes/Polynom";
-import {Camera} from "../../js/classes/Camera";
-import {Renderer} from "../../js/classes/Renderer";
-import {
-  COLOR_0,
-  COLOR_1,
-  COLOR_2,
-  COLOR_3,
-  DRAW_STEP_SIZE,
-  POINT_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH,
-  X_AXIS_SIZE,
-  Y_AXIS_SIZE
-} from "../../js/constants";
+import {Vector3} from "three";
 import {HermiteScene} from "./hermiteScene";
 import {BasisScene} from "./basisScene";
 

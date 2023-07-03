@@ -17,7 +17,6 @@ import {Ring} from "../../js/classes/Ring";
 import {calcY, deCasteljau, getBernsteinPolynomes, lerpVector} from "../../js/interpolation";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
 
-let currentT = 0.5;
 let point0 = new Point(new Vector3(0.1,-0.5,0)).setRadius(POINT_SIZE).setColor(COLOR_0);
 let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(POINT_SIZE).setColor(COLOR_1);
 let point2 = new Point(new Vector3(1.8,0.9,0)).setRadius(POINT_SIZE).setColor(COLOR_2);
@@ -65,23 +64,10 @@ export class CasteljauScene extends AnimatedScene{
     this.add(new Linie().setPoints([bezierArrowOrigin, bezierArrow3]).setColor(COLOR_3).move(bezierArrow2.x-3*bezierArrowOrigin.x+bezierArrow0.x+bezierArrow1.x, bezierArrow2.y-3*bezierArrowOrigin.y+bezierArrow0.y+bezierArrow1.y));
 
 
-    curves = this.drawDeCasteljau(currentT);
+    curves = this.drawDeCasteljau(this.currentT);
     this.addElements(curves)
 
     return super.render()
-  }
-
-  animate(sceneObject) {
-    if(sceneObject.pause) return;
-
-    currentT += ANIMATION_SPEED;
-
-    if(currentT > 1) currentT = 0;
-
-    sceneObject.render();
-
-    requestAnimationFrame(() => sceneObject.animate(sceneObject));
-    return sceneObject;
   }
 
   renderCasteljauCurve() {
@@ -89,7 +75,7 @@ export class CasteljauScene extends AnimatedScene{
       for (const curve of curves) {
         this.remove(curve);
       }
-    curves = this.drawDeCasteljau(currentT);
+    curves = this.drawDeCasteljau(this.currentT);
 
     this.addElements(curves);
     this.renderer.render(this, this.camera);
@@ -135,10 +121,10 @@ export class CasteljauScene extends AnimatedScene{
 
   getBezierArrowLengths(){
     let bernsteinPolynomes = getBernsteinPolynomes();
-    let arrow0length = 1 - calcY(currentT, bernsteinPolynomes[0]);
-    let arrow1length = 1 - calcY(currentT, bernsteinPolynomes[1]);
-    let arrow2length = 1 - calcY(currentT, bernsteinPolynomes[2]);
-    let arrow3length = 1 - calcY(currentT, bernsteinPolynomes[3]);
+    let arrow0length = 1 - calcY(this.currentT, bernsteinPolynomes[0]);
+    let arrow1length = 1 - calcY(this.currentT, bernsteinPolynomes[1]);
+    let arrow2length = 1 - calcY(this.currentT, bernsteinPolynomes[2]);
+    let arrow3length = 1 - calcY(this.currentT, bernsteinPolynomes[3]);
 
     return [arrow0length, arrow1length, arrow2length, arrow3length]
   }
