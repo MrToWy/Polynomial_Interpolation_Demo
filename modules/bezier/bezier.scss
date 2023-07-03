@@ -6,24 +6,17 @@
     grid-column-start: 1;
   }
   #canvasRight {
-    grid-column-start: 2;
+    grid-column-start: 1;
+    grid-row-start: 2;
   }
-  #buttonContainer {
+  #cards {
     grid-column-start: 2;
     display: inline;
-
-    button {
-
-    }
-
   }
-}
 
-#buttons {
-  display: grid;
-  grid-template-columns: 50% 50%;
-
-  #pause {
+  #buttons {
+    grid-column-start: 1;
+    grid-row-start: 3;
     margin-right: auto;
     margin-left: auto;
   }

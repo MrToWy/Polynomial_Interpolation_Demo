@@ -98,3 +98,65 @@ button {
   }
 }
 
+
+////////// ACCORDION \\\\\\\\\\
+#cards{
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  margin: 3%;
+
+  .collapse{
+    .upper-content {
+      text-decoration: none;
+      border-left: 12px solid rgba(0, 0, 0, 0.12);
+      height: 5em;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      h2 {
+        margin: 0 0 0 2%;
+        color: var(--info-card-font-color);
+      }
+    }
+  }
+
+  .content{
+    max-height: 0;
+    border-left: 12px solid rgba(0, 0, 0, 0.12);
+    transition: all 0.65s cubic-bezier(1, 0, 0.41, 1.01);
+    overflow: hidden;
+
+    .inner-content {
+      padding: 1.8rem;
+    }
+  }
+
+  .collapse.active {
+    .content {
+      max-height: 200px; //TODO: keine Pixel
+    }
+  }
+}
+
+
+#card1{
+  background-color: var(--info-card1-color);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+#card2{
+  background-color: var(--info-card2-color);
+}
+
+#card3{
+  background-color: var(--info-card3-color);
+}
+
+#card4{
+  background-color: var(--info-card4-color);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
