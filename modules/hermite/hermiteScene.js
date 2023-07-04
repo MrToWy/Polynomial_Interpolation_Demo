@@ -8,21 +8,21 @@ import {
 import {Polynom} from "../../js/classes/Polynom";
 import {COLOR_0, COLOR_1, COLOR_2, COLOR_3, DRAW_STEP_SIZE, POINT_SIZE, X_AXIS_SIZE} from "../../js/constants";
 import {Point} from "../../js/classes/Point";
-import {AbleitungsVector} from "../../js/classes/AbleitungsVector";
+import {AbleitungsVector, getAbleitungsVecs} from "../../js/classes/AbleitungsVector";
 import {ColorLine} from "../../js/classes/ColorLine";
 import {Vector3} from "three";
 import {Ring} from "../../js/classes/Ring";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
 import {Linie} from "../../js/classes/Linie";
 
-let hermiteArrowOrigin = new Vector3(1.5, -0.2);
+let hermiteArrowOrigin = new Vector3(0, 0);
 
 export class HermiteScene extends AnimatedScene{
   constructor(domElementId, points) {
     super(domElementId);
     this.points = points;
     this.polynomArray = interpolate(this.points);
-    this.camera.move(0.9, 0.9);
+    this.camera.move(1.2, 1.2);
   }
 
   render() {
@@ -31,39 +31,37 @@ export class HermiteScene extends AnimatedScene{
     this.add(new Point(this.points[0]).setRadius(POINT_SIZE).setColor(COLOR_0));
     this.add(new Point(this.points[2]).setRadius(POINT_SIZE).setColor(COLOR_1));
 
-    this.add(new ColorLine([new Vector3(0,0,0),new Vector3(1,1,0)], [1,0,0,0,1,0]).translateX(-1));
+    //this.add(new ColorLine([new Vector3(0,0,0),new Vector3(1,1,0)], [1,0,0,0,1,0]).translateX(-1));
+
 
     let y = calcY(this.currentT, this.polynomArray);
-    let ySteigung = calcYAbleitung(this.currentT, this.polynomArray);
-    let y2Steigung = calcYZweiteAbleitung(this.currentT,this.polynomArray)
-
-    // TODO: das hier alles in AbleitungsVec schieben
-    let laenge = y2Steigung/8;
-    let winkel = Math.atan(ySteigung);
-
-    let xVec = Math.cos(winkel)*laenge;
-    let yVec = Math.sin(winkel)*laenge;
-
-    let vec = new Vector3(xVec,yVec);
-    let endVec = new Vector3(vec.x + this.currentT, vec.y+y);
-    let startVec = new Vector3(this.currentT,y);
-
-    this.add(new Linie().setPoints([startVec,endVec]))
-
     this.add(new Ring(new Vector3(this.currentT, y)).setRadius(0.01, 0.02).setColor(COLOR_0));
 
+    this.add(new AbleitungsVector(this.currentT, this.polynomArray));
+
+
+    let vecs = getAbleitungsVecs(0, this.polynomArray);
+    let vecs1 = getAbleitungsVecs(1, this.polynomArray);
     let hermiteArrowLengths = this.getHermiteArrowLengths(this.points)
     let bezierArrow0 = lerpVector(hermiteArrowOrigin, this.points[0], hermiteArrowLengths[0]);
-    let bezierArrow1 = lerpVector(hermiteArrowOrigin, this.points[1], hermiteArrowLengths[1]);
+    let bezierArrow1 = lerpVector(this.points[0], vecs[1], hermiteArrowLengths[1]);
     let bezierArrow2 = lerpVector(hermiteArrowOrigin, this.points[2], hermiteArrowLengths[2]);
-    let bezierArrow3 = lerpVector(hermiteArrowOrigin, this.points[3], hermiteArrowLengths[3]);
-
+    let bezierArrow3 = lerpVector(this.points[2] ,vecs1[1], -hermiteArrowLengths[3]);
     this.add(new Point(hermiteArrowOrigin))
 
-    this.add(new Linie().setPoints([hermiteArrowOrigin, bezierArrow0]).setColor(COLOR_0));
-    this.add(new Linie().setPoints([hermiteArrowOrigin, bezierArrow1]).setColor(COLOR_1).move(bezierArrow0.x-hermiteArrowOrigin.x,  bezierArrow0.y-hermiteArrowOrigin.y));
-    this.add(new Linie().setPoints([hermiteArrowOrigin, bezierArrow2]).setColor(COLOR_2).move(bezierArrow1.x-2*hermiteArrowOrigin.x+bezierArrow0.x, bezierArrow1.y-2*hermiteArrowOrigin.y+bezierArrow0.y));
-    this.add(new Linie().setPoints([hermiteArrowOrigin, bezierArrow3]).setColor(COLOR_3).move(bezierArrow2.x-3*hermiteArrowOrigin.x+bezierArrow0.x+bezierArrow1.x, bezierArrow2.y-3*hermiteArrowOrigin.y+bezierArrow0.y+bezierArrow1.y));
+    let arrowLine0 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow0]).setColor(COLOR_0);
+    let arrowLine1 = new Linie().setPoints([this.points[0], bezierArrow1]).setColor(COLOR_1);
+    let arrowLine2 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow2]).setColor(COLOR_2);
+    let arrowLine3 = new Linie().setPoints([this.points[2], bezierArrow3]).setColor(COLOR_3);
+
+    arrowLine1.move(bezierArrow0.x-this.points[0].x,  bezierArrow0.y-this.points[0].y);
+    arrowLine2.move(bezierArrow0.x-this.points[0].x + bezierArrow1.x, bezierArrow0.y-this.points[0].y + bezierArrow1.y);
+    arrowLine3.move(bezierArrow0.x-this.points[0].x + bezierArrow1.x + bezierArrow2.x-this.points[2].x,bezierArrow0.x-this.points[0].y + bezierArrow1.y + bezierArrow2.y-this.points[2].y);
+
+    this.add(arrowLine0);
+    this.add(arrowLine1);
+    this.add(arrowLine2);
+    this.add(arrowLine3);
 
     return super.render();
   }
