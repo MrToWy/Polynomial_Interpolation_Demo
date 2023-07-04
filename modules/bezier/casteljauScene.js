@@ -30,7 +30,7 @@ let bezierArrowOrigin = new Vector3(1, -0.2);
 
 let sceneObjects = [];
 
-let showBezierOrOther = "other"; // casteljau or other
+let showBezierOrOther = "casteljau"; // casteljau or other
 
 
 export class CasteljauScene extends AnimatedScene{
