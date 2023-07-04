@@ -32,7 +32,11 @@ export class AnimatedScene extends Szene{
     if(sceneObject.pause) return;
 
     this.currentT += ANIMATION_SPEED;
-    if(this.currentT > 1) this.currentT = 0;
+    if(this.currentT > 1) {
+      this.currentT = 0;
+
+      this.pause = true; // TODO: Text auf Button ändern, oder diese Zeile komplett löschen
+    }
 
     this.clear();
 
