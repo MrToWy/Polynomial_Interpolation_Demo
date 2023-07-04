@@ -1,13 +1,12 @@
 import {
   calcY,
   calcYAbleitung,
-  getBernsteinPolynomes,
   getHermitePolynomes,
   interpolate,
   lerpVector
 } from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
-import {COLOR_0, COLOR_1, COLOR_2, COLOR_3, WHITE, DRAW_STEP_SIZE, POINT_SIZE, X_AXIS_SIZE} from "../../js/constants";
+import {COLOR_0, COLOR_1, COLOR_2, COLOR_3, DRAW_STEP_SIZE, POINT_SIZE, X_AXIS_SIZE} from "../../js/constants";
 import {Point} from "../../js/classes/Point";
 import {AbleitungsVector} from "../../js/classes/AbleitungsVector";
 import {ColorLine} from "../../js/classes/ColorLine";
