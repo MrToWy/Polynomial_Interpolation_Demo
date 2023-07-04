@@ -28,7 +28,8 @@ button {
   color: var(--bt-font-color);
 
   &:hover {
-    background-color: var(--bt-font-color);
+    background-color: var(--bt-color-hover);
+    color: var(--bt-font-color-hover);;
     cursor: pointer;
   }
 }
