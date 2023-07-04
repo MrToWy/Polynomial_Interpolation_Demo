@@ -9,23 +9,27 @@ let bernsteinScene = new BernsteinScene("canvasRight").render();
 
 
 window.addEventListener( 'click', (e) => casteljauScene.onDocumentMouseDown(e, casteljauScene), false );
-document.getElementById('upper-card1').addEventListener( 'click', () => {
-  document.getElementById("card1").classList.toggle('active')
-  casteljauScene.step = 1;
-});
-document.getElementById('upper-card2').addEventListener( 'click', () => {
-  document.getElementById("card2").classList.toggle('active')
-  casteljauScene.step = 2;
-});
-document.getElementById('upper-card3').addEventListener( 'click', () => {
-  document.getElementById("card3").classList.toggle('active')
-  casteljauScene.step = 3;
-});
-document.getElementById('upper-card4').addEventListener( 'click', () => {
-  document.getElementById("card4").classList.toggle('active')
-  casteljauScene.step = 4;
-});
+
+for (let i = 1; i <= 4 ; i++) {
+  addCardClickListener(i);
+}
+
 document.getElementById("pause").addEventListener('click',e => {
   casteljauScene.togglePause(e, casteljauScene);
   bernsteinScene.togglePause(e, bernsteinScene);
 });
+
+function clearActiveClass() {
+  Array.from(document.querySelectorAll('.collapse')).forEach(
+    (el) => el.classList.remove('active')
+  );
+}
+
+function addCardClickListener(number) {
+  document.getElementById('upper-card'+ number).addEventListener( 'click', () => {
+    clearActiveClass();
+    document.getElementById("card" + number).classList.toggle('active');
+    casteljauScene.step = number;
+  });
+
+}
