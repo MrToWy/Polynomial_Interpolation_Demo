@@ -56,7 +56,7 @@ export class HermiteScene extends AnimatedScene{
 
     arrowLine1.move(bezierArrow0.x-this.points[0].x,  bezierArrow0.y-this.points[0].y);
     arrowLine2.move(bezierArrow0.x-this.points[0].x + bezierArrow1.x, bezierArrow0.y-this.points[0].y + bezierArrow1.y);
-    arrowLine3.move(bezierArrow0.x-this.points[0].x + bezierArrow1.x + bezierArrow2.x-this.points[2].x,bezierArrow0.x-this.points[0].y + bezierArrow1.y + bezierArrow2.y-this.points[2].y);
+    arrowLine3.move(bezierArrow0.x-this.points[0].x + bezierArrow1.x + bezierArrow2.x-this.points[2].x,bezierArrow0.y-this.points[0].y + bezierArrow1.y + bezierArrow2.y-this.points[2].y);
 
     this.add(arrowLine0);
     this.add(arrowLine1);
