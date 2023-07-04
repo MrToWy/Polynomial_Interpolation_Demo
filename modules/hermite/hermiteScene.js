@@ -25,21 +25,24 @@ export class HermiteScene extends AnimatedScene{
     this.camera.move(1.2, 1.2);
   }
 
-  render() {
-    this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, this.polynomArray).setShowNegativeAxis(false).setColor(0xff0000).setBoundarys(this.points[0].x, this.points[2].x));
-
+  addControlPoints(){
     this.add(new Point(this.points[0]).setRadius(POINT_SIZE).setColor(COLOR_0));
     this.add(new Point(this.points[2]).setRadius(POINT_SIZE).setColor(COLOR_1));
+  }
 
-    //this.add(new ColorLine([new Vector3(0,0,0),new Vector3(1,1,0)], [1,0,0,0,1,0]).translateX(-1));
+  addResultLine(){
+    this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, this.polynomArray).setShowNegativeAxis(false).setColor(0xff0000).setBoundarys(this.points[0].x, this.points[2].x));
+  }
 
-
-    let y = calcY(this.currentT, this.polynomArray);
+  addTRing(y){
     this.add(new Ring(new Vector3(this.currentT, y)).setRadius(0.01, 0.02).setColor(COLOR_0));
+  }
 
+  addAbleitungsvektor(){
     this.add(new AbleitungsVector(this.currentT, this.polynomArray));
+  }
 
-
+  addArrowLines(addLinesTogether){
     let vecs = getAbleitungsVecs(0, this.polynomArray);
     let vecs1 = getAbleitungsVecs(1, this.polynomArray);
     let hermiteArrowLengths = this.getHermiteArrowLengths(this.points)
@@ -54,14 +57,28 @@ export class HermiteScene extends AnimatedScene{
     let arrowLine2 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow2]).setColor(COLOR_2);
     let arrowLine3 = new Linie().setPoints([this.points[2], bezierArrow3]).setColor(COLOR_3);
 
-    arrowLine1.move(bezierArrow0.x-this.points[0].x,  bezierArrow0.y-this.points[0].y);
-    arrowLine2.move(bezierArrow0.x-this.points[0].x + bezierArrow1.x, bezierArrow0.y-this.points[0].y + bezierArrow1.y);
-    arrowLine3.move(bezierArrow0.x-this.points[0].x + bezierArrow1.x + bezierArrow2.x-this.points[2].x,bezierArrow0.x-this.points[0].y + bezierArrow1.y + bezierArrow2.y-this.points[2].y);
+    if(addLinesTogether) {
+      arrowLine1.move(bezierArrow0.x-this.points[0].x,  bezierArrow0.y-this.points[0].y);
+      arrowLine2.move(bezierArrow0.x-this.points[0].x + bezierArrow1.x, bezierArrow0.y-this.points[0].y + bezierArrow1.y);
+      arrowLine3.move(bezierArrow0.x-this.points[0].x + bezierArrow1.x + bezierArrow2.x-this.points[2].x,bezierArrow0.y-this.points[0].y + bezierArrow1.y + bezierArrow2.y-this.points[2].y);
+    }
 
     this.add(arrowLine0);
     this.add(arrowLine1);
     this.add(arrowLine2);
     this.add(arrowLine3);
+  }
+
+  render() {
+    let y = calcY(this.currentT, this.polynomArray);
+
+    this.addResultLine();
+    this.addControlPoints();
+
+    this.addTRing(y);
+    this.addAbleitungsvektor();
+
+    this.addArrowLines(true);
 
     return super.render();
   }
