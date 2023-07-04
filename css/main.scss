@@ -105,6 +105,11 @@ canvas{
 
 
 ////////// ACCORDION \\\\\\\\\\
+
+#cards.hide {
+  visibility: hidden;
+}
+
 #cards{
   display: flex;
   flex-direction: column;
