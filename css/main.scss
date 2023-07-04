@@ -131,6 +131,7 @@ canvas{
     border-left: 12px solid rgba(0, 0, 0, 0.12);
     transition: all 0.65s cubic-bezier(1, 0, 0.41, 1.01);
     overflow: hidden;
+    background-color: var(--info-card-content-color);
 
     .inner-content {
       padding: 1.8rem;
