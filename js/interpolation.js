@@ -74,6 +74,25 @@ export function calcYAbleitung(x, polynomArray){
   return result;
 }
 
+export function calcYZweiteAbleitung(x, polynomArray){
+
+  let grad = polynomArray.length - 1;
+  let result = 0;
+
+  for (let i = 0; i < grad-1; i++) {
+    result += (grad-1-i) * (grad-i) * polynomArray[grad-i] * Math.pow(x, grad - i - 2)
+  }
+
+  return result;
+}
+
+export function calcTangente(x, y, ySteigung) {
+  // y = ySteigung * x + b
+  let b = y - x * ySteigung;
+  return [b, ySteigung];
+
+}
+
 export function getBernsteinPolynomes() {
   let bernsteinPolynom0 = [1,-3,3,-1];
   let bernsteinPolynom1 = [0,3,-6,3];

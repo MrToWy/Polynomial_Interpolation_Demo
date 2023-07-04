@@ -1,6 +1,6 @@
 import {
   calcY,
-  calcYAbleitung,
+  calcYAbleitung, calcYZweiteAbleitung,
   getHermitePolynomes,
   interpolate,
   lerpVector
@@ -35,9 +35,21 @@ export class HermiteScene extends AnimatedScene{
 
     let y = calcY(this.currentT, this.polynomArray);
     let ySteigung = calcYAbleitung(this.currentT, this.polynomArray);
+    let y2Steigung = calcYZweiteAbleitung(this.currentT,this.polynomArray)
+
+    let laenge = y2Steigung/8;
+    let winkel = Math.atan(ySteigung);
+
+    let xVec = Math.cos(winkel)*laenge;
+    let yVec = Math.sin(winkel)*laenge;
+
+    let vec = new Vector3(xVec,yVec);
+    let endVec = new Vector3(vec.x + this.currentT, vec.y+y);
+    let startVec = new Vector3(this.currentT,y);
+
+    this.add(new Linie().setPoints([startVec,endVec]))
 
     this.add(new Ring(new Vector3(this.currentT, y)).setRadius(0.01, 0.02).setColor(COLOR_0));
-    this.add(new AbleitungsVector(this.currentT, y, ySteigung));
 
     let hermiteArrowLengths = this.getHermiteArrowLengths(this.points)
     let bezierArrow0 = lerpVector(hermiteArrowOrigin, this.points[0], hermiteArrowLengths[0]);
