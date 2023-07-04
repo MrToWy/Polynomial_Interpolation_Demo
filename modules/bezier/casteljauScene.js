@@ -214,9 +214,7 @@ export class CasteljauScene extends AnimatedScene{
     return [arrow0length, arrow1length, arrow2length, arrow3length];
   }
 
-  onDocumentMouseDown( e, sceneObject ) {
-    e.preventDefault();
-
+  getCollidingObjects(e, sceneObject){
     const offset = calculateOffset(document.getElementById(sceneObject.domElementId)); //or some other element
 
     let posX = e.clientX+offset.x;
@@ -226,9 +224,15 @@ export class CasteljauScene extends AnimatedScene{
     raycaster.setFromCamera(pointer, sceneObject.camera);
 
     // calculate clicked objects
-    const intersects = raycaster.intersectObjects(sceneObject.children).filter(obj => {
+    return raycaster.intersectObjects(sceneObject.children).filter(obj => {
       return obj.object instanceof Point;
     });
+  }
+
+  onDocumentMouseDown( e, sceneObject ) {
+    e.preventDefault();
+
+    let intersects = sceneObject.getCollidingObjects(e, sceneObject);
 
     if(intersects.length === 0){
       sceneObject.transformControl.detach();
