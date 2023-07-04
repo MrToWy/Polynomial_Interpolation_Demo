@@ -10,7 +10,7 @@ let bernsteinScene = new BernsteinScene("canvasRight").render();
 
 window.addEventListener( 'click', (e) => casteljauScene.onDocumentMouseDown(e, casteljauScene), false );
 
-for (let i = 1; i <= 5 ; i++) {
+for (let i = 1; i <= 6 ; i++) {
   addCardClickListener(i);
 }
 
