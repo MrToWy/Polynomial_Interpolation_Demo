@@ -43,27 +43,59 @@
       <div class="content">
         <div class="inner-content">
           <p>Wir verbinden unsere Kontrollpunkte und können uns nun zu jedem Zeitpunkt auf der Linien bewegen.</p>
-          <label for="slider">0</label>
-          <input type="range" min="0" max="100" value="50" id="slider">
-          <label for="slider">1</label>
+          <p>Diesen Vorgang nennt man <b>lineare Interpolation</b>.</p>
+          <p>Wenn du den Slider veränderst bewegen sich die Punkte auf den Verbindungslinien.</p>
         </div>
       </div>
     </div>
       <div id="card4" class="collapse">
       <div class="upper-content" id="upper-card4">
-        <h2>STEP 4</h2>
+        <h2>4. de Casteljau-Algorithmus - Schritt 2</h2>
       </div>
       <div class="content">
         <div class="inner-content">
-          Hier könnte der Inhalt einer Karte stehen...
+          <p>Wenn wir die drei neuen Punkte wieder verbinden, können wir wieder in Abhängigkeit von t zwischen den Punkten interpolieren. </p>
         </div>
       </div>
     </div>
+      <div id="card5" class="collapse">
+      <div class="upper-content" id="upper-card5">
+        <h2>5. de Casteljau-Algorithmus - Schritt 3</h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Wir können ein letztes Mal die Punkte verbinden und einen neuen von t abhängigen Punkt setzen.</p>
+        </div>
+      </div>
     </div>
-
-  <div id="buttons">
-    <button id="pause">Play</button>
-  </div>
+      <div id="card6" class="collapse">
+      <div class="upper-content" id="upper-card6">
+        <h2>6. de Casteljau-Algorithmus - Schritt 4</h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Dieser Punkt liegt auf der Bezierkurve.</p>
+          <p>Wir können nun in Abhängigkeit von der Zeit die Bezierkurve der Kontrollpunkte zeichnen.</p>
+          <button id="nextBezier">Next Lesson</button>
+        </div>
+      </div>
+    </div>
+      <div id="cardSlider" class="collapse">
+      <div class="upper-content" id="upper-cardSlider">
+        <h2>Slider: </h2>
+        <label for="slider">0</label>
+        <input type="range" min="0" max="100" value="50" id="slider">
+        <label for="slider">1</label>
+      </div>
+    </div>
+      <div id="cardEnde" class="collapse">
+      <div class="upper-content" id="upper-cardEnde">
+        <h2>Play: </h2>
+        <button id="pause">Play</button>
+      </div>
+    </div>
+    <button onclick="history.back()">Zurück</button>
+    </div>
 </div>
 
 <script src="bezier.js"></script>

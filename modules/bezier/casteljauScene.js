@@ -142,20 +142,20 @@ export class CasteljauScene extends AnimatedScene{
     if (showBezierOrOther === "other") return;
 
       switch (true) {
-        case this.step > 4:
+        case this.step > 5:
           this.addCasteljauCurve();
 
-        case this.step > 3:
+        case this.step > 4:
           this.addCasteljauLinesStep2();
 
           this.addCasteljauPointStep3();
 
-        case this.step > 2:
+        case this.step > 3:
           this.addCasteljauLinesStep1();
 
           this.addCasteljauPointStep2();
 
-        case this.step > 1:
+        case this.step > 2:
           this.addCasteljauPointStep1();
           this.addOuterLines();
       }

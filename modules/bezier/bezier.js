@@ -4,13 +4,11 @@ import {BernsteinScene} from "./bernsteinScene";
 
 
 let casteljauScene = new CasteljauScene("canvasLeft").render();
-
 let bernsteinScene = new BernsteinScene("canvasRight").render();
-
 
 window.addEventListener( 'click', (e) => casteljauScene.onDocumentMouseDown(e, casteljauScene), false );
 
-for (let i = 1; i <= 4 ; i++) {
+for (let i = 1; i <= 6 ; i++) {
   addCardClickListener(i);
 }
 
@@ -18,6 +16,8 @@ document.getElementById("pause").addEventListener('click',e => {
   casteljauScene.togglePause(e, casteljauScene);
   bernsteinScene.togglePause(e, bernsteinScene);
 });
+
+document.getElementById("nextBezier").addEventListener('click',() => document.getElementById("cards").classList.toggle('hide'));
 
 function clearActiveClass() {
   Array.from(document.querySelectorAll('.collapse')).forEach(
@@ -31,5 +31,4 @@ function addCardClickListener(number) {
     document.getElementById("card" + number).classList.toggle('active');
     casteljauScene.step = number;
   });
-
 }

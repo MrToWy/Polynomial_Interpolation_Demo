@@ -28,7 +28,8 @@ button {
   color: var(--bt-font-color);
 
   &:hover {
-    background-color: var(--bt-font-color);
+    background-color: var(--bt-color-hover);
+    color: var(--bt-font-color-hover);;
     cursor: pointer;
   }
 }
@@ -104,6 +105,11 @@ canvas{
 
 
 ////////// ACCORDION \\\\\\\\\\
+
+#cards.hide {
+  visibility: hidden;
+}
+
 #cards{
   display: flex;
   flex-direction: column;
@@ -161,6 +167,22 @@ canvas{
 
 #card4{
   background-color: var(--info-card4-color);
+}
+
+#card5{
+  background-color: var(--info-card5-color);
+}
+
+#card6{
+  background-color: var(--info-card6-color);
+}
+
+#cardSlider{
+  background-color: var(--info-cardSlider-color);
+}
+
+#cardEnde {
+  background-color: var(--info-cardEnde-color);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
