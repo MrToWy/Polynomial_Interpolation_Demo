@@ -1,6 +1,7 @@
 #grid {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 60% 20% 20%;
 
   #canvasLeft {
     grid-column-start: 1;
@@ -11,7 +12,6 @@
   }
   #cards {
     grid-column-start: 2;
-    display: inline;
   }
 
   #buttons {
@@ -20,4 +20,10 @@
     margin-right: auto;
     margin-left: auto;
   }
+}
+
+#canvasLeft {
+  //display: flex;
+  //align-items: center;
+  //justify-content: center;
 }
