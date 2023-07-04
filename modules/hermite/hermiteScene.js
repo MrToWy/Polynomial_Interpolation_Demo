@@ -37,6 +37,7 @@ export class HermiteScene extends AnimatedScene{
     let ySteigung = calcYAbleitung(this.currentT, this.polynomArray);
     let y2Steigung = calcYZweiteAbleitung(this.currentT,this.polynomArray)
 
+    // TODO: das hier alles in AbleitungsVec schieben
     let laenge = y2Steigung/8;
     let winkel = Math.atan(ySteigung);
 
