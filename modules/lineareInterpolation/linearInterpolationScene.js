@@ -33,7 +33,7 @@ export class LinearInterpolationScene extends Szene{
     // draw actual runge curve
     this.add(new Linie().setPoints(getRungePoints(500)).setColor(COLOR_1));
 
-    super.render();
+    return super.render();
   }
 
   setPointCount(count){
