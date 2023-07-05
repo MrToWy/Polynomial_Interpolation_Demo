@@ -16,5 +16,9 @@ document.getElementById("pause").addEventListener('click',e => {
   casteljauScene.togglePause(e, casteljauScene);
 });
 
-document.getElementById("nextBezier").addEventListener('click',() => document.getElementById("cards").classList.toggle('hide'));
+document.getElementById("nextBezier").addEventListener('click',() => {
+  document.getElementById("cards").style.display = 'none';
+  document.getElementById("arrowCards").style.display = 'flex';
+});
+
 

@@ -10,7 +10,7 @@
 <h1>Bezier</h1>
 <div id="grid">
   <div id="canvasLeft"></div>
-  <div id="cards">
+  <div id="cards" class="tabcontent" style="display:block">
       <div id="card1" class="collapse">
         <div class="upper-content" id="upper-card1">
           <h2>1. Kontrollpunkte</h2>
@@ -91,6 +91,88 @@
       </div>
     </div>
     <button id="backButton" onclick="history.back()">Zurück</button>
+    </div>
+
+  <div id="arrowCards" class="tabcontent">
+      <div id="arrowCard1" class="collapse">
+        <div class="upper-content" id="upper-arrowCard1">
+          <h2>1. Kontrollpunkte</h2>
+        </div>
+        <div class="content">
+          <div class="inner-content">
+            <p>Für unsere Bezierkurve benötigen wir erstmal <b>vier Kontrollpunkte</b>.</p>
+            <p>Probiere doch einmal, sie zu bewegen, indem du auf einen Punkt klickst.</p>
+          </div>
+        </div>
+      </div>
+      <div id="arrowCard2" class="collapse">
+        <div class="upper-content" id="upper-arrowCard2">
+          <h2>2. de Casteljau-Algorithmus</h2>
+        </div>
+        <div class="content">
+          <div class="inner-content">
+            <p>Wenn wir den Casteljau-Algoritmus auf unsere Kontrollpunkte anwenden entsteht eine Bezierkurve.</p>
+            <p>Mit dem de Casteljau-Algorithmus lässt sich eine Bezierkurve zu bestimmten Zeitpunkte auswerten.</p>
+            <p>Lass uns diesen nun <b>Schritt für Schritt</b> durchgehen!</p>
+            <img src="../../img/deCasteljau.png" alt="Der de Casteljau-Algorithmus">
+          </div>
+        </div>
+      </div>
+      <div id="arrowCard3" class="collapse">
+      <div class="upper-content" id="upper-arrowCard3">
+        <h2>3. de Casteljau-Algorithmus - Schritt 1</h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Wir verbinden unsere Kontrollpunkte und können uns nun zu jedem Zeitpunkt auf der Linien bewegen.</p>
+          <p>Diesen Vorgang nennt man <b>lineare Interpolation</b>.</p>
+          <p>Wenn du den Slider veränderst bewegen sich die Punkte auf den Verbindungslinien.</p>
+        </div>
+      </div>
+    </div>
+      <div id="arrowCard4" class="collapse">
+      <div class="upper-content" id="upper-arrowCard4">
+        <h2>4. de Casteljau-Algorithmus - Schritt 2</h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Wenn wir die drei neuen Punkte wieder verbinden, können wir wieder in Abhängigkeit von t zwischen den Punkten interpolieren. </p>
+        </div>
+      </div>
+    </div>
+      <div id="arrowCard5" class="collapse">
+      <div class="upper-content" id="upper-arrowCard5">
+        <h2>5. de Casteljau-Algorithmus - Schritt 3</h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Wir können ein letztes Mal die Punkte verbinden und einen neuen von t abhängigen Punkt setzen.</p>
+        </div>
+      </div>
+    </div>
+      <div id="arrowCard6" class="collapse">
+      <div class="upper-content" id="upper-arrowCard6">
+        <h2>6. de Casteljau-Algorithmus - Schritt 4</h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Dieser Punkt liegt auf der Bezierkurve.</p>
+          <p>Wir können nun in Abhängigkeit von der Zeit die Bezierkurve der Kontrollpunkte zeichnen.</p>
+        </div>
+      </div>
+    </div>
+      <div id="arrowCardEnde" class="collapse">
+      <div class="upper-content" id="upper-arrowCardEnde">
+        <h2>Slider: </h2>
+        <div class="wrapper">
+          <label for="arrowslider" class="silderLabel">0</label>
+          <input type="range" min="0" max="100" value="50" id="arrowslider">
+          <label for="slider" class="silderLabel">1</label>
+          <button id="arrowpause">►</button>
+        </div>
+      </div>
+    </div>
+    <button id="arrowbackButton" onclick="history.back()">Zurück</button>
     </div>
 </div>
 
