@@ -8,7 +8,7 @@ export class AnimatedScene extends Szene{
   constructor(domElementId) {
     super(domElementId);
 
-    this.currentT = 0.5;
+    this.currentT = 0.25;
     this.pause = true;
   }
 

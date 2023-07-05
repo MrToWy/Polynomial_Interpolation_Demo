@@ -15,7 +15,7 @@ import {Ring} from "../../js/classes/Ring";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
 import {Linie} from "../../js/classes/Linie";
 
-let hermiteArrowOrigin = new Vector3(0, 0);
+let hermiteArrowOrigin = new Vector3(0.5, 0);
 
 let yellowPoints = []
 
@@ -37,7 +37,6 @@ export class HermiteScene extends AnimatedScene{
   }
 
   addResultLine(){
-    console.log("hi", this.polynomArrayX)
     this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, this.polynomArray, this.polynomArrayX).setShowNegativeAxis(false).setColor(0xff0000).setBoundarys(this.points[0].x, this.points[2].x));
   }
 
@@ -56,24 +55,46 @@ export class HermiteScene extends AnimatedScene{
     this.add(new Point(hermiteArrowOrigin))
 
     let hermiteArrowLengths = this.getHermiteArrowLengths(this.points)
+
     let bezierArrow0 = lerpVector(hermiteArrowOrigin, this.points[0], hermiteArrowLengths[0]);
-    let bezierArrow1 = lerpVector(hermiteArrowOrigin,this.points[1], hermiteArrowLengths[1]);
+    let bezierArrow1 = lerpVector(new Vector3(),this.points[1], hermiteArrowLengths[1]);
     let bezierArrow2 = lerpVector(hermiteArrowOrigin, this.points[2], hermiteArrowLengths[2]);
-    let bezierArrow3 = lerpVector(hermiteArrowOrigin ,this.points[3], hermiteArrowLengths[3]);
+    let bezierArrow3 = lerpVector(new Vector3() ,this.points[3], hermiteArrowLengths[3]);
     this.add(new Point(hermiteArrowOrigin))
 
+
+
     let arrowLine0 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow0]).setColor(COLOR_0);
-    let arrowLine1 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow1]).setColor(COLOR_1);
+    let arrowLine1 = new Linie().setPoints([new Vector3(), bezierArrow1]).setColor(COLOR_1);
     let arrowLine2 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow2]).setColor(COLOR_2);
-    let arrowLine3 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow3]).setColor(COLOR_3);
+    let arrowLine3 = new Linie().setPoints([new Vector3(), bezierArrow3]).setColor(COLOR_3);
 
 
+    this.add(new Point(new Vector3()))
+    this.add(new Ring(new Vector3(calcY(this.currentT, this.polynomArrayX), calcY(this.currentT, this.polynomArray))))
 
     addLinesTogether = true;
     if(addLinesTogether) {
+
+      // move line1 to origin
+      // move line1 to end of line0
       arrowLine1.move(bezierArrow0.x, bezierArrow0.y)
-      arrowLine2.move(bezierArrow0.x + bezierArrow1.x, bezierArrow0.y + bezierArrow1.y)
-      arrowLine3.move(bezierArrow0.x + bezierArrow1.x + bezierArrow2.x, bezierArrow0.y + bezierArrow1.y + bezierArrow2.y)
+
+
+      // move line2 to origin
+      arrowLine2.move(-hermiteArrowOrigin.x, -hermiteArrowOrigin.y)
+      // move line2 to end of line1
+      arrowLine2.move(bezierArrow1.x, bezierArrow1.y)
+      // repeat movements from arrowLine1
+      arrowLine2.move(bezierArrow0.x, bezierArrow0.y)
+
+
+      // move line3 to origin
+      arrowLine3.move(bezierArrow2.x, bezierArrow2.y)
+      // repeat movements from arrowLine2
+      arrowLine3.move(-hermiteArrowOrigin.x, -hermiteArrowOrigin.y)
+      arrowLine3.move(bezierArrow1.x, bezierArrow1.y)
+      arrowLine3.move(bezierArrow0.x, bezierArrow0.y)
   }
 
     this.add(arrowLine0);
