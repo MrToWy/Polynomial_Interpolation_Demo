@@ -55,61 +55,26 @@ export class HermiteScene extends AnimatedScene{
   addArrowLines(addLinesTogether){
     this.add(new Point(hermiteArrowOrigin))
 
-    // p0 * H0(t), m0 * Ĥ0(t), p0 * H1(t) und m0 * Ĥ1(t)
-    let p0 = this.points[0]
-    let m0 = this.points[1]
-    let p1 = this.points[2]
-    let m1 = this.points[3]
-    let t = this.currentT
+    let hermiteArrowLengths = this.getHermiteArrowLengths(this.points)
+    let bezierArrow0 = lerpVector(hermiteArrowOrigin, this.points[0], hermiteArrowLengths[0]);
+    let bezierArrow1 = lerpVector(hermiteArrowOrigin,this.points[1], hermiteArrowLengths[1]);
+    let bezierArrow2 = lerpVector(hermiteArrowOrigin, this.points[2], hermiteArrowLengths[2]);
+    let bezierArrow3 = lerpVector(hermiteArrowOrigin ,this.points[3], hermiteArrowLengths[3]);
+    this.add(new Point(hermiteArrowOrigin))
 
-    function H0(t){
-      return 2 * Math.pow(t, 3) - 3 * Math.pow(t, 2)  + 1
-    }
-    function Hstrich0(t){
-      return Math.pow(t, 3) - 2 * Math.pow(t, 2)  + t
-    }
-    function H1(t){
-      return -2 * Math.pow(t, 3) + 3 * Math.pow(t, 2)
-    }
-    function Hstrich1(t){
-      return Math.pow(t, 3) -  Math.pow(t, 2)
-    }
-    let arrowLine0 = new Linie().setPoints([hermiteArrowOrigin, new Vector3(p0.x * H0(t), p0.y * H0(t))]).setColor(COLOR_0);
-    let arrowLine1 = new Linie().setPoints([hermiteArrowOrigin, new Vector3(m0.x * Hstrich0(t), m0.y * Hstrich0(t))]).setColor(COLOR_1);
-    let arrowLine2 = new Linie().setPoints([hermiteArrowOrigin, new Vector3(p1.x * H1(t), p1.y * H1(t))]).setColor(COLOR_2);
-    let arrowLine3 = new Linie().setPoints([hermiteArrowOrigin, new Vector3(m1.x * Hstrich1(t), m1.y * Hstrich1(t))]).setColor(COLOR_3);
+    let arrowLine0 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow0]).setColor(COLOR_0);
+    let arrowLine1 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow1]).setColor(COLOR_1);
+    let arrowLine2 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow2]).setColor(COLOR_2);
+    let arrowLine3 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow3]).setColor(COLOR_3);
 
-
-    function addTogether(t, p0, m0, p1, m1){
-      return H0(t) * p0 + Hstrich0(t) * m0 + H1(t) * p1 + Hstrich1(t) * m1;
-    }
-
-    let yellowX = addTogether(t, p0.x, m0.x, p1.x, m1.x);
-    console.log(yellowX, calcY(this.currentT, this.polynomArrayX))
-
-    let yellowY = addTogether(t, p0.y, m0.y, p1.y, m1.y);
-    //console.log(yellowY, calcY(this.currentT, this.polynomArray))
-
-    let yellowVec = new Vector3(yellowX, yellowY);
-    //this.add(new Point(yellowVec))
-    yellowPoints.push(yellowVec)
-    //this.add(new Linie().setPoints(yellowPoints).setColor(0xffff00))
-      //resultPoints.push(new Vector3(i, addTogether(t, p0.y, m0.y, p1.y, m1.y)))
-
-    for (let i = 0; i < this.currentT; i+= DRAW_STEP_SIZE) {
-
-    }
-
-    //let newResultLine = new Linie().setPoints(resultPoints)
-    //this.add(newResultLine)
 
 
     addLinesTogether = true;
     if(addLinesTogether) {
-      arrowLine1.move(p0.x * H0(t),  p0.y * H0(t));
-      arrowLine2.move(p0.x * H0(t) + m0.x * Hstrich0(t), p0.y * H0(t) + m0.y * Hstrich0(t))
-      arrowLine3.move(p0.x * H0(t) + m0.x * Hstrich0(t) + p1.x * H1(t), p0.y * H0(t) + m0.y * Hstrich0(t) + p1.y * H1(t))
-    }
+      arrowLine1.move(bezierArrow0.x, bezierArrow0.y)
+      arrowLine2.move(bezierArrow0.x + bezierArrow1.x, bezierArrow0.y + bezierArrow1.y)
+      arrowLine3.move(bezierArrow0.x + bezierArrow1.x + bezierArrow2.x, bezierArrow0.y + bezierArrow1.y + bezierArrow2.y)
+  }
 
     this.add(arrowLine0);
     this.add(arrowLine1);
