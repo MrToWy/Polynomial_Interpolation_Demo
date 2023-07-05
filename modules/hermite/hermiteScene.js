@@ -98,6 +98,8 @@ export class HermiteScene extends AnimatedScene{
   }
 
   render() {
+    this.clear();
+
     let y = calcY(this.currentT, this.polynomArray);
 
     this.addResultLine();

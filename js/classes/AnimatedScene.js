@@ -27,9 +27,6 @@ export class AnimatedScene extends Szene{
     }
   }
 
-  addMovingLineToAxis(){
-    this.add(this.getMovingLine());
-  }
 
   getMovingLine(){
     let startOfWhiteLine = new Vector3(this.currentT, -0.3);
