@@ -105,7 +105,6 @@ canvas{
 
 
 ////////// ACCORDION \\\\\\\\\\
-
 #cards.hide {
   visibility: hidden;
 }
@@ -185,5 +184,28 @@ canvas{
   background-color: var(--info-cardEnde-color);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+
+/////////////////// GRID \\\\\\\\\\\\\\\\\\\
+#grid {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 60% 20% 20%;
+
+  #canvasLeft {
+    grid-column-start: 1;
+  }
+
+  #canvasRight {
+    grid-column-start: 1;
+    grid-row-start: 2;
+  }
+
+  #cards {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
 }
 
