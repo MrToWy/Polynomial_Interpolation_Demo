@@ -23,3 +23,5 @@ for (const pause of document.getElementsByClassName("pause")) {
 for (let i = 1; i <= 6 ; i++) {
   addCardClickListener(hermiteScene, i);
 }
+
+window.addEventListener('click', () => hermiteScene.render())
