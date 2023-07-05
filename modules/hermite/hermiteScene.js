@@ -1,5 +1,5 @@
 import {
-  calcY,
+  calcY, calcYAbleitung,
   getHermitePolynomes,
   interpolate, interpolateX,
   lerpVector
@@ -39,12 +39,20 @@ export class HermiteScene extends AnimatedScene{
 
   addAbleitungsvektor(){
 
-    let linie0 = new Linie().setPoints([new Vector3(), this.points[1]]);
-    this.add(linie0);
+    let linieStart = new Linie().setPoints([new Vector3(), this.points[1]]);
+    this.add(linieStart);
 
-    let linie1 = new Linie().setPoints([new Vector3(), this.points[3]]);
-    linie1.move(this.points[2].x, this.points[2].y);
-    this.add(linie1);
+    let x = calcY(this.currentT, this.polynomArrayX)
+    let y = calcY(this.currentT, this.polynomArray)
+    let xAbleitung = calcYAbleitung(this.currentT, this.polynomArrayX)
+    let yAbleitung = calcYAbleitung(this.currentT, this.polynomArray)
+    let linieT = new Linie().setPoints([new Vector3(), new Vector3(xAbleitung, yAbleitung)]);
+    linieT.move(x, y);
+    this.add(linieT);
+
+    let linieEnd = new Linie().setPoints([new Vector3(), this.points[3]]);
+    linieEnd.move(this.points[2].x, this.points[2].y);
+    this.add(linieEnd);
   }
 
   addArrowLines(addLinesTogether){
