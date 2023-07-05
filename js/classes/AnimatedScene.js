@@ -42,7 +42,7 @@ export class AnimatedScene extends Szene{
       this.currentT = 0;
 
       this.pause = true;
-      document.getElementById("pause").innerHTML = "Start"
+      document.getElementById("pause").innerHTML = "►"
     }
 
     document.getElementById("slider").value = this.currentT * 100;
