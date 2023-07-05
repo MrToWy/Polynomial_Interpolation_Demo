@@ -2,6 +2,7 @@ import "regenerator-runtime/runtime";
 import {Vector3} from "three";
 import {HermiteScene} from "./hermiteScene";
 import {BasisScene} from "./basisScene";
+import {addCardClickListener} from "../../js/uiHelpers";
 
 let punkt0 = new Vector3(0,0.,0);
 let punkt1 = new Vector3(1,1.4,0);
@@ -19,3 +20,7 @@ document.getElementById("pause").addEventListener('click',e => {
   hermiteScene.togglePause(e, hermiteScene);
   basisScene.togglePause(e, basisScene);
 });
+
+for (let i = 1; i <= 6 ; i++) {
+  addCardClickListener(hermiteScene, i);
+}
