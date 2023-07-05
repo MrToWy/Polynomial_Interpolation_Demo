@@ -15,6 +15,10 @@ export class AnimatedScene extends Szene{
       this.currentT = e.target.value / 100;
       this.render();
     });
+    document.getElementById("arrowslider")?.addEventListener('input', (e) => {
+      this.currentT = e.target.value / 100;
+      this.render();
+    });
   }
 
   togglePause(e, sceneObject) {
@@ -43,9 +47,11 @@ export class AnimatedScene extends Szene{
 
       this.pause = true;
       document.getElementById("pause").innerHTML = "►"
+      document.getElementById("arrowpause").innerHTML = "►"
     }
 
     document.getElementById("slider").value = this.currentT * 100;
+    document.getElementById("arrowslider").value = this.currentT * 100;
 
 
     this.clear();

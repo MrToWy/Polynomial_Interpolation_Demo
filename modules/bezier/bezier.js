@@ -12,9 +12,8 @@ for (let i = 1; i <= 6 ; i++) {
   addCardClickListener(casteljauScene, i);
 }
 
-document.getElementById("pause").addEventListener('click',e => {
-  casteljauScene.togglePause(e, casteljauScene);
-});
+
+
 
 document.getElementById("nextBezier").addEventListener('click',() => {
   document.getElementById("cards").style.display = 'none';
@@ -22,3 +21,11 @@ document.getElementById("nextBezier").addEventListener('click',() => {
 });
 
 
+
+
+document.getElementById("pause").addEventListener('click',e => {
+  casteljauScene.togglePause(e, casteljauScene);
+});
+document.getElementById("arrowpause").addEventListener('click',e => {
+  casteljauScene.togglePause(e, casteljauScene);
+});

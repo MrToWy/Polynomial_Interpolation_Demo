@@ -4,6 +4,12 @@ export function addCardClickListener(scene, number) {
     document.getElementById("card" + number).classList.toggle('active');
     scene.step = number;
   });
+
+  document.getElementById('upper-arrowCard'+ number).addEventListener( 'click', () => {
+    clearActiveClass();
+    document.getElementById("arrowCard" + number).classList.toggle('active');
+    scene.step = number;
+  });
 }
 
 function clearActiveClass() {
