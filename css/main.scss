@@ -38,6 +38,30 @@ canvas{
   border: var(--canvas-border-color) solid 2px;
 }
 
+#slider {
+  border-radius: 1rem;
+  width: 20rem;
+  height: 3.5rem;
+  -webkit-appearance: none;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 3.5rem;
+    width: 1rem;
+    border-radius: 0.2rem;
+    background-color: var(--bt-color);
+  }
+}
+.silderLabel {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 2rem;
+  color: var(--bt-font-color);
+}
+
+
+
 
 
 ///////////// STYLE INDEX.HTML \\\\\\\\\\\\\\
@@ -208,4 +232,6 @@ canvas{
     grid-row-end: 3;
   }
 }
+
+
 
