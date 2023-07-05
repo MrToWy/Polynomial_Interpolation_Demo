@@ -5,7 +5,7 @@ export function addCardClickListener(scene, number) {
     scene.step = number;
   });
 
-  document.getElementById('upper-arrowCard'+ number).addEventListener( 'click', () => {
+  document.getElementById('upper-arrowCard'+ number)?.addEventListener( 'click', () => {
     clearActiveClass();
     document.getElementById("arrowCard" + number).classList.toggle('active');
     scene.step = number;
