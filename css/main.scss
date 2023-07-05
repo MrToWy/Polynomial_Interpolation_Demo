@@ -1,8 +1,10 @@
 @import "constants";
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300");
 
 body {
   margin: 0;
   background-color: var(--bg-color);
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 h1 {
