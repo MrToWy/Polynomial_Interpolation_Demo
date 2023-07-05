@@ -52,7 +52,6 @@ export class InteractiveScene extends AnimatedScene{
     }
 
     for (const intersect of intersects) {
-      console.log(sceneObject.transformControl, intersect.object)
       sceneObject.transformControl.attach(intersect.object);
       sceneObject.add(sceneObject.transformControl)
       sceneObject.render();
