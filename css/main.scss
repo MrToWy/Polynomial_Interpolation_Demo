@@ -47,6 +47,7 @@ canvas{
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
+    cursor: pointer;
     border: none;
     height: 3.5rem;
     width: 1rem;
