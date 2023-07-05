@@ -1,5 +1,5 @@
 export function addCardClickListener(scene, number) {
-  document.getElementById('upper-card'+ number).addEventListener( 'click', () => {
+  document.getElementById('upper-card'+ number)?.addEventListener( 'click', () => {
     clearActiveClass();
     document.getElementById("card" + number).classList.toggle('active');
     scene.step = number;
