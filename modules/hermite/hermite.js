@@ -14,9 +14,11 @@ let points = [punkt0,ableitung0,punkt1,ableitung1];
 
 let hermiteScene = new HermiteScene("canvasLeft", points).render()
 
-document.getElementById("pause").addEventListener('click',e => {
-  hermiteScene.togglePause(e, hermiteScene);
-});
+for (const pause of document.getElementsByClassName("pause")) {
+ pause.addEventListener('click',e => {
+    hermiteScene.togglePause(e, hermiteScene);
+  });
+}
 
 for (let i = 1; i <= 6 ; i++) {
   addCardClickListener(hermiteScene, i);

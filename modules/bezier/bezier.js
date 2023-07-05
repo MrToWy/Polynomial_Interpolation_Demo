@@ -14,18 +14,14 @@ for (let i = 1; i <= 6 ; i++) {
 
 
 
-
 document.getElementById("nextBezier").addEventListener('click',() => {
   document.getElementById("cards").style.display = 'none';
   document.getElementById("arrowCards").style.display = 'flex';
 });
 
 
-
-
-document.getElementById("pause").addEventListener('click',e => {
-  casteljauScene.togglePause(e, casteljauScene);
-});
-document.getElementById("arrowpause").addEventListener('click',e => {
-  casteljauScene.togglePause(e, casteljauScene);
-});
+for (const pause of document.getElementsByClassName("pause")) {
+  pause.addEventListener('click',e => {
+    casteljauScene.togglePause(e, casteljauScene);
+  });
+}
