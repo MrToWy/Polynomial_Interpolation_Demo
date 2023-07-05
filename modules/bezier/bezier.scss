@@ -1,21 +1,4 @@
 #grid {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  grid-template-rows: 60% 20% 20%;
-
-  #canvasLeft {
-    grid-column-start: 1;
-  }
-  #canvasRight {
-    grid-column-start: 1;
-    grid-row-start: 2;
-  }
-  #cards {
-    grid-column-start: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
-  }
-
   #buttons {
     grid-column-start: 1;
     grid-row-start: 3;

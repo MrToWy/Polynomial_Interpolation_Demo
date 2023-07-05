@@ -5,15 +5,90 @@
   <title>Hermite Interpolation</title>
   <link rel="stylesheet" href="hermite.scss" type="text/css">
   <link rel="stylesheet" href="../../css/main.scss" type="text/css">
+  <script type="module">
+    import { LaTeXJSComponent } from "https://cdn.jsdelivr.net/npm/latex.js/dist/latex.mjs";
+    customElements.define("latex-js", LaTeXJSComponent);
+  </script>
 </head>
 <body>
 <h1>Hermite</h1>
 <div id="grid">
   <div id="canvasLeft"></div>
   <div id="canvasRight"></div>
-</div>
-<div id="buttons">
-  <button id="pause">Play</button>
+  <div id="cards">
+    <div id="card1" class="collapse">
+      <div class="upper-content" id="upper-card1">
+        <h2>1. Kontrollpunkte</h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Für unsere Hermite-Spline benötigen wir erstmal <b>zwei Kontrollpunkte</b>.</p>
+          <p>Jeder Kontrollpunkt besitzt eine <b>Position</b> und eine <b>Steigung</b> in diesem Punkt.</p>
+        </div>
+      </div>
+    </div>
+    <div id="card2" class="collapse">
+      <div class="upper-content" id="upper-card2">
+        <h2>2. Hermite Spline</h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Bei der Hermite-Interpolation werden die beiden Kontrollpunkte durch eine Funktion interpoliert, welche folgende Eigenschaften besitzt: </p>
+          <p>- Die Funktion durchläuft die Kontrollpunkte.</p>
+          <p>- Die Funktion nimmt die Ableitung in diesen Punkte an.</p>
+        </div>
+      </div>
+    </div>
+    <div id="card3" class="collapse">
+      <div class="upper-content" id="upper-card3">
+        <h2>3. Ableitung </h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Wenn du den Slider veränderst, kannst du dir zu jedem Zeitpunkt den Kurvenpunkt als gewichtetes Mittel zwischen den beiden Kontrollpunkten und den Ableitungen ansehen.</p>
+        </div>
+      </div>
+    </div>
+    <div id="card4" class="collapse">
+      <div class="upper-content" id="upper-card4">
+        <h2>4. Basisfunktionen</h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Die </p>
+          <latex-js>$\Large{H_0(t) = (2t^3-3t^2+1)p_0}$</latex-js>
+          <latex-js>$\Large{H'_0(t) = (t^3-2t^2+t)m_0}$</latex-js>
+          <latex-js>$\Large{H_1(t) = (-2t^3+3t^2)p_1}$</latex-js>
+          <latex-js>$\Large{H'_1(t) = (t^3-t^2)m_1}$</latex-js>
+        </div>
+      </div>
+    </div>
+    <div id="card5" class="collapse">
+      <div class="upper-content" id="upper-card5">
+        <h2>5. Zusammenhang Hermite-Interpolation und Basisfunktionen </h2>
+      </div>
+      <div class="content">
+        <div class="inner-content">
+          <p>Wir können ein letztes Mal die Punkte verbinden und einen neuen von t abhängigen Punkt setzen.</p>
+        </div>
+      </div>
+    </div>
+    <div id="cardSlider" class="collapse">
+      <div class="upper-content" id="upper-cardSlider">
+        <h2>Slider: </h2>
+        <label for="slider">0</label>
+        <input type="range" min="0" max="100" value="50" id="slider">
+        <label for="slider">1</label>
+      </div>
+    </div>
+    <div id="cardEnde" class="collapse">
+      <div class="upper-content" id="upper-cardEnde">
+        <h2>Play: </h2>
+        <button id="pause">Play</button>
+      </div>
+    </div>
+    <button onclick="history.back()">Zurück</button>
+  </div>
 </div>
 <script src="hermite.js"></script>
 </body>
