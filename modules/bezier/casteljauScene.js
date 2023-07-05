@@ -28,7 +28,6 @@ let bezierArrowOrigin = new Vector3(1, -0.2);
 
 let sceneObjects = [];
 
-let showBezierOrOther = "casteljau"; // casteljau or other
 
 
 export class CasteljauScene extends InteractiveScene{
@@ -46,6 +45,7 @@ export class CasteljauScene extends InteractiveScene{
     this.domElementId = domElementId;
 
     this.camera.move(1,0.5);
+    this.showBezierOrOther = "casteljau"; // casteljau or other
   }
 
   render(){
@@ -151,7 +151,7 @@ export class CasteljauScene extends InteractiveScene{
 
    addDeCasteljau() {
 
-    if (showBezierOrOther === "other") return;
+    if (this.showBezierOrOther === "other") return;
 
       switch (true) {
         case this.step > 6:
@@ -174,7 +174,7 @@ export class CasteljauScene extends InteractiveScene{
   }
 
   addOther() {
-    if (showBezierOrOther !== "other") return;
+    if (this.showBezierOrOther !== "other") return;
 
     let joinArrows = false;
     switch (true) {

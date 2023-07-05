@@ -17,6 +17,9 @@ for (let i = 1; i <= 7 ; i++) {
 document.getElementById("nextBezier").addEventListener('click',() => {
   document.getElementById("cards").style.display = 'none';
   document.getElementById("arrowCards").style.display = 'flex';
+
+  casteljauScene.showBezierOrOther = "other";
+  casteljauScene.step = 1;
 });
 
 
