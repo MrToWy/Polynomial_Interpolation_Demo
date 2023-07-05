@@ -2,7 +2,7 @@ import {
   calcY,
   calcYAbleitung, calcYZweiteAbleitung,
   getHermitePolynomes,
-  interpolate,
+  interpolate, interpolateX,
   lerpVector
 } from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
@@ -10,19 +10,25 @@ import {COLOR_0, COLOR_1, COLOR_2, COLOR_3, DRAW_STEP_SIZE, POINT_SIZE, X_AXIS_S
 import {Point} from "../../js/classes/Point";
 import {AbleitungsVector, getAbleitungsVecs} from "../../js/classes/AbleitungsVector";
 import {ColorLine} from "../../js/classes/ColorLine";
-import {Vector3} from "three";
+import {Color, Vector3} from "three";
 import {Ring} from "../../js/classes/Ring";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
 import {Linie} from "../../js/classes/Linie";
 
 let hermiteArrowOrigin = new Vector3(0, 0);
 
+let yellowPoints = []
+
 export class HermiteScene extends AnimatedScene{
   constructor(domElementId, points) {
     super(domElementId);
     this.points = points;
     this.polynomArray = interpolate(this.points);
+    this.polynomArrayX = interpolateX(this.points);
     this.camera.move(1.2, 1.2);
+    //this.camera.translateZ(17)
+
+    //console.log(this.polynomArray)
   }
 
   addControlPoints(){
@@ -31,7 +37,8 @@ export class HermiteScene extends AnimatedScene{
   }
 
   addResultLine(){
-    this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, this.polynomArray).setShowNegativeAxis(false).setColor(0xff0000).setBoundarys(this.points[0].x, this.points[2].x));
+    console.log("hi", this.polynomArrayX)
+    this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, this.polynomArray, this.polynomArrayX).setShowNegativeAxis(false).setColor(0xff0000).setBoundarys(this.points[0].x, this.points[2].x));
   }
 
   addTRing(y){
@@ -40,6 +47,9 @@ export class HermiteScene extends AnimatedScene{
 
   addAbleitungsvektor(){
     this.add(new AbleitungsVector(this.currentT, this.polynomArray));
+
+    this.add(new AbleitungsVector(0, this.polynomArray));
+    this.add(new AbleitungsVector(1, this.polynomArray));
   }
 
   addArrowLines(addLinesTogether){
@@ -70,6 +80,29 @@ export class HermiteScene extends AnimatedScene{
     let arrowLine3 = new Linie().setPoints([hermiteArrowOrigin, new Vector3(m1.x * Hstrich1(t), m1.y * Hstrich1(t))]).setColor(COLOR_3);
 
 
+    function addTogether(t, p0, m0, p1, m1){
+      return H0(t) * p0 + Hstrich0(t) * m0 + H1(t) * p1 + Hstrich1(t) * m1;
+    }
+
+    let yellowX = addTogether(t, p0.x, m0.x, p1.x, m1.x);
+    console.log(yellowX, calcY(this.currentT, this.polynomArrayX))
+
+    let yellowY = addTogether(t, p0.y, m0.y, p1.y, m1.y);
+    //console.log(yellowY, calcY(this.currentT, this.polynomArray))
+
+    let yellowVec = new Vector3(yellowX, yellowY);
+    //this.add(new Point(yellowVec))
+    yellowPoints.push(yellowVec)
+    //this.add(new Linie().setPoints(yellowPoints).setColor(0xffff00))
+      //resultPoints.push(new Vector3(i, addTogether(t, p0.y, m0.y, p1.y, m1.y)))
+
+    for (let i = 0; i < this.currentT; i+= DRAW_STEP_SIZE) {
+
+    }
+
+    //let newResultLine = new Linie().setPoints(resultPoints)
+    //this.add(newResultLine)
+
 
     addLinesTogether = true;
     if(addLinesTogether) {
@@ -90,8 +123,8 @@ export class HermiteScene extends AnimatedScene{
     this.addResultLine();
     this.addControlPoints();
 
-    this.addTRing(y);
-    this.addAbleitungsvektor();
+    // this.addTRing(y);
+    // this.addAbleitungsvektor();
 
     this.addArrowLines(false);
 

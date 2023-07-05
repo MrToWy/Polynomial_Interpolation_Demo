@@ -4,11 +4,21 @@ import {Vector3} from "three";
 export function interpolate(points) {
   if (points.length <= 0) throw new Error("Bitte Punkte übergeben.");
 
-  const [matrix, vector] = getMatrixform(points);
+  const [matrix, , vectorY] = getMatrixform(points);
 
   let inverse = mathjs.inv(matrix);
 
-  return mathjs.multiply(inverse, vector);
+  return mathjs.multiply(inverse, vectorY);
+}
+
+export function interpolateX(points) {
+  if (points.length <= 0) throw new Error("Bitte Punkte übergeben.");
+
+  const [matrix, vectorX] = getMatrixform(points);
+
+  let inverse = mathjs.inv(matrix);
+
+  return mathjs.multiply(inverse, vectorX);
 }
 
 export function deCasteljau(t, point0, point1, point2, point3){
@@ -104,7 +114,8 @@ export function getBernsteinPolynomes() {
 
 export function getMatrixform(points) {
   let matrix = [];
-  let vector = [];
+  let vectorY = [];
+  let vectorX = [];
 
   let degree = points.length - 1;
 
@@ -120,9 +131,11 @@ export function getMatrixform(points) {
       }
     }
     matrix.push(rowArray);
-    vector.push(point.y);
+    vectorX.push(point.x);
+    vectorY.push(point.y);
   }
-  return [matrix, vector];
+
+  return [matrix, vectorX, vectorY];
 }
 
 export function getHermitePolynomes(points) {
