@@ -15,7 +15,7 @@ import {Ring} from "../../js/classes/Ring";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
 import {Linie} from "../../js/classes/Linie";
 
-let hermiteArrowOrigin = new Vector3(0.5, 0);
+let hermiteArrowOrigin = new Vector3(0.7, 0.3);
 
 let yellowPoints = []
 
@@ -25,7 +25,7 @@ export class HermiteScene extends AnimatedScene{
     this.points = points;
     this.polynomArray = interpolate(this.points);
     this.polynomArrayX = interpolateX(this.points);
-    this.camera.move(1.2, 1.2);
+    this.camera.move(.5, 0.5);
     //this.camera.translateZ(17)
 
     //console.log(this.polynomArray)

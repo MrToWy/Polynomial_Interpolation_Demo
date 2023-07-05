@@ -3,10 +3,10 @@ import {Vector3} from "three";
 import {HermiteScene} from "./hermiteScene";
 import {BasisScene} from "./basisScene";
 
-let punkt0 = new Vector3(0,0.5,0);
+let punkt0 = new Vector3(0,0.,0);
 let punkt1 = new Vector3(1,1.4,0);
-let ableitung0 = new Vector3(punkt0.x, -0.3,0);
-let ableitung1 = new Vector3(punkt1.x,-0.6,0);
+let ableitung0 = new Vector3(punkt0.x, 3.3,0);
+let ableitung1 = new Vector3(punkt1.x,-3.6,0);
 ableitung0.isAbleitung = true;
 ableitung1.isAbleitung = true;
 
