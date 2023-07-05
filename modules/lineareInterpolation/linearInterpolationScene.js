@@ -12,10 +12,10 @@ let points = [
   new Vector3(4.7,2.32),
   new Vector3(-3.1,-1.32),
 ];
-let point0 = new Point(points[0]).setRadius(POINT_SIZE).setColor(COLOR_0);
-let point1 = new Point(points[1]).setRadius(POINT_SIZE).setColor(COLOR_1);
-let point2 = new Point(points[2]).setRadius(POINT_SIZE).setColor(COLOR_2);
-let point3 = new Point(points[3]).setRadius(POINT_SIZE).setColor(COLOR_3);
+let point0 = new Point(points[0]).setRadius(POINT_SIZE*2).setColor(COLOR_0);
+let point1 = new Point(points[1]).setRadius(POINT_SIZE*2).setColor(COLOR_1);
+let point2 = new Point(points[2]).setRadius(POINT_SIZE*2).setColor(COLOR_2);
+let point3 = new Point(points[3]).setRadius(POINT_SIZE*2).setColor(COLOR_3);
 
 let sceneObjects = [];
 
