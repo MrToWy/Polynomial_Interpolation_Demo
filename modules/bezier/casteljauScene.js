@@ -1,14 +1,13 @@
 import {Point} from "../../js/classes/Point";
-import {Raycaster, Vector2, Vector3} from "three";
+import {Group, Raycaster, Vector2, Vector3} from "three";
 import {
-  ANIMATION_SPEED,
   COLOR_0,
   COLOR_1,
   COLOR_2,
-  COLOR_3, COLOR_4, COLOR_5, COLOR_6,
+  COLOR_3, COLOR_4, COLOR_5, COLOR_6, DRAW_STEP_SIZE,
   POINT_SIZE, WHITE,
   WINDOW_HEIGHT,
-  WINDOW_WIDTH
+  WINDOW_WIDTH, X_AXIS_SIZE
 } from "../../js/constants";
 import {Linie} from "../../js/classes/Linie";
 import {calculateOffset} from "../../js/helpers";
@@ -16,6 +15,8 @@ import {TransformControl} from "../../js/classes/TransformControl";
 import {Ring} from "../../js/classes/Ring";
 import {calcY, deCasteljau, getBernsteinPolynomes, lerpVector} from "../../js/interpolation";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
+import {Polynom} from "../../js/classes/Polynom";
+import {Axis} from "../../js/classes/Axis";
 
 let point0 = new Point(new Vector3(0.1,-0.5,0)).setRadius(POINT_SIZE).setColor(COLOR_0);
 let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(POINT_SIZE).setColor(COLOR_1);
@@ -137,6 +138,24 @@ export class CasteljauScene extends AnimatedScene{
 
   }
 
+  addBernsteinLines() {
+    let bernsteinPolynomes = getBernsteinPolynomes();
+
+    let bernsteinGroup = new Group();
+    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[0]).setShowNegativeAxis(false).setColor(COLOR_0));
+    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[1]).setShowNegativeAxis(false).setColor(COLOR_1));
+    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[2]).setShowNegativeAxis(false).setColor(COLOR_2));
+    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[3]).setShowNegativeAxis(false).setColor(COLOR_3));
+
+    bernsteinGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
+    bernsteinGroup.add(this.getMovingLine());
+
+    bernsteinGroup.translateX(1.5).translateY(1.5);
+    bernsteinGroup.scale.set(0.5, 0.5, 0.5);
+
+    sceneObjects.push(bernsteinGroup);
+  }
+
    addDeCasteljau() {
 
     if (showBezierOrOther === "other") return;
@@ -147,13 +166,13 @@ export class CasteljauScene extends AnimatedScene{
 
         case this.step > 4:
           this.addCasteljauLinesStep2();
-
           this.addCasteljauPointStep3();
 
         case this.step > 3:
           this.addCasteljauLinesStep1();
-
           this.addCasteljauPointStep2();
+
+          this.addBernsteinLines();
 
         case this.step > 2:
           this.addCasteljauPointStep1();
