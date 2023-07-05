@@ -17,6 +17,7 @@ import {calcY, deCasteljau, getBernsteinPolynomes, lerpVector} from "../../js/in
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
 import {Polynom} from "../../js/classes/Polynom";
 import {Axis} from "../../js/classes/Axis";
+import {InteractiveScene} from "../../js/classes/InteractiveScene";
 
 let point0 = new Point(new Vector3(0.1,-0.5,0)).setRadius(POINT_SIZE).setColor(COLOR_0);
 let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(POINT_SIZE).setColor(COLOR_1);
@@ -34,23 +35,21 @@ let sceneObjects = [];
 let showBezierOrOther = "casteljau"; // casteljau or other
 
 
-export class CasteljauScene extends AnimatedScene{
+export class CasteljauScene extends InteractiveScene{
 
   constructor(domElementId) {
-    super(domElementId);
+    super(domElementId, (sceneObject) => {
+      sceneObject.removeAllObjects();
+
+      sceneObject.addDeCasteljau();
+      sceneObject.addOther();
+
+      sceneObject.renderCasteljauLines();
+    });
+
     this.domElementId = domElementId;
 
     this.step = 1;
-
-    this.transformControl = new TransformControl(this.camera, this.renderer, () => {
-      this.removeAllObjects();
-
-      this.addDeCasteljau();
-      this.addOther();
-
-      this.renderCasteljauLines();
-      this.renderer.render(this, this.camera);
-    });
 
     this.camera.move(1,0.5);
   }
@@ -231,45 +230,5 @@ export class CasteljauScene extends AnimatedScene{
     let arrow3length = calcY(this.currentT, bernsteinPolynomes[3]);
 
     return [arrow0length, arrow1length, arrow2length, arrow3length];
-  }
-
-  getCollidingObjects(e, sceneObject){
-    const offset = calculateOffset(document.getElementById(sceneObject.domElementId)); //or some other element
-
-    let posX = e.clientX+offset.x;
-    let posY = e.clientY+offset.y;
-    let pointer = new Vector2((posX / WINDOW_WIDTH) * 2 - 1, -(posY / WINDOW_HEIGHT) * 2 + 1)
-    let raycaster = new Raycaster();
-    raycaster.setFromCamera(pointer, sceneObject.camera);
-
-    // calculate clicked objects
-    return raycaster.intersectObjects(sceneObject.children).filter(obj => {
-      return obj.object instanceof Point;
-    });
-  }
-
-  onDocumentMouseMove( e, sceneObject ) {
-    e.preventDefault();
-
-    let intersects = sceneObject.getCollidingObjects(e, sceneObject);
-
-    document.getElementById(this.domElementId).style.cursor = intersects.length === 0 ? "auto" : "pointer";
-  }
-
-  onDocumentMouseDown( e, sceneObject ) {
-    e.preventDefault();
-
-    let intersects = sceneObject.getCollidingObjects(e, sceneObject);
-
-    if(intersects.length === 0){
-      sceneObject.transformControl.detach();
-      sceneObject.render();
-    }
-
-    for (const intersect of intersects) {
-      sceneObject.transformControl.attach(intersect.object);
-      sceneObject.add(sceneObject.transformControl)
-      sceneObject.render();
-    }
   }
 }
