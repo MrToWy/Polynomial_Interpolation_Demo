@@ -237,6 +237,10 @@ canvas{
   background-color: var(--info-card6-color);
 }
 
+.card7 {
+  background-color: var(--info-card7-color);
+}
+
 .cardEnde {
   background-color: var(--info-cardEnde-color);
   border-bottom-left-radius: 10px;
@@ -264,7 +268,7 @@ canvas{
     grid-row-end: 3;
   }
 
-  #buttons {
+  .buttons {
     display: flex;
     justify-content: space-between;
 
