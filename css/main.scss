@@ -61,9 +61,13 @@ canvas{
   color: var(--bt-color);
 }
 
-#pause{
+#pause {
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+#backButton {
+  margin: 5% 3% 5% auto;
 }
 
 .wrapper {
