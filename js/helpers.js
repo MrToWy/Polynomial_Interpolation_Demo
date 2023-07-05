@@ -15,7 +15,7 @@ export function calculateOffset (domElement) {
     }
 
     if (domElement.scrollTop) {
-      currOffset.y = domElement.scrollTop;
+      //currOffset.y = domElement.scrollTop;  canvas is fixed now and will not scroll
     }
 
     if (domElement.offsetLeft) {
