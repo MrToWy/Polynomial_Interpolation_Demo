@@ -38,6 +38,16 @@ button {
   }
 }
 
+span {
+  &.rot{
+    color: red;
+  }
+
+  &.grün{
+    color: green;
+  }
+}
+
 canvas{
   border: var(--canvas-border-color) solid 2px;
 }
@@ -261,6 +271,7 @@ canvas{
     button {
       width: 33%;
       margin: 1%;
+      font-size: 1rem;
     }
   }
 }
