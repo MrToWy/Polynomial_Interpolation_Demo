@@ -7,10 +7,11 @@ import {
 import {Polynom} from "../../js/classes/Polynom";
 import {COLOR_0, COLOR_1, COLOR_2, COLOR_3, DRAW_STEP_SIZE, POINT_SIZE, X_AXIS_SIZE} from "../../js/constants";
 import {Point} from "../../js/classes/Point";
-import {Vector3} from "three";
+import {Group, Vector3} from "three";
 import {Ring} from "../../js/classes/Ring";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
 import {Linie} from "../../js/classes/Linie";
+import {Axis} from "../../js/classes/Axis";
 
 let hermiteArrowOrigin = new Vector3(0.7, 0.3);
 
@@ -106,8 +107,27 @@ export class HermiteScene extends AnimatedScene{
     this.addAbleitungsvektor();
 
     this.addArrowLines(false);
+    this.addBasisGraph();
 
     return super.render();
+  }
+
+  addBasisGraph(){
+    let bernsteinGroup = new Group();
+
+    let polynomMatrix = getHermitePolynomes(this.points);
+
+    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[0]).setShowNegativeAxis(false).setColor(COLOR_0));
+    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[1]).setShowNegativeAxis(false).setColor(COLOR_1));
+    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2));
+    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3));
+
+    bernsteinGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
+    bernsteinGroup.add(this.getMovingLine());
+
+    bernsteinGroup.translateX(1.5).translateY(1.5);
+    bernsteinGroup.scale.set(0.5, 0.5, 0.5);
+    this.add(bernsteinGroup);
   }
 
   getHermiteArrowLengths(){
