@@ -6,6 +6,7 @@ import {addCardClickListener} from "../../js/uiHelpers";
 let casteljauScene = new CasteljauScene("canvasLeft").render();
 
 window.addEventListener( 'click', (e) => casteljauScene.onDocumentMouseDown(e, casteljauScene), false );
+window.addEventListener( 'mousemove', (e) => casteljauScene.onDocumentMouseMove(e, casteljauScene), false );
 
 for (let i = 1; i <= 6 ; i++) {
   addCardClickListener(casteljauScene, i);

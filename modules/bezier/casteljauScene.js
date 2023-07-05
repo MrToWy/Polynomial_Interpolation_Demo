@@ -248,6 +248,14 @@ export class CasteljauScene extends AnimatedScene{
     });
   }
 
+  onDocumentMouseMove( e, sceneObject ) {
+    e.preventDefault();
+
+    let intersects = sceneObject.getCollidingObjects(e, sceneObject);
+
+    document.getElementById(this.domElementId).style.cursor = intersects.length === 0 ? "auto" : "pointer";
+  }
+
   onDocumentMouseDown( e, sceneObject ) {
     e.preventDefault();
 
