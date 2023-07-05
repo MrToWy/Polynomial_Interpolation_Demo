@@ -6,8 +6,8 @@ import {addCardClickListener} from "../../js/uiHelpers";
 
 let punkt0 = new Vector3(0,0.,0);
 let punkt1 = new Vector3(1,1.4,0);
-let ableitung0 = new Vector3(punkt0.x, 3.3,0);
-let ableitung1 = new Vector3(punkt1.x,-3.6,0);
+let ableitung0 = new Vector3(0, 1.3,0);
+let ableitung1 = new Vector3(1,-1.6,0);
 ableitung0.isAbleitung = true;
 ableitung1.isAbleitung = true;
 
