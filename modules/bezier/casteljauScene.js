@@ -154,20 +154,18 @@ export class CasteljauScene extends InteractiveScene{
     if (showBezierOrOther === "other") return;
 
       switch (true) {
-        case this.step > 5:
+        case this.step > 6:
           this.addCasteljauCurve();
 
-        case this.step > 4:
+        case this.step > 5:
           this.addCasteljauLinesStep2();
           this.addCasteljauPointStep3();
 
-        case this.step > 3:
+        case this.step > 4:
           this.addCasteljauLinesStep1();
           this.addCasteljauPointStep2();
 
-          this.addBernsteinLines();
-
-        case this.step > 2:
+        case this.step > 3:
           this.addCasteljauPointStep1();
           this.addOuterLines();
       }
@@ -180,14 +178,22 @@ export class CasteljauScene extends InteractiveScene{
 
     let joinArrows = false;
     switch (true) {
-      case this.step > 2:
+      case this.step > 4:
         this.addCasteljauCurve();
 
-      case this.step > 1:
+      case this.step > 3:
         joinArrows = true;
+        //TODO: Ring am Ende der Verkettung anzeigen.
+
+      case this.step > 2:
+        this.addBezierArrows(joinArrows);
+
+      case this.step > 1:
+        this.addBernsteinLines();
 
       case this.step > 0:
-        this.addBezierArrows(joinArrows);
+        //TODO: Punkte als Vektoren darstellen
+
     }
 
     this.addElements(sceneObjects);

@@ -21,7 +21,7 @@ export class HermiteScene extends AnimatedScene{
     this.points = points;
     this.polynomArray = interpolate(this.points);
     this.polynomArrayX = interpolateX(this.points);
-    this.camera.move(1, 0.5);
+    this.camera.move(1, 1.3);
   }
 
   addControlPoints(){
@@ -135,7 +135,7 @@ export class HermiteScene extends AnimatedScene{
     bernsteinGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
     bernsteinGroup.add(this.getMovingLine());
 
-    bernsteinGroup.translateX(1.5).translateY(1.5);
+    bernsteinGroup.translateX(1.5).translateY(2.3);
     bernsteinGroup.scale.set(0.5, 0.5, 0.5);
     this.add(bernsteinGroup);
   }
