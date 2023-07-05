@@ -110,14 +110,31 @@ export class HermiteScene extends AnimatedScene{
 
     let y = calcY(this.currentT, this.polynomArray);
 
+    switch (true) {
+      case this.step > 6:
+
+      case this.step > 5:
+
+      case this.step > 4:
+        this.addArrowLines(false);
+
+      case this.step > 3:
+        this.addBasisGraph();
+
+
+      case this.step > 2:
+        this.addTRing(y);
+        this.addAbleitungsvektor();
+
+
+
+      case this.step > 1:
+    }
+
     this.addResultLine();
     this.addControlPoints();
 
-    this.addTRing(y);
-    this.addAbleitungsvektor();
 
-    this.addArrowLines(false);
-    this.addBasisGraph();
 
     return super.render();
   }
