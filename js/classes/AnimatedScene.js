@@ -43,6 +43,9 @@ export class AnimatedScene extends Szene{
       this.pause = true; // TODO: Text auf Button ändern, oder diese Zeile komplett löschen
     }
 
+    document.getElementById("slider").value = this.currentT * 100;
+
+
     this.clear();
 
     runBetweenClearAndRender?.();
