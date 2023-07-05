@@ -42,6 +42,12 @@ export class HermiteScene extends AnimatedScene{
     let linieStart = new Linie().setPoints([new Vector3(), this.points[1]]);
     this.add(linieStart);
 
+    let linieEnd = new Linie().setPoints([new Vector3(), this.points[3]]);
+    linieEnd.move(this.points[2].x, this.points[2].y);
+    this.add(linieEnd);
+  }
+
+  addAbleitunsgvektorT(){
     let x = calcY(this.currentT, this.polynomArrayX)
     let y = calcY(this.currentT, this.polynomArray)
     let xAbleitung = calcYAbleitung(this.currentT, this.polynomArrayX)
@@ -49,10 +55,6 @@ export class HermiteScene extends AnimatedScene{
     let linieT = new Linie().setPoints([new Vector3(), new Vector3(xAbleitung, yAbleitung)]);
     linieT.move(x, y);
     this.add(linieT);
-
-    let linieEnd = new Linie().setPoints([new Vector3(), this.points[3]]);
-    linieEnd.move(this.points[2].x, this.points[2].y);
-    this.add(linieEnd);
   }
 
   addArrowLines(addLinesTogether){
@@ -114,6 +116,7 @@ export class HermiteScene extends AnimatedScene{
       case this.step > 6:
 
       case this.step > 5:
+      //TODO: Arrows als eigene Karten aufsplitten
 
       case this.step > 4:
         this.addArrowLines(false);
@@ -121,20 +124,17 @@ export class HermiteScene extends AnimatedScene{
       case this.step > 3:
         this.addBasisGraph();
 
-
       case this.step > 2:
+        this.addAbleitunsgvektorT();
         this.addTRing(y);
-        this.addAbleitungsvektor();
-
-
+        this.addResultLine();
+        //TODO: Resultline nicht komplett zeichnen nur bis T
 
       case this.step > 1:
+        this.addAbleitungsvektor();
     }
 
-    this.addResultLine();
     this.addControlPoints();
-
-
 
     return super.render();
   }
