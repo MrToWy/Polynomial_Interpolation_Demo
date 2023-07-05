@@ -238,7 +238,6 @@ canvas{
 #grid {
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 60% 20% 20%;
 
   #canvasLeft {
     grid-column-start: 1;
@@ -253,6 +252,16 @@ canvas{
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: 3;
+  }
+
+  #buttons {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      width: 33%;
+      margin: 1%;
+    }
   }
 }
 
