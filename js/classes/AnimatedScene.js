@@ -10,6 +10,11 @@ export class AnimatedScene extends Szene{
 
     this.currentT = 0.25;
     this.pause = true;
+
+    document.getElementById("slider")?.addEventListener('input', (e) => {
+      this.currentT = e.target.value / 100;
+      this.render();
+    });
   }
 
   togglePause(e, sceneObject) {
