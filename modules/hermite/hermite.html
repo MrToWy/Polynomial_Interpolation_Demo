@@ -18,24 +18,25 @@
   <div id="cards" class="cards">
     <div id="card1" class="collapse card1">
       <div class="upper-content" id="upper-card1">
-        <h2>1. Kontrollpunkte</h2>
+        <h2>1. Hermite Interpolation</h2>
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Für unsere Hermite-Spline benötigen wir erstmal <b>zwei Kontrollpunkte</b>.</p>
-          <p>Jeder Kontrollpunkt besitzt eine <b>Position</b> und eine <b>Steigung</b> in diesem Punkt.</p>
+          <p>Die Hermite Interpolation ist eine alternative Methode zur Interpolation, bei der das Polynom nicht nur durch Punkte, sondern auch durch ihre Ableitungen gewichtet dargestellt wird.</p>
+          <p>Bei der Hermite-Interpolation werden die beiden Kontrollpunkte durch eine Funktion interpoliert, welche folgende Eigenschaften besitzt: </p>
+          <p>- Die Funktion durchläuft die Kontrollpunkte.</p>
+          <p>- Die Funktion nimmt die Ableitung in diesen Punkte an.</p>
         </div>
       </div>
     </div>
     <div id="card2" class="collapse card2">
       <div class="upper-content" id="upper-card2">
-        <h2>2. Hermite Spline</h2>
+        <h2>2. Kontrollpunkte</h2>
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Bei der Hermite-Interpolation werden die beiden Kontrollpunkte durch eine Funktion interpoliert, welche folgende Eigenschaften besitzt: </p>
-          <p>- Die Funktion durchläuft die Kontrollpunkte.</p>
-          <p>- Die Funktion nimmt die Ableitung in diesen Punkte an.</p>
+          <p>Für unsere Hermite-Spline benötigen wir also erstmal <b>zwei Kontrollpunkte</b>.</p>
+          <p>Jeder Kontrollpunkt besitzt eine <b>Position</b> und eine <b>Steigung</b>.</p>
         </div>
       </div>
     </div>
@@ -46,6 +47,7 @@
       <div class="content">
         <div class="inner-content">
           <p>Wenn du den Slider veränderst, kannst du dir zu jedem Zeitpunkt den Kurvenpunkt als gewichtetes Mittel zwischen den beiden Kontrollpunkten und den Ableitungen ansehen.</p>
+          <!--TODO: Kurve nur zeichnen mit Ableitung nicht vollständig zeigen-->
         </div>
       </div>
     </div>
@@ -55,11 +57,14 @@
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Die </p>
-          <latex-js>$\Large{H_0(t) = (2t^3-3t^2+1)p_0}$</latex-js>
-          <latex-js>$\Large{H'_0(t) = (t^3-2t^2+t)m_0}$</latex-js>
-          <latex-js>$\Large{H_1(t) = (-2t^3+3t^2)p_1}$</latex-js>
-          <latex-js>$\Large{H'_1(t) = (t^3-t^2)m_1}$</latex-js>
+          <p>Die Basis für die Hermite Interpolation bilden ihre Basisfunktionen.</p>
+          <latex-js>$\Large{H_0(t) = (2t^3-3t^2+1)}$</latex-js>
+          <latex-js>$\Large{\^{H}_0(t) = (t^3-2t^2+t)}$</latex-js>
+          <latex-js>$\Large{H_1(t) = (-2t^3+3t^2)}$</latex-js>
+          <latex-js>$\Large{\^{H}_1(t) = (t^3-t^2)}$</latex-js>
+          <p>Eine Darstellung der Basisfunktionen sieht du oben rechts.</p>
+          <p>Das Interpolationspolynom entsteht durch die Multiplikation der einzelnen Basisfunktionen mit den entsprechenden Punkten und anschließende Addition dieser Terme.</p>
+          <latex-js>$\Large{p(t) = H_0(t) \cdot p_0 + \^{H}_0(t) \cdot m_0 + H_1(t) \cdot p_1 + \^{H}_1(t) \cdot m_1}$</latex-js>
         </div>
       </div>
     </div>
@@ -69,7 +74,9 @@
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Wir können ein letztes Mal die Punkte verbinden und einen neuen von t abhängigen Punkt setzen.</p>
+          <p> Das Polynom kann auch auch als eine aneinander Reihung von Vektorpfeilen dargestellt werden. Hier bei stellt jeder Pfeil eine Basisfunktion dar und in welcher Gewichtung diese Basisfunktion das Interpolationspolynom beeinflusst.</p>
+          <p>Mit dem Slider kannst du für unterschiedliche Zeitpunkte dir den Verlauf der Basisfunktionen angucken.</p>
+          <!--TODO: Arrows einblenden-->
         </div>
       </div>
     </div>

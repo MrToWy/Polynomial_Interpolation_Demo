@@ -8,7 +8,7 @@ let casteljauScene = new CasteljauScene("canvasLeft").render();
 window.addEventListener( 'click', (e) => casteljauScene.onDocumentMouseDown(e, casteljauScene), false );
 document.getElementById("canvasLeft").addEventListener( 'mousemove', (e) => casteljauScene.onDocumentMouseMove(e, casteljauScene), false );
 
-for (let i = 1; i <= 6 ; i++) {
+for (let i = 1; i <= 7 ; i++) {
   addCardClickListener(casteljauScene, i);
 }
 
