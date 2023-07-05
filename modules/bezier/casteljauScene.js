@@ -1,20 +1,16 @@
 import {Point} from "../../js/classes/Point";
-import {Group, Raycaster, Vector2, Vector3} from "three";
+import {Group,  Vector3} from "three";
 import {
   COLOR_0,
   COLOR_1,
   COLOR_2,
   COLOR_3, COLOR_4, COLOR_5, COLOR_6, DRAW_STEP_SIZE,
   POINT_SIZE, WHITE,
-  WINDOW_HEIGHT,
-  WINDOW_WIDTH, X_AXIS_SIZE
+  X_AXIS_SIZE
 } from "../../js/constants";
 import {Linie} from "../../js/classes/Linie";
-import {calculateOffset} from "../../js/helpers";
-import {TransformControl} from "../../js/classes/TransformControl";
 import {Ring} from "../../js/classes/Ring";
 import {calcY, deCasteljau, getBernsteinPolynomes, lerpVector} from "../../js/interpolation";
-import {AnimatedScene} from "../../js/classes/AnimatedScene";
 import {Polynom} from "../../js/classes/Polynom";
 import {Axis} from "../../js/classes/Axis";
 import {InteractiveScene} from "../../js/classes/InteractiveScene";

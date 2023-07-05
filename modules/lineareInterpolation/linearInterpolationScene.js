@@ -1,4 +1,3 @@
-import {Szene} from "../../js/classes/Szene";
 import {getRungePoints, interpolate} from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
 import {COLOR_1, DRAW_STEP_SIZE, POINT_SIZE} from "../../js/constants";
@@ -6,7 +5,6 @@ import {Group, Vector3} from "three";
 import {Point} from "../../js/classes/Point";
 import {Linie} from "../../js/classes/Linie";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
-import {TransformControl} from "../../js/classes/TransformControl";
 
 export class LinearInterpolationScene extends AnimatedScene{
 
