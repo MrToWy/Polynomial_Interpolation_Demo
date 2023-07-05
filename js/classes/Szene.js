@@ -8,6 +8,7 @@ export class Szene extends Scene{
 
   constructor(domElementId) {
     super();
+    this.domElementId = domElementId;
 
     this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
     this.renderer = new Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);

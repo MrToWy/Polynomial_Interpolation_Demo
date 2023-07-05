@@ -45,8 +45,6 @@ export class CasteljauScene extends InteractiveScene{
 
     this.domElementId = domElementId;
 
-    this.step = 1;
-
     this.camera.move(1,0.5);
   }
 

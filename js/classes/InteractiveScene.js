@@ -8,6 +8,7 @@ import {TransformControl} from "./TransformControl";
 export class InteractiveScene extends AnimatedScene{
   constructor(domElementId, redrawWhileDraggingTransformControl) {
     super(domElementId);
+    this.step = 1;
 
     this.transformControl = new TransformControl(this.camera, this.renderer, () => {
 
@@ -51,6 +52,7 @@ export class InteractiveScene extends AnimatedScene{
     }
 
     for (const intersect of intersects) {
+      console.log(sceneObject.transformControl, intersect.object)
       sceneObject.transformControl.attach(intersect.object);
       sceneObject.add(sceneObject.transformControl)
       sceneObject.render();
