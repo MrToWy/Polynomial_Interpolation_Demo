@@ -51,14 +51,14 @@ canvas{
     height: 3.5rem;
     width: 1rem;
     border-radius: 0.2rem;
-    background-color: var(--bt-color);
+    background-color: var(--bt-font-color);
   }
 }
 .silderLabel {
   margin-left: 1rem;
   margin-right: 1rem;
   font-size: 2rem;
-  color: var(--bt-font-color);
+  color: var(--bt-color);
 }
 
 #pause{
