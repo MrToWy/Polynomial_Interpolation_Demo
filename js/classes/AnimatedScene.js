@@ -20,9 +20,9 @@ export class AnimatedScene extends Szene{
   togglePause(e, sceneObject) {
     sceneObject.pause = !sceneObject.pause;
     if(sceneObject.pause){
-      e.target.innerHTML = "Play";
+      e.target.innerHTML = "►";
     } else {
-      e.target.innerHTML = "Pause";
+      e.target.innerHTML = "⏸";
       sceneObject.animate(sceneObject);
     }
   }
