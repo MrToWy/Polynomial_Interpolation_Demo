@@ -24,7 +24,7 @@
         <div class="content">
           <div class="inner-content">
             <p>Die Interpolation von Punkten ist ein gängiges Verfahren in der Computer-Animation.</p>
-            <p>Dort werden für verschiedene Zeitpunkte wichtige Parameter wie Position, Farbe oder Orientierung gesetzt.</p>
+            <p>Dort werden für verschiedene Zeitpunkte wichtige Parameter wie Position, Farbe oder Orientierung gesetzt. Um dann eine flüssige Animation zu haben muss zwischen den unterschiedlichen Zuständen interpoliert werden.</p>
             <p>Es gibt verschiedene Arten zu interpolieren in diesem Kapitel beschäftigen wir uns mit der Polynominterpolation.</p>
           </div>
         </div>
@@ -61,21 +61,17 @@
           <div class="inner-content">
             <p>Die Polynominterpolation hat gewisse Grenzen, würde man eine stetige Funktion interpolieren, so würden die Interpolationspolynome nicht unbedingt sich an diese Funktion annähern.</p>
             <p>Je höher der Polynomgrad, desto größer kann auch der maximale Fehler der Schätzung sein.</p>
+            <div id="buttons">
+              <button id="small">6 Kontrollpunkte</button>
+              <button id="medium">11 Kontrollpunkte</button>
+              <button id="large">18 Kontrollpunkte</button>
+            </div>
           </div>
         </div>
       </div>
       <button  id="backButton" class="backButton" onclick="history.back()">Zurück</button>
     </div>
   </div>
-
-  <div class="grid">
-    <div id="buttons">
-      <button id="small">6 Kontrollpunkte</button>
-      <button id="medium">11 Kontrollpunkte</button>
-      <button id="large">18 Kontrollpunkte</button>
-    </div>
-  </div>
-
   <script src="lineareInterpolation.js"></script>
   </body>
 </html>
