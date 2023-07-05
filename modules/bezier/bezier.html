@@ -119,68 +119,42 @@
   <div id="arrowCards" class="cards" style="display: none">
       <div id="arrowCard1" class="collapse card1">
         <div class="upper-content" id="upper-arrowCard1">
-          <h2>1. Arrow Kontrollpunkte</h2>
+          <h2>1. Kontrollpunkte als Vektoren</h2>
         </div>
         <div class="content">
           <div class="inner-content">
-            <p>Für unsere Bezierkurve benötigen wir erstmal <b>vier Kontrollpunkte</b>.</p>
-            <p>Probiere doch einmal, sie zu bewegen, indem du auf einen Punkt klickst.</p>
+            <p>Jeder Kontrollpunkt kann auch als Vektor dargestellt werden.</p>
           </div>
         </div>
       </div>
       <div id="arrowCard2" class="collapse card2">
         <div class="upper-content" id="upper-arrowCard2">
-          <h2>2. de Casteljau-Algorithmus</h2>
+          <h2>2. Bernsteinpolynome</h2>
         </div>
         <div class="content">
           <div class="inner-content">
-            <p>Wenn wir den Casteljau-Algoritmus auf unsere Kontrollpunkte anwenden entsteht eine Bezierkurve.</p>
-            <p>Mit dem de Casteljau-Algorithmus lässt sich eine Bezierkurve zu bestimmten Zeitpunkte auswerten.</p>
-            <p>Lass uns diesen nun <b>Schritt für Schritt</b> durchgehen!</p>
-            <img src="../../img/deCasteljau.png" alt="Der de Casteljau-Algorithmus">
+            <p>Die Bernsteinpolynome bilden die perfekte Basis für die Eigenschaften einer Bezierkurve. Mithilfe der Bernsteinpolynome können wir versuchen die Bezier-Kurve auf eine andere Art zu zeichnen.</p>
           </div>
         </div>
       </div>
       <div id="arrowCard3" class="collapse card3">
       <div class="upper-content" id="upper-arrowCard3">
-        <h2>3. de Casteljau-Algorithmus - Schritt 1</h2>
+        <h2>3. Bernsteinpolynome als Gewichtung für Vektoren</h2>
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Wir verbinden unsere Kontrollpunkte und können uns nun zu jedem Zeitpunkt auf der Linien bewegen.</p>
-          <p>Diesen Vorgang nennt man <b>lineare Interpolation</b>.</p>
-          <p>Wenn du den Slider veränderst bewegen sich die Punkte auf den Verbindungslinien.</p>
+          <p>Mit den Bernsteinpolynomen kann zu jedem Zeitpunkt die Gewichtung der einzelnen Vektoren bestimmt werden.</p>
+          <p>Probier es doch selbst einmal aus!</p>
         </div>
       </div>
     </div>
       <div id="arrowCard4" class="collapse card4">
       <div class="upper-content" id="upper-arrowCard4">
-        <h2>4. de Casteljau-Algorithmus - Schritt 2</h2>
+        <h2>4. Verschiebung der Vektoren</h2>
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Wenn wir die drei neuen Punkte wieder verbinden, können wir wieder in Abhängigkeit von t zwischen den Punkten interpolieren. </p>
-        </div>
-      </div>
-    </div>
-      <div id="arrowCard5" class="collapse card5">
-      <div class="upper-content" id="upper-arrowCard5">
-        <h2>5. de Casteljau-Algorithmus - Schritt 3</h2>
-      </div>
-      <div class="content">
-        <div class="inner-content">
-          <p>Wir können ein letztes Mal die Punkte verbinden und einen neuen von t abhängigen Punkt setzen.</p>
-        </div>
-      </div>
-    </div>
-      <div id="arrowCard6" class="collapse card6">
-      <div class="upper-content" id="upper-arrowCard6">
-        <h2>6. de Casteljau-Algorithmus - Schritt 4</h2>
-      </div>
-      <div class="content">
-        <div class="inner-content">
-          <p>Dieser Punkt liegt auf der Bezierkurve.</p>
-          <p>Wir können nun in Abhängigkeit von der Zeit die Bezierkurve der Kontrollpunkte zeichnen.</p>
+          <p>Wenn man nun die Vektoren mit einandern verkettet, zeigt ihr Endpunkt auf die Bezierkurve.</p>
         </div>
       </div>
     </div>
