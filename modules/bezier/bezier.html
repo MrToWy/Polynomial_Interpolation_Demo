@@ -10,8 +10,8 @@
 <h1>Bezier</h1>
 <div id="grid">
   <div id="canvasLeft"></div>
-  <div id="cards" class="tabcontent" style="display:block">
-      <div id="card1" class="collapse">
+  <div id="cards" class="cards">
+      <div id="card1" class="collapse card1">
         <div class="upper-content" id="upper-card1">
           <h2>1. Kontrollpunkte</h2>
         </div>
@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div id="card2" class="collapse">
+      <div id="card2" class="collapse card2">
         <div class="upper-content" id="upper-card2">
           <h2>2. de Casteljau-Algorithmus</h2>
         </div>
@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div id="card3" class="collapse">
+      <div id="card3" class="collapse card3">
       <div class="upper-content" id="upper-card3">
         <h2>3. de Casteljau-Algorithmus - Schritt 1</h2>
       </div>
@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-      <div id="card4" class="collapse">
+      <div id="card4" class="collapse card4">
       <div class="upper-content" id="upper-card4">
         <h2>4. de Casteljau-Algorithmus - Schritt 2</h2>
       </div>
@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-      <div id="card5" class="collapse">
+      <div id="card5" class="collapse card5">
       <div class="upper-content" id="upper-card5">
         <h2>5. de Casteljau-Algorithmus - Schritt 3</h2>
       </div>
@@ -67,7 +67,7 @@
         </div>
       </div>
     </div>
-      <div id="card6" class="collapse">
+      <div id="card6" class="collapse card6">
       <div class="upper-content" id="upper-card6">
         <h2>6. de Casteljau-Algorithmus - Schritt 4</h2>
       </div>
@@ -79,18 +79,18 @@
         </div>
       </div>
     </div>
-      <div id="cardEnde" class="collapse">
+      <div id="cardEnde" class="collapse cardEnde">
       <div class="upper-content" id="upper-cardEnde">
         <h2>Slider: </h2>
         <div class="wrapper">
           <label for="slider" class="silderLabel">0</label>
-          <input type="range" min="0" max="100" value="50" id="slider">
+          <input type="range" min="0" max="100" value="50" id="slider" class="slider">
           <label for="slider" class="silderLabel">1</label>
-          <button id="pause">►</button>
+          <button id="pause" class="pause">►</button>
         </div>
       </div>
     </div>
-    <button id="backButton" onclick="history.back()">Zurück</button>
+    <button id="backButton" class="backButton" onclick="history.back()">Zurück</button>
     </div>
 
   <div id="arrowCards" class="tabcontent">

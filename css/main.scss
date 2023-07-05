@@ -42,7 +42,7 @@ canvas{
   border: var(--canvas-border-color) solid 2px;
 }
 
-#slider {
+.slider {
   border-radius: 1rem;
   width: 20rem;
   height: 3.5rem;
@@ -66,7 +66,7 @@ canvas{
   color: var(--bt-color);
 }
 
-#pause {
+.pause {
   width: 3rem;
   height: 3.5rem;
   border-radius: 1rem;
@@ -74,7 +74,7 @@ canvas{
   margin-right: 2rem;
 }
 
-#backButton {
+.backButton {
   margin: 5% 3% 5% auto;
 }
 
@@ -85,7 +85,7 @@ canvas{
   align-items: center;
 }
 
-#cardEnde {
+.cardEnde {
   h2{
     width: 6rem;
   }
@@ -160,11 +160,7 @@ canvas{
 
 
 ////////// ACCORDION \\\\\\\\\\
-#cards.hide {
-  visibility: hidden;
-}
-
-#cards{
+.cards{
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -206,32 +202,32 @@ canvas{
 }
 
 
-#card1{
+.card1{
   background-color: var(--info-card1-color);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-#card2{
+.card2{
   background-color: var(--info-card2-color);
 }
 
-#card3{
+.card3{
   background-color: var(--info-card3-color);
 }
 
-#card4{
+.card4{
   background-color: var(--info-card4-color);
 }
 
-#card5{
+.card5{
   background-color: var(--info-card5-color);
 }
 
-#card6{
+.card6{
   background-color: var(--info-card6-color);
 }
 
-#cardEnde {
+.cardEnde {
   background-color: var(--info-cardEnde-color);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -241,7 +237,7 @@ canvas{
 /////////////////// GRID \\\\\\\\\\\\\\\\\\\
 #grid {
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 50% 50%;
   grid-template-rows: 60% 20% 20%;
 
   #canvasLeft {
@@ -253,7 +249,7 @@ canvas{
     grid-row-start: 2;
   }
 
-  #cards {
+  .cards {
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: 3;

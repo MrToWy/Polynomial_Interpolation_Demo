@@ -12,13 +12,25 @@
     </script>
   </head>
   <body>
-  <h1>Lineare Interpolation</h1>
+  <h1>Polynominterpolation</h1>
 
   <div id="grid">
     <div id="canvasLeft"></div>
-    <div id="cards">
-      <div id="card1" class="collapse">
+    <div id="cards" class="cards">
+      <div id="card1" class="collapse card1">
         <div class="upper-content" id="upper-card1">
+          <h2>Motivation: Interpolation von Punkten</h2>
+        </div>
+        <div class="content">
+          <div class="inner-content">
+            <p>Die Interpolation von Punkten ist ein gängiges Verfahren in der Computer-Animation.</p>
+            <p>Dort werden für verschiedene Zeitpunkte wichtige Parameter wie Position, Farbe oder Orientierung gesetzt.</p>
+            <p>Es gibt verschiedene Arten zu interpolieren in diesem Kapitel beschäftigen wir uns mit der Polynominterpolation.</p>
+          </div>
+        </div>
+      </div>
+      <div id="card2" class="collapse card2">
+        <div class="upper-content" id="upper-card2">
           <h2>Was ist ein Polynom?</h2>
         </div>
         <div class="content">
@@ -30,8 +42,8 @@
           </div>
         </div>
       </div>
-      <div id="card2" class="collapse">
-        <div class="upper-content" id="upper-card2">
+      <div id="card3" class="collapse card3">
+        <div class="upper-content" id="upper-card3">
           <h2>Was ist die Interpolationsaufgabe?</h2>
         </div>
         <div class="content">
@@ -41,8 +53,8 @@
           </div>
         </div>
       </div>
-      <div id="card3" class="collapse">
-        <div class="upper-content" id="upper-card3">
+      <div id="card4" class="collapse card4">
+        <div class="upper-content" id="upper-card4">
           <h2>Grenzen der Interpolation</h2>
         </div>
         <div class="content">
@@ -52,7 +64,7 @@
           </div>
         </div>
       </div>
-      <button  id="backButton" onclick="history.back()">Zurück</button>
+      <button  id="backButton" class="backButton" onclick="history.back()">Zurück</button>
     </div>
   </div>
 
