@@ -6,6 +6,7 @@ export const ANIMATION_SPEED = 0.003;
 export const WINDOW_HEIGHT = window.innerHeight*0.985;
 export const WINDOW_WIDTH = window.innerWidth/2;
 export const LINE_WIDTH = 0.005;
+export const BASISFUNKTIONS_LINE_WIDTH = 0.003;
 
 // COLORS
 export const COLOR_0 = 0xFF0000;
