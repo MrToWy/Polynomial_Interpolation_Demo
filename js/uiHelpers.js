@@ -12,7 +12,7 @@ export function addCardClickListener(scene, number) {
   });
 }
 
-function clearActiveClass() {
+export function clearActiveClass() {
     Array.from(document.querySelectorAll('.collapse')).forEach(
       (el) => el.classList.remove('active')
     );
