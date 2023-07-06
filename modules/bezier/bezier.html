@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bezier</title>
+  <title>Bézier</title>
   <link rel="stylesheet" href="../../css/main.scss" type="text/css">
   <link rel="stylesheet" href="bezier.scss" type="text/css">
 </head>
 <body>
-<h1>Bezier</h1>
+<h1>Bézier</h1>
 <div id="grid">
   <div id="canvasLeft"></div>
   <div id="cards" class="cards">
       <div id="card1" class="collapse card1">
         <div class="upper-content" id="upper-card1">
-          <h2>1. Bezierinterpolation</h2>
+          <h2>1. Bézierinterpolation</h2>
         </div>
         <div class="content">
           <div class="inner-content">
-            <p>Die Bezierinterpolation ist eine weitere Art Punkte zu interpolieren. Sie basiert auf der hermitischen Grundidee die Kurve als gewichtetes Mittel darzustellen.</p>
-            <p>Bezierkurven haben folgende Eigenschaften:</p>
+            <p>Die Bézierinterpolation ist eine weitere Art Punkte zu interpolieren. Sie basiert auf der hermitischen Grundidee die Kurve als gewichtetes Mittel darzustellen.</p>
+            <p>Bézierkurven haben folgende Eigenschaften:</p>
             <ul>
               <li>Zum Zeitpunkt <b>t = 0</b> soll die Kurve im Startpunkt liegen.</li>
               <li>Zum Zeitpunkt <b>t = 1</b> soll die Kurve im Endpunkt liegen.</li>
               <li>In der ersten Kurvenhälfte soll die Kurve stark zum zweiten Punkt <b>b1</b> hingezogen werden.</li>
               <li>In der zweiten Kurvenhälfte soll die Kurve stark zum dritten Punkt <b>b2</b> hingezogen werden.</li>
             </ul>
-            <img src="../../img/grundideeBezier.png" alt="Grundidee Bezier">
+            <img src="../../img/grundideeBezier.png" alt="Grundidee Bézier">
             <p></p>
           </div>
         </div>
@@ -36,9 +36,9 @@
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Der de Casteljau-Algorithmus wird verwendet, um Bezierkurven zu berechnen. Er ist ein effizienter Algorithmus, der die Berechnung von Punkten auf einer Bezierkurve ermöglicht, ohne das gesamte Polynom auszuwerten.</p>
-          <p>Wenn wir den de Casteljau-Algoritmus auf unsere Kontrollpunkte anwenden entsteht also eine Bezierkurve.</p>
-          <p>Der Algorithmus arbeitet nach dem Prinzip der linearen Interpolation. Er teilt eine Bezierkurve in kleinere Teilabschnitte und interpoliert die Kontrollpunkte, um die Positionen der Zwischenpunkte zu berechnen. Dieser Prozess wird iterativ durchgeführt, bis der gewünschte Punkt auf der Kurve erreicht ist.</p>
+          <p>Der de Casteljau-Algorithmus wird verwendet, um Bézierkurven zu berechnen. Er ist ein effizienter Algorithmus, der die Berechnung von Punkten auf einer Bézierkurve ermöglicht, ohne das gesamte Polynom auszuwerten.</p>
+          <p>Wenn wir den de Casteljau-Algoritmus auf unsere Kontrollpunkte anwenden entsteht also eine Bézierkurve.</p>
+          <p>Der Algorithmus arbeitet nach dem Prinzip der linearen Interpolation. Er teilt eine Bézierkurve in kleinere Teilabschnitte und interpoliert die Kontrollpunkte, um die Positionen der Zwischenpunkte zu berechnen. Dieser Prozess wird iterativ durchgeführt, bis der gewünschte Punkt auf der Kurve erreicht ist.</p>
           <p>Lass uns diesen nun <b>Schritt für Schritt</b> durchgehen!</p>
           <img src="../../img/deCasteljau.png" alt="Der de Casteljau-Algorithmus">
         </div>
@@ -50,7 +50,7 @@
         </div>
         <div class="content">
           <div class="inner-content">
-            <p>Für unsere Bezierkurve benötigen wir erstmal <b>vier Kontrollpunkte</b>.</p>
+            <p>Für unsere Bézierkurve benötigen wir erstmal <b>vier Kontrollpunkte</b>.</p>
             <p>Probiere doch einmal, sie zu bewegen, indem du auf einen Punkt klickst.</p>
           </div>
         </div>
@@ -94,8 +94,8 @@
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Wenn man nun den Verlauf des Punktes darstellt, kann man die entstehende Bezierkurve nachverfolgen.</p>
-          <p>Wir können nun in Abhängigkeit von der Zeit die Bezierkurve der Kontrollpunkte zeichnen.</p>
+          <p>Wenn man nun den Verlauf des Punktes darstellt, kann man die entstehende Bézierkurve nachverfolgen.</p>
+          <p>Wir können nun in Abhängigkeit von der Zeit die Bézierkurve der Kontrollpunkte zeichnen.</p>
           <div class="buttons">
             <button id="nextBezier">Weiter</button>
           </div>
@@ -139,7 +139,7 @@
         </div>
         <div class="content">
           <div class="inner-content">
-            <p>Die Bernsteinpolynome bilden die perfekte Basis für die Eigenschaften einer Bezierkurve. Mithilfe der Bernsteinpolynome können wir versuchen die Bezier-Kurve auf eine andere Art zu zeichnen.</p>
+            <p>Die Bernsteinpolynome bilden die perfekte Basis für die Eigenschaften einer Bézierkurve. Mithilfe der Bernsteinpolynome können wir versuchen die Bézierkurve auf eine andere Art zu zeichnen.</p>
           </div>
         </div>
       </div>
@@ -161,17 +161,17 @@
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Wenn man nun die Vektoren verkettet, zeigt ihr Endpunkt auf die Bezierkurve.</p>
+          <p>Wenn man nun die Vektoren verkettet, zeigt ihr Endpunkt auf die Bézierkurve.</p>
         </div>
       </div>
     </div>
       <div id="arrowCard5" class="collapse card5">
       <div class="upper-content" id="upper-arrowCard5">
-        <h2>5. Bezierkurve</h2>
+        <h2>5. Bézierkurve</h2>
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Man kann also durch die Bernsteinpolynome den Verlauf der Bezierkurve darstellen.</p>
+          <p>Man kann also durch die Bernsteinpolynome den Verlauf der Bézierkurve darstellen.</p>
         </div>
       </div>
     </div>
@@ -181,7 +181,7 @@
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Die Bernsteinpolynome bilden die Basis für den de Casteljau Algoritmus. Der im letzten Schritt des de Casteljau Algoritmus entstandene Punkt liegt auf der Bezierkurve und lässt sich ebenso durch die Vektordarstellung nachbilden.</p>
+          <p>Die Bernsteinpolynome bilden die Basis für den de Casteljau Algoritmus. Der im letzten Schritt des de Casteljau Algoritmus entstandene Punkt liegt auf der Bézierkurve und lässt sich ebenso durch die Vektordarstellung nachbilden.</p>
         </div>
       </div>
     </div>
