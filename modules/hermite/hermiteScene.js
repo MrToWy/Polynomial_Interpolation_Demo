@@ -117,7 +117,6 @@ export class HermiteScene extends AnimatedScene{
 
     this.add(new Point(new Vector3()))
 
-    addLinesTogether = true;
     if(addLinesTogether) {
 
       // move line1 to origin
@@ -149,6 +148,7 @@ export class HermiteScene extends AnimatedScene{
 
   render() {
     this.clear();
+    this.addAxis(false)
 
     let y = calcY(this.currentT, this.polynomArray);
 
