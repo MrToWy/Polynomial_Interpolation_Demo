@@ -73,8 +73,17 @@
       </div>
       <div class="content">
         <div class="inner-content">
-          <p> Das Polynom kann auch auch als eine aneinander Reihung von Vektorpfeilen dargestellt werden. Hier bei stellt jeder Pfeil eine Basisfunktion dar und in welcher Gewichtung diese Basisfunktion das Interpolationspolynom beeinflusst.</p>
-          <p>Mit dem Slider kannst du für unterschiedliche Zeitpunkte dir den Verlauf der Basisfunktionen angucken.</p>
+          <p>Das Polynom kann auch auch mit Vektorpfeilen dargestellt werden. Hier bei stellt jeder Pfeil eine Basisfunktion dar und in welcher Gewichtung diese Basisfunktion das Interpolationspolynom beeinflusst.</p>
+          <p>Mit dem Slider kannst du für unterschiedliche Zeitpunkte dir den Verlauf der Basisfunktionen ansehen.</p>
+
+          <p>Der Ursprung des <span class="color0">ersten</span> und des <span class="color1">zweiten</span> Vektorpfeils ist an einem beliebigen Punkt. Wir geben den Punkt hier einmal vor und setzen ihn auf x = 0.7 und y = 0.3. Von da aus läuft der Pfeil in Richtung der Kontrollpunkte.</p>
+          <p>Der Ursprung des <span class="color2">dritten</span> und des <span class="color3">vierten</span> Vektorpfeils ist im Ursprung. Er geht von da aus in Richtung der gegebenen Ableitungspunkte.</p>
+
+          <p>Wenn wir mit dem folgenden Switch jetzt die Vektorpfeile von dem ausgesuchten Punkt x = 0.7 und y=0.3 aus aufaddieren, landen wir auf dem Graphen.</p>
+          <div class="switchWrapper">
+            <input type="checkbox" id="switch" /><label id="switchLabel" for="switch">Toggle</label>
+            <span>Vektorpfeile summieren</span>
+          </div>
         </div>
       </div>
     </div>

@@ -25,3 +25,7 @@ for (let i = 1; i <= 6 ; i++) {
 }
 
 window.addEventListener('click', () => hermiteScene.render())
+document.getElementById('switch').addEventListener('change', (e) => {
+  hermiteScene.addLinesTogether = e.currentTarget.checked;
+  hermiteScene.render();
+})

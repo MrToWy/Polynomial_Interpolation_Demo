@@ -34,6 +34,7 @@ export class HermiteScene extends AnimatedScene{
     this.polynomArray = interpolate(this.points);
     this.polynomArrayX = interpolateX(this.points);
     this.camera.move(1, 1.3);
+    this.addLinesTogether = false;
 
    this.initBernsteinGroup();
   }
@@ -99,7 +100,7 @@ export class HermiteScene extends AnimatedScene{
     this.add(linie);
   }
 
-  addArrowLines(addLinesTogether){
+  addArrowLines(){
     this.add(new Point(hermiteArrowOrigin))
 
     let hermiteArrowLengths = this.getHermiteArrowLengths(this.points)
@@ -118,7 +119,7 @@ export class HermiteScene extends AnimatedScene{
 
     this.add(new Point(new Vector3()))
 
-    if(addLinesTogether) {
+    if(this.addLinesTogether) {
 
       // move line1 to origin
       // move line1 to end of line0
@@ -160,7 +161,7 @@ export class HermiteScene extends AnimatedScene{
       //TODO: Arrows als eigene Karten aufsplitten
 
       case this.step > 4:
-        this.addArrowLines(false);
+        this.addArrowLines();
 
       case this.step > 3:
         this.addBasisGraph();
