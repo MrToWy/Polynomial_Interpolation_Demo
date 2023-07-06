@@ -150,58 +150,56 @@ canvas{
     padding: 1em;
     display: flex;
     align-items: center;
-    text-align: center;
+    text-align: left;
 
     margin: 1em;
-    width: 25em;
+    width: 20em;
     min-width: 20%;
     height: 40em;
     border-radius: 2rem;
 
-    background-color: var(--card-color);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    border-left: 12px solid rgba(0, 0, 0, 0.12);
 
     &.card1{
-      background-image: url("../img/lineareInterpolation.png");
+      background-color: var(--info-card1-color);
     }
 
     &.card2{
-      background-image: url("../img/hermite.png");
+      background-color: var(--info-card2-color);
     }
 
     &.card3{
-      background-image: url("../img/bezier.svg");
+      background-color: var(--info-card3-color);
     }
 
 
     &:hover{
       cursor: pointer;
+      transform: scale(.95);
+      transition: .5s;
 
       .heading{
+        opacity: 1;
         transform: scale(1);
-        opacity: 0.8;
       }
     }
 
     .heading {
-      transform: scale(2);
-      opacity: 0;
-      transition: .5s;
+      color: white;
+      opacity: 0.4;
+      margin: auto;
+      word-break: break-word;
+      font-size: clamp(1rem, 2.5vw, 3rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-decoration: none;
     }
   }
 
-  .heading {
-    margin: auto;
-    word-break: break-word;
-    font-size: clamp(1rem, 3vw, 4rem);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 900;
-    text-decoration: none;
-    color: black;
-  }
 }
 
 
