@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 import {CasteljauScene} from "./CasteljauScene";
-import {addCardClickListener} from "../../js/uiHelpers";
+import {addCardClickListener, clearActiveClass} from "../../js/uiHelpers";
 
 
 let casteljauScene = new CasteljauScene("canvasLeft").render();
@@ -19,6 +19,9 @@ for (const navButton of document.getElementsByClassName("navButton")) {
 
     casteljauScene.showBezierOrOther = "other";
     casteljauScene.step = 1;
+
+    clearActiveClass();
+    document.getElementById("arrowCard1").classList.add('active');
   });
 }
 
@@ -28,6 +31,9 @@ document.getElementById("arrowNavButton").addEventListener('click',() => {
 
     casteljauScene.showBezierOrOther = "bezier";
     casteljauScene.step = 1;
+
+    clearActiveClass();
+  document.getElementById("card1").classList.add('active');
 });
 
 
