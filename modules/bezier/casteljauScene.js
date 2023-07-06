@@ -139,7 +139,7 @@ export class CasteljauScene extends InteractiveScene{
       let result = deCasteljau( t, point0, point1, point2, point3);
       curve.push(result[5]);
     }
-    sceneObjects.push(castelJauCurve.setPoints(curve).setColor(COLOR_6));
+    sceneObjects.push(new Linie().setPoints(curve).setColor(COLOR_6));
   }
 
   removeAllObjects(){
@@ -236,9 +236,9 @@ export class CasteljauScene extends InteractiveScene{
     let bezierArrow3 = lerpVector(bezierArrowOrigin, point3.position, bezierArrowLengths[3]);
 
     arrowLine0.setPoints([bezierArrowOrigin, bezierArrow0]);
-    arrowLine1.setPoints([bezierArrowOrigin, bezierArrow1]);
-    arrowLine2.setPoints([bezierArrowOrigin, bezierArrow2]);
-    arrowLine3.setPoints([bezierArrowOrigin, bezierArrow3]);
+    arrowLine1.setPoints([bezierArrowOrigin, bezierArrow1]).setPosition(0, 0);
+    arrowLine2.setPoints([bezierArrowOrigin, bezierArrow2]).setPosition(0, 0);
+    arrowLine3.setPoints([bezierArrowOrigin, bezierArrow3]).setPosition(0, 0);
 
     if(joinArrows){
       arrowLine1.setPosition(bezierArrow0.x-bezierArrowOrigin.x, bezierArrow0.y-bezierArrowOrigin.y);
