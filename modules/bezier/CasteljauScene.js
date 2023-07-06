@@ -221,8 +221,6 @@ export class CasteljauScene extends InteractiveScene{
       case this.step > 3:
         joinArrows = true;
 
-        //TODO: Ring am Ende der Verkettung anzeigen.
-
       case this.step > 2:
         this.addBezierArrows(joinArrows);
         break;
