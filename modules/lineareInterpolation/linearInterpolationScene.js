@@ -11,11 +11,15 @@ let points = [
   new Vector3(1,1.12),
   new Vector3(4.7,2.32),
   new Vector3(-3.1,-1.32),
+  new Vector3(-5,-0.32),
+  new Vector3(5,-0.32),
 ];
-let point0 = new Point(points[0]).setRadius(POINT_SIZE*2).setColor(COLOR_0);
-let point1 = new Point(points[1]).setRadius(POINT_SIZE*2).setColor(COLOR_1);
-let point2 = new Point(points[2]).setRadius(POINT_SIZE*2).setColor(COLOR_2);
-let point3 = new Point(points[3]).setRadius(POINT_SIZE*2).setColor(COLOR_3);
+let point0 = new Point(points[0]).setRadius(POINT_SIZE*2);
+let point1 = new Point(points[1]).setRadius(POINT_SIZE*2);
+let point2 = new Point(points[2]).setRadius(POINT_SIZE*2);
+let point3 = new Point(points[3]).setRadius(POINT_SIZE*2);
+let point4 = new Point(points[4]).setRadius(POINT_SIZE*2);
+let point5 = new Point(points[5]).setRadius(POINT_SIZE*2);
 
 let sceneObjects = [];
 
@@ -75,13 +79,13 @@ export class LinearInterpolationScene extends InteractiveScene{
   addInterpolationPoints(){
     if(this.step >= 5) return;
 
-    this.addElements([point0, point1, point2, point3, this.transformControl]);
+    this.addElements([point0, point1, point2, point3, point4, point5, this.transformControl]);
   }
 
   addInterpolationLine(){
     if(this.step >= 5) return;
 
-    let polynomArray = interpolate([point0.position, point1.position, point2.position, point3.position]);
+    let polynomArray = interpolate([point0.position, point1.position, point2.position, point3.position, point4.position, point5.position]);
     sceneObjects.push(new Polynom(DRAW_STEP_SIZE, this.xAxisSize, polynomArray));
   }
 
