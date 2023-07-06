@@ -35,6 +35,10 @@ export class HermiteScene extends AnimatedScene{
     this.polynomArrayX = interpolateX(this.points);
     this.camera.move(1, 1.3);
 
+   this.initBernsteinGroup();
+  }
+
+  initBernsteinGroup(){
     this.bernsteinGroup = new Group();
     let polynomMatrix = getHermitePolynomes(this.points);
     this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[0]).setShowNegativeAxis(false).setColor(COLOR_0));
