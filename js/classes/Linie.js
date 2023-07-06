@@ -40,7 +40,6 @@ export class Linie extends Line2{
   }
 
   setPosition(x, y){
-    console.log("move from", this.positionVector.x, this.positionVector.y, "to", x, y)
     // move to origin
     this.translateX(-this.positionVector.x);
     this.translateY(-this.positionVector.y);
