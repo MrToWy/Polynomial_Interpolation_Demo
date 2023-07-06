@@ -39,17 +39,17 @@ export class HermiteScene extends AnimatedScene{
   }
 
   initBernsteinGroup(){
-    this.bernsteinGroup = new Group();
+    this.baseFunctionGroup = new Group();
     let polynomMatrix = getHermitePolynomes(this.points);
-    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[0]).setShowNegativeAxis(false).setColor(COLOR_0).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
-    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[1]).setShowNegativeAxis(false).setColor(COLOR_1).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
-    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
-    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+    this.baseFunctionGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[0]).setShowNegativeAxis(false).setColor(COLOR_0).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+    this.baseFunctionGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[1]).setShowNegativeAxis(false).setColor(COLOR_1).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+    this.baseFunctionGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+    this.baseFunctionGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
 
-    this.bernsteinGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
+    this.baseFunctionGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
 
-    this.bernsteinGroup.translateX(1.5).translateY(2.3);
-    this.bernsteinGroup.scale.set(0.5, 0.5, 0.5);
+    this.baseFunctionGroup.translateX(1.5).translateY(2.3);
+    this.baseFunctionGroup.scale.set(0.5, 0.5, 0.5);
   }
 
   addControlPoints(){
@@ -104,16 +104,16 @@ export class HermiteScene extends AnimatedScene{
 
     let hermiteArrowLengths = this.getHermiteArrowLengths(this.points)
 
-    let bezierArrow0 = lerpVector(hermiteArrowOrigin,this.points[0], hermiteArrowLengths[0]);
-    let bezierArrow1 = lerpVector(new Vector3(),this.points[1], hermiteArrowLengths[1]);
-    let bezierArrow2 = lerpVector(hermiteArrowOrigin, this.points[2], hermiteArrowLengths[2]);
-    let bezierArrow3 = lerpVector(new Vector3() ,this.points[3], hermiteArrowLengths[3]);
+    let hermiteArrow0 = lerpVector(hermiteArrowOrigin,this.points[0], hermiteArrowLengths[0]);
+    let hermiteArrow1 = lerpVector(new Vector3(),this.points[1], hermiteArrowLengths[1]);
+    let hermiteArrow2 = lerpVector(hermiteArrowOrigin, this.points[2], hermiteArrowLengths[2]);
+    let hermiteArrow3 = lerpVector(new Vector3() ,this.points[3], hermiteArrowLengths[3]);
     this.add(new Point(hermiteArrowOrigin));
 
-    let arrowLine0 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow0]).setColor(COLOR_0);
-    let arrowLine1 = new Linie().setPoints([new Vector3(), bezierArrow1]).setColor(COLOR_1);
-    let arrowLine2 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow2]).setColor(COLOR_2);
-    let arrowLine3 = new Linie().setPoints([new Vector3(), bezierArrow3]).setColor(COLOR_3);
+    let arrowLine0 = new Linie().setPoints([hermiteArrowOrigin, hermiteArrow0]).setColor(COLOR_0);
+    let arrowLine1 = new Linie().setPoints([new Vector3(), hermiteArrow1]).setColor(COLOR_1);
+    let arrowLine2 = new Linie().setPoints([hermiteArrowOrigin, hermiteArrow2]).setColor(COLOR_2);
+    let arrowLine3 = new Linie().setPoints([new Vector3(), hermiteArrow3]).setColor(COLOR_3);
 
 
     this.add(new Point(new Vector3()))
@@ -122,23 +122,23 @@ export class HermiteScene extends AnimatedScene{
 
       // move line1 to origin
       // move line1 to end of line0
-      arrowLine1.move(bezierArrow0.x, bezierArrow0.y)
+      arrowLine1.move(hermiteArrow0.x, hermiteArrow0.y)
 
 
       // move line2 to origin
       arrowLine2.move(-hermiteArrowOrigin.x, -hermiteArrowOrigin.y)
       // move line2 to end of line1
-      arrowLine2.move(bezierArrow1.x, bezierArrow1.y)
+      arrowLine2.move(hermiteArrow1.x, hermiteArrow1.y)
       // repeat movements from arrowLine1
-      arrowLine2.move(bezierArrow0.x, bezierArrow0.y)
+      arrowLine2.move(hermiteArrow0.x, hermiteArrow0.y)
 
 
       // move line3 to origin
-      arrowLine3.move(bezierArrow2.x, bezierArrow2.y)
+      arrowLine3.move(hermiteArrow2.x, hermiteArrow2.y)
       // repeat movements from arrowLine2
       arrowLine3.move(-hermiteArrowOrigin.x, -hermiteArrowOrigin.y)
-      arrowLine3.move(bezierArrow1.x, bezierArrow1.y)
-      arrowLine3.move(bezierArrow0.x, bezierArrow0.y)
+      arrowLine3.move(hermiteArrow1.x, hermiteArrow1.y)
+      arrowLine3.move(hermiteArrow0.x, hermiteArrow0.y)
   }
 
     this.add(arrowLine0);
@@ -181,9 +181,9 @@ export class HermiteScene extends AnimatedScene{
   }
 
   addBasisGraph(){
-    this.bernsteinGroup.add(this.getMovingLine());
+    this.baseFunctionGroup.add(this.getMovingLine());
 
-    this.add(this.bernsteinGroup);
+    this.add(this.baseFunctionGroup);
   }
 
   getHermiteArrowLengths(){
