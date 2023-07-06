@@ -1,6 +1,6 @@
 import {getRungePoints, interpolate} from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
-import {COLOR_0, COLOR_1, COLOR_2, COLOR_3, DRAW_STEP_SIZE, POINT_SIZE} from "../../js/constants";
+import {COLOR_1, DRAW_STEP_SIZE, POINT_SIZE} from "../../js/constants";
 import {Vector3} from "three";
 import {Point} from "../../js/classes/Point";
 import {Linie} from "../../js/classes/Linie";
