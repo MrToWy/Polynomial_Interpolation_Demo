@@ -54,7 +54,7 @@ export class HermiteScene extends AnimatedScene{
 
   addControlPoints(){
     this.add(new Point(this.points[0]).setRadius(POINT_SIZE).setColor(COLOR_0));
-    this.add(new Point(this.points[2]).setRadius(POINT_SIZE).setColor(COLOR_1));
+    this.add(new Point(this.points[2]).setRadius(POINT_SIZE).setColor(COLOR_2));
   }
 
   addResultLine(){
@@ -66,15 +66,15 @@ export class HermiteScene extends AnimatedScene{
   }
 
   addAbleitungsvektorStartEnd(){
-    this.addAbleitungsArrow(0);
-    this.addAbleitungsArrow(1);
+    this.addAbleitungsArrow(0, COLOR_1);
+    this.addAbleitungsArrow(1, COLOR_3);
   }
 
   addAbleitunsgvektorT(){
     this.addAbleitungsArrow(this.currentT);
   }
 
-  addAbleitungsArrow(t){
+  addAbleitungsArrow(t, color = ARROW_COLOR){
     let x = calcY(t, this.polynomArrayX);
     let y = calcY(t, this.polynomArray);
     let origin = new Vector3(x,y);
@@ -83,12 +83,13 @@ export class HermiteScene extends AnimatedScene{
     let yAbleitung = calcYAbleitung(t, this.polynomArray);
     let dir = new Vector3(xAbleitung, yAbleitung);
 
-    this.addArrowLine(dir, origin);
-    this.addArrowHead(dir, origin);
+    this.addArrowLine(dir, origin, color);
+    this.addArrowHead(dir, origin, color);
   }
 
   addArrowHead(dir, origin, color = ARROW_COLOR){
     let spitze = new ArrowHelper(normalizeVec3(dir),origin, dir.length(), color,0.05, 0.08);
+    spitze.remove(spitze.line)
     this.add(spitze);
   }
 
