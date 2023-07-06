@@ -48,10 +48,6 @@ export class AnimatedScene extends Szene{
     this.currentT += ANIMATION_SPEED;
     if(this.currentT > 1) {
       this.currentT = 0;
-
-      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined paused")) {
-        pauseButton.innerHTML = "play_arrow";
-      }
     }
 
     for (const slider of document.getElementsByClassName("slider")) {
