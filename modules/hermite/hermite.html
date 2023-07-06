@@ -24,8 +24,10 @@
         <div class="inner-content">
           <p>Die Hermite Interpolation ist eine alternative Methode zur Interpolation, bei der das Polynom nicht nur durch Punkte, sondern auch durch ihre Ableitungen gewichtet dargestellt wird.</p>
           <p>Bei der Hermite-Interpolation werden die beiden Kontrollpunkte durch eine Funktion interpoliert, welche folgende Eigenschaften besitzt: </p>
-          <p>- Die Funktion durchläuft die Kontrollpunkte <span class="color0">(0.0, 0.3)</span> und <span class="color2">(1.0, 1.4)</span>.</p>
-          <p>- Die Funktion nimmt die Ableitung in diesen Punkten an. <span class="color1">(0.0, 0.8)</span> und <span class="color3">(1.0, -1.2)</span></p>
+          <ul>
+            <li>Die Funktion durchläuft ihre Kontrollpunkte.</li>
+            <li>Die Funktion nimmt die Ableitung in diesen Punkten an.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -73,13 +75,13 @@
       </div>
       <div class="content">
         <div class="inner-content">
-          <p>Das Polynom kann auch auch mit Vektorpfeilen dargestellt werden. Hier bei stellt jeder Pfeil eine Basisfunktion dar und in welcher Gewichtung diese Basisfunktion das Interpolationspolynom beeinflusst.</p>
-          <p>Mit dem Slider kannst du für unterschiedliche Zeitpunkte dir den Verlauf der Basisfunktionen ansehen.</p>
+          <p>Das Polynom kann auch auch mit Vektorpfeilen dargestellt werden. Hierbei stellt jeder Pfeil eine Basisfunktion dar und gibt an in welcher Gewichtung diese Basisfunktion das Interpolationspolynom beeinflusst.</p>
+          <p>Mit dem Slider kannst du dir für unterschiedliche Zeitpunkte den Verlauf der Basisfunktionen ansehen.</p>
 
-          <p>Der Ursprung des <span class="color0">ersten</span> und des <span class="color1">zweiten</span> Vektorpfeils ist an einem beliebigen Punkt. Wir geben den Punkt hier einmal vor und setzen ihn auf x = 0.7 und y = 0.3. Von da aus läuft der Pfeil in Richtung der Kontrollpunkte.</p>
-          <p>Der Ursprung des <span class="color2">dritten</span> und des <span class="color3">vierten</span> Vektorpfeils ist im Ursprung. Er geht von da aus in Richtung der gegebenen Ableitungspunkte.</p>
+          <p>Der Ursprung des <span class="color0">ersten</span> und des <span class="color1">zweiten</span> Vektorpfeils ist an einem <span class="colorPoint">beliebigen Punkt</span> Wir geben den <span class="colorPoint">Punkt</span> hier einmal vor und setzen ihn auf x = 0.7 und y = 0.3. Von da aus läuft der Pfeil in Richtung der Kontrollpunkte.</p>
+          <p>Der Ursprung des <span class="color2">dritten</span> und des <span class="color3">vierten</span> Vektorpfeils ist im <span class="colorOrigin">Ursprung</span>. Er geht von da aus in Richtung der gegebenen Ableitungspunkte.</p>
 
-          <p>Wenn wir mit dem folgenden Switch jetzt die Vektorpfeile von dem ausgesuchten Punkt x = 0.7 und y=0.3 aus aufaddieren, landen wir auf dem Graphen.</p>
+          <p>Wenn wir mit dem folgenden Switch jetzt die Vektorpfeile von dem ausgesuchten <span class="colorPoint">Punkt</span> x = 0.7 und y = 0.3 aus aufaddieren, landen wir auf dem Graphen.</p>
           <div class="switchWrapper">
             <input type="checkbox" id="switch" /><label id="switchLabel" for="switch">Toggle</label>
             <span>Vektorpfeile summieren</span>

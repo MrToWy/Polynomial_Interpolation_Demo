@@ -67,6 +67,9 @@ span {
   &.colorPoint{
     color: var(--colorPoint);
   }
+  &.colorOrigin{
+    color: var(--colorOrigin);
+  }
 }
 
 canvas{
