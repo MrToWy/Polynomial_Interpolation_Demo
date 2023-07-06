@@ -214,6 +214,14 @@ export class CasteljauScene extends InteractiveScene{
 
     let joinArrows = false;
     switch (true) {
+      case this.step > 5:
+        this.addCasteljauLinesStep2();
+        this.addCasteljauPointStep3();
+        this.addCasteljauLinesStep1();
+        this.addCasteljauPointStep2();
+        this.addCasteljauPointStep1();
+        this.addOuterLines();
+
       case this.step > 4:
         this.addCasteljauCurve();
         this.addCasteljauPointStep3();
