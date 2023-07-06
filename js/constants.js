@@ -22,3 +22,4 @@ export const WHITE = 0xFFFFFF;
 export const RED = 0xFF0000;
 export const ARROW_COLOR = 0xFFFFFF;
 export const LINE_COLOR = 0xFFFFFF;
+export const ORIGIN_COLOR = 0x00beac;

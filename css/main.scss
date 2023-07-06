@@ -61,6 +61,15 @@ span {
   &.color3{
     color: var(--lineColor3);
   }
+  &.colorPolynom{
+    color: var(--colorPolynom);
+  }
+  &.colorPoint{
+    color: var(--colorPoint);
+  }
+  &.colorOrigin{
+    color: var(--colorOrigin);
+  }
 }
 
 canvas{

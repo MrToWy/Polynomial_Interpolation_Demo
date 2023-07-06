@@ -168,7 +168,7 @@ export class LinearInterpolationScene extends InteractiveScene{
   getPoints(pointsArray, pointSize) {
     const points = [];
     for (const point of pointsArray) {
-      points.push(new Point(point).setRadius(pointSize));
+      points.push(new Point(point).setRadius(pointSize*2));
     }
     return points;
   }

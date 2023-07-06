@@ -11,7 +11,7 @@ import {
   COLOR_1,
   COLOR_2,
   COLOR_3,
-  DRAW_STEP_SIZE,
+  DRAW_STEP_SIZE, ORIGIN_COLOR,
   POINT_SIZE,
   RED,
   WHITE,
@@ -101,8 +101,6 @@ export class HermiteScene extends AnimatedScene{
   }
 
   addArrowLines(){
-    this.add(new Point(hermiteArrowOrigin))
-
     let hermiteArrowLengths = this.getHermiteArrowLengths(this.points)
 
     let hermiteArrow0 = lerpVector(hermiteArrowOrigin,this.points[0], hermiteArrowLengths[0]);
@@ -117,7 +115,7 @@ export class HermiteScene extends AnimatedScene{
     let arrowLine3 = new Linie().setPoints([new Vector3(), hermiteArrow3]).setColor(COLOR_3);
 
 
-    this.add(new Point(new Vector3()))
+    this.add(new Point(new Vector3()).setColor(ORIGIN_COLOR))
 
     if(this.addLinesTogether) {
 

@@ -24,8 +24,8 @@
         <div class="content">
           <div class="inner-content">
             <p>Die Interpolation von Punkten ist ein gängiges Verfahren in der Computer-Animation.</p>
-            <p>Dort werden für verschiedene Zeitpunkte wichtige Parameter wie Position, Farbe oder Orientierung gesetzt. Um dann eine flüssige Animation zu haben muss zwischen den unterschiedlichen Zuständen interpoliert werden.</p>
-            <p>Es gibt verschiedene Arten zu interpolieren in diesem Kapitel beschäftigen wir uns mit der Polynominterpolation.</p>
+            <p>Dort werden für verschiedene Zeitpunkte wichtige Parameter wie Position, Farbe oder Orientierung gesetzt. Um eine flüssige Animation zu erreichen, muss zwischen den unterschiedlichen Zuständen interpoliert werden.</p>
+            <p>Es gibt verschiedene Arten zu interpolieren. In diesem Kapitel beschäftigen wir uns mit der Polynominterpolation.</p>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
         </div>
         <div class="content">
           <div class="inner-content">
-            <p>Ein Polynom ist eine Summe von Vielfachen von Potenzen mit natürlich-zahligen Exponenten einer Variablen.</p>
+            <p>Ein <span class="colorPolynom">Polynom</span> ist eine Summe von Vielfachen von Potenzen mit natürlich-zahligen Exponenten einer Variablen.</p>
             <latex-js>
               $\Large{p(x) = \displaystyle\sum_{i=0}^{m} \alpha_i \cdot x^i }$
             </latex-js>
@@ -48,8 +48,8 @@
         </div>
         <div class="content">
           <div class="inner-content">
-            <p>Bei der Polynominterpolation wird ein Polynom so berechnet, dass es die angegebenen Punkte exakt durchläuft.</p>
-            <p>Probier es doch einmal selbst aus, in dem du einen der Punkte verschiebst.</p>
+            <p>Bei der Polynominterpolation wird ein <span class="colorPolynom">Polynom</span> so berechnet, dass es die angegebenen <span class="colorPoint">Punkte</span> exakt durchläuft.</p>
+            <p>Probier' es doch einmal selbst aus, indem du einen der <span class="colorPoint">Punkte</span> verschiebst.</p>
           </div>
         </div>
       </div>
@@ -59,11 +59,11 @@
         </div>
         <div class="content">
           <div class="inner-content">
-            <p>Die Interpolationsaufgabe ist ein Verfahren, dass versucht zu gegebene Datenpunkten ein Polynom zu finden, welches diese Punkte durchläuft.</p>
-            <p>Mithilfe dieses Polynoms können dann Zwischenwerte zwischen den Datenpunkten ausgerechnet werden.</p>
+            <p>Die Interpolationsaufgabe ist ein Verfahren, das versucht zu gegebenen Datenpunkten ein <span class="colorPolynom">Polynom</span> zu finden, welches diese <span class="colorPoint">Punkte</span> durchläuft.</p>
+            <p>Mithilfe dieses <span class="colorPolynom">Polynoms</span> können dann Zwischenwerte zwischen den <span class="colorPoint">Datenpunkten</span> ausgerechnet werden.</p>
 
-            <p id="grad">Das aktuell dargestellte Polynom hat Grad </p>
-            <p>Die allgemeine Formel für ein Polynom vom Grad 4 lautet also: </p>
+            <p id="grad">Das aktuell dargestellte <span class="colorPolynom">Polynom</span> hat Grad </p>
+            <p>Die allgemeine Formel für ein <span class="colorPolynom">Polynom</span> vom Grad 4 lautet also: </p>
             <latex-js>
               $\Large{p(x) =  a + b \cdot x + c \cdot x^2 + d \cdot x^3 + e \cdot x^4  }$
             </latex-js>
@@ -81,9 +81,9 @@
         </div>
         <div class="content">
           <div class="inner-content">
-            <p>Die Polynominterpolation hat gewisse Grenzen, würde man eine stetige Funktion interpolieren, so würden die Interpolationspolynome nicht unbedingt sich an diese Funktion annähern.</p>
+            <p>Die Polynominterpolation hat gewisse Grenzen. Würde man eine stetige Funktion interpolieren, so würden sich die Interpolationspolynome nicht unbedingt an diese Funktion annähern.</p>
             <p>Je höher der Polynomgrad, desto größer kann auch der maximale Fehler der Schätzung sein.</p>
-            <p>Über die folegnden Schaltflächen kannst du die bekannte <span class="grün">Runge-Funktion</span> interpolieren und diese mit ihrem <span class="rot">Interpolationspolynom</span> vergeleichen</p>
+            <p>Über die folgenden Schaltflächen kannst du die bekannte <span class="grün">Runge-Funktion</span> interpolieren und diese mit ihrem <span class="rot">Interpolationspolynom</span> vergeleichen</p>
             <div class="buttons">
               <button id="small">6 Kontrollpunkte</button>
               <button id="medium">11 Kontrollpunkte</button>
