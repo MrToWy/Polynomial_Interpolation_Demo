@@ -7,6 +7,8 @@ export class Ring extends Mesh{
 
     this.material = new MeshBasicMaterial({ color: 0xffff00 });
     this.geometry = new RingGeometry(0.02, 0.04);
+    this.material.depthTest = false;
+    this.renderOrder = 2;
 
     this.translateX(positionVector.x);
     this.translateY(positionVector.y);
