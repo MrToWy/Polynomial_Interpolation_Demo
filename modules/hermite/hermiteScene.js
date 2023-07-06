@@ -34,6 +34,18 @@ export class HermiteScene extends AnimatedScene{
     this.polynomArray = interpolate(this.points);
     this.polynomArrayX = interpolateX(this.points);
     this.camera.move(1, 1.3);
+
+    this.bernsteinGroup = new Group();
+    let polynomMatrix = getHermitePolynomes(this.points);
+    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[0]).setShowNegativeAxis(false).setColor(COLOR_0));
+    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[1]).setShowNegativeAxis(false).setColor(COLOR_1));
+    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2));
+    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3));
+
+    this.bernsteinGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
+
+    this.bernsteinGroup.translateX(1.5).translateY(2.3);
+    this.bernsteinGroup.scale.set(0.5, 0.5, 0.5);
   }
 
   addControlPoints(){
@@ -165,21 +177,9 @@ export class HermiteScene extends AnimatedScene{
   }
 
   addBasisGraph(){
-    let bernsteinGroup = new Group();
+    this.bernsteinGroup.add(this.getMovingLine());
 
-    let polynomMatrix = getHermitePolynomes(this.points);
-
-    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[0]).setShowNegativeAxis(false).setColor(COLOR_0));
-    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[1]).setShowNegativeAxis(false).setColor(COLOR_1));
-    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2));
-    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3));
-
-    bernsteinGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
-    bernsteinGroup.add(this.getMovingLine());
-
-    bernsteinGroup.translateX(1.5).translateY(2.3);
-    bernsteinGroup.scale.set(0.5, 0.5, 0.5);
-    this.add(bernsteinGroup);
+    this.add(this.bernsteinGroup);
   }
 
   getHermiteArrowLengths(){
