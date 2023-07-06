@@ -34,7 +34,7 @@ button {
   color: var(--bt-font-color);
 
   &:hover {
-    background-color: var(--bt-color-hover);
+    //background-color: var(--bt-color-hover);
     color: var(--bt-font-color-hover);;
     cursor: pointer;
   }
@@ -92,6 +92,9 @@ canvas{
     width: 1rem;
     border-radius: 0.2rem;
     background-color: var(--bt-font-color);
+    &:hover{
+    background-color: var(--bt-font-color-hover)
+    }
   }
 }
 .silderLabel {
