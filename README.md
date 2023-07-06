@@ -21,6 +21,7 @@ npm run build
 ## Additional libraries
 - mathjs.org
 - threejs.org
+- latex.js.org
 
 ## Fonts and Icons
 - Google Fonts
