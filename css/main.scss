@@ -178,6 +178,8 @@ canvas{
 
     &:hover{
       cursor: pointer;
+      transform: scale(.95);
+      transition: .5s;
 
       .heading{
         opacity: 1;
@@ -186,21 +188,18 @@ canvas{
     }
 
     .heading {
-      font-size: xxx-large;
-      opacity: 0.2;
+      color: white;
+      opacity: 0.4;
+      margin: auto;
+      word-break: break-word;
+      font-size: clamp(1rem, 2.5vw, 3rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-decoration: none;
     }
   }
 
-  .heading {
-    margin: auto;
-    word-break: break-word;
-    font-size: clamp(1rem, 3vw, 4rem);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 900;
-    text-decoration: none;
-    color: black;
-  }
 }
 
 
