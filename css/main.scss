@@ -48,6 +48,19 @@ span {
   &.grün{
     color: green;
   }
+
+  &.color0{
+    color: var(--lineColor0);
+  }
+  &.color1{
+    color: var(--lineColor1);
+  }
+  &.color2{
+    color: var(--lineColor2);
+  }
+  &.color3{
+    color: var(--lineColor3);
+  }
 }
 
 canvas{
