@@ -46,3 +46,32 @@
     transition: 0.3s;
   }
 }
+
+#legende {
+  display: flex;
+  justify-content: space-evenly;
+  color: var(--h1-font-color);
+
+  p {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+
+    .punkt1 {
+      color: var(--lineColor0);
+      margin-right: 2%;
+    }
+
+    .punkt2 {
+      color: var(--lineColor2);
+    }
+
+    .ableitung1 {
+      color: var(--lineColor1);
+    }
+
+    .ableitung2 {
+      color: var(--lineColor3);
+    }
+  }
+}
