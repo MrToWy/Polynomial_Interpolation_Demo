@@ -231,6 +231,7 @@ export class CasteljauScene extends InteractiveScene{
 
       case this.step > 2:
         this.addBezierArrows(joinArrows);
+        this.addBernsteinLines();
         break;
 
       case this.step > 1:
