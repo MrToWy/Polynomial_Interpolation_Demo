@@ -15,10 +15,13 @@ npm run start
 npm run build
 ```
 
-## Additional libraries  
+## Additional libraries
 - mathjs.org
 - threejs.org
 
+## Fonts and Icons
+- Google Fonts
+
 ## Contributors
-Sophie Fürhoff  
-Tobias Wylega  
+Sophie Fürhoff
+Tobias Wylega

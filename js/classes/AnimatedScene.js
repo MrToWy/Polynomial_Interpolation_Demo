@@ -24,9 +24,13 @@ export class AnimatedScene extends Szene{
   togglePause(e, sceneObject) {
     sceneObject.pause = !sceneObject.pause;
     if(sceneObject.pause){
-      e.target.innerHTML = "►";
+      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined")) {
+        pauseButton.innerHTML = "play_arrow";
+      }
     } else {
-      e.target.innerHTML = "⏸";
+      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined")) {
+        pauseButton.innerHTML = "pause";
+      }
       sceneObject.animate(sceneObject);
     }
   }
@@ -45,9 +49,8 @@ export class AnimatedScene extends Szene{
     if(this.currentT > 1) {
       this.currentT = 0;
 
-      //this.pause = true;
-      for (const pauseButton of document.getElementsByClassName("pause")) {
-        pauseButton.innerHTML = "►"
+      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined")) {
+        pauseButton.innerHTML = "play_arrow";
       }
     }
 
