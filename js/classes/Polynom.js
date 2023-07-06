@@ -1,6 +1,7 @@
 import {Vector3} from "three";
 import {Linie} from "./Linie";
 import {calcY} from "../interpolation";
+import {LINE_COLOR} from "../constants";
 
 export class Polynom extends Linie{
   constructor(stepSize, xAxisSize, polynomArray, polynomArrayX = null) {
@@ -14,7 +15,7 @@ export class Polynom extends Linie{
     this.polynomArray = polynomArray;
     this.polynomArrayX = polynomArrayX;
 
-    this.setColor(0xff0000);
+    this.setColor(LINE_COLOR);
     this.updateObject();
   }
 

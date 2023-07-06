@@ -1,6 +1,6 @@
 import {getRungePoints, interpolate} from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
-import {COLOR_1, DRAW_STEP_SIZE, POINT_SIZE} from "../../js/constants";
+import {COLOR_1, COLOR_2, COLOR_5, DRAW_STEP_SIZE, POINT_SIZE, RUNGE2_COLOR, RUNGE_COLOR} from "../../js/constants";
 import {Vector3} from "three";
 import {Point} from "../../js/classes/Point";
 import {Linie} from "../../js/classes/Linie";
@@ -148,16 +148,16 @@ export class LinearInterpolationScene extends InteractiveScene{
   addRungeScene(){
     if(this.step < 5) return;
 
+    // draw actual runge curve
+    sceneObjects.push(new Linie().setPoints(getRungePoints(500)).setColor(RUNGE_COLOR));
+
     let points = getRungePoints(this.rungePointCount);
     let polynomArray = interpolate(points);
-    sceneObjects.push(new Polynom(DRAW_STEP_SIZE, this.xAxisSize, polynomArray));
+    sceneObjects.push(new Polynom(DRAW_STEP_SIZE, this.xAxisSize, polynomArray).setColor(RUNGE2_COLOR));
     for (const point of this.getPoints(points, POINT_SIZE)) {
       sceneObjects.push(point)
     }
 
-
-    // draw actual runge curve
-    sceneObjects.push(new Linie().setPoints(getRungePoints(500)).setColor(COLOR_1));
   }
 
   setPointCount(count){

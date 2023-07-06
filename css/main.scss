@@ -42,11 +42,11 @@ button {
 
 span {
   &.rot{
-    color: red;
+    color: var(--runge-color);
   }
 
   &.grün{
-    color: green;
+    color: var(--runge2-color);
   }
 
   &.color0{

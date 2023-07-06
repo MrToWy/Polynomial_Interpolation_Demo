@@ -21,5 +21,9 @@ export const GREY = 0x999999;
 export const WHITE = 0xFFFFFF;
 export const RED = 0xFF0000;
 export const ARROW_COLOR = 0xFFFFFF;
-export const LINE_COLOR = 0xFFFFFF;
+export const LINE_COLOR = 0xb9daf6;
 export const ORIGIN_COLOR = 0x00beac;
+export const POINT_COLOR = 0xff0080;
+export const RUNGE_COLOR = 0xb9daf6;
+export const RUNGE2_COLOR = 0x08d37b;
+
