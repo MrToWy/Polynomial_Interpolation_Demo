@@ -130,12 +130,10 @@ export class CasteljauScene extends InteractiveScene{
     sceneObjects.push(ring5.setPosition(casteljauPoints[5]))
   }
 
-  addCasteljauCurve(overwriteT = null){
-    let sett = overwriteT === null ? this.currentT : overwriteT;
-
+  addCasteljauCurve(){
     let stepSize = 0.01;
     let curve = [];
-    for (let t = 0; t <= sett; t+= stepSize) {
+    for (let t = 0; t <= this.currentT; t+= stepSize) {
       let result = deCasteljau( t, point0, point1, point2, point3);
       curve.push(result[5]);
     }
@@ -194,7 +192,7 @@ export class CasteljauScene extends InteractiveScene{
 
       if(overWriteT !== null)
       {
-        this.addCasteljauCurve(1);
+        this.addCasteljauCurve();
       }
 
      this.addElements(sceneObjects);
