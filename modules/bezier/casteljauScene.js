@@ -20,9 +20,40 @@ let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(POINT_SIZE).setColor(CO
 let point2 = new Point(new Vector3(1.8,0.9,0)).setRadius(POINT_SIZE).setColor(COLOR_2);
 let point3 = new Point(new Vector3(1.9,-0.5,0)).setRadius(POINT_SIZE).setColor(COLOR_3);
 
-let linie0 = new Linie().setPoints([point0.position,point1.position]).setColor(WHITE);
-let linie1 = new Linie().setPoints([point1.position,point2.position]).setColor(WHITE);
-let linie2 = new Linie().setPoints([point2.position,point3.position]).setColor(WHITE);
+let outerLine0 = new Linie().setPoints([point0.position,point1.position]).setColor(WHITE);
+let outerLine1 = new Linie().setPoints([point1.position,point2.position]).setColor(WHITE);
+let outerLine2 = new Linie().setPoints([point2.position,point3.position]).setColor(WHITE);
+
+let casteljauLine0 = new Linie().setColor(COLOR_4);
+let casteljauLine1 = new Linie().setColor(COLOR_4);
+let casteljauLine2 = new Linie().setColor(COLOR_5);
+let castelJauCurve = new Linie().setColor(COLOR_6);
+
+
+let arrowLine0 = new Linie().setColor(COLOR_0);
+let arrowLine1 = new Linie().setColor(COLOR_1);
+let arrowLine2 = new Linie().setColor(COLOR_2);
+let arrowLine3 = new Linie().setColor(COLOR_3);
+
+
+let ring0 = new Ring().setColor(COLOR_4);
+let ring1 = new Ring().setColor(COLOR_4);
+let ring2 = new Ring().setColor(COLOR_4);
+let ring3 = new Ring().setColor(COLOR_5);
+let ring4 = new Ring().setColor(COLOR_5);
+let ring5 = new Ring().setColor(COLOR_6);
+
+
+
+let bernsteinPolynomes = getBernsteinPolynomes();
+let bernsteinGroup = new Group();
+bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[0]).setShowNegativeAxis(false).setColor(COLOR_0));
+bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[1]).setShowNegativeAxis(false).setColor(COLOR_1));
+bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[2]).setShowNegativeAxis(false).setColor(COLOR_2));
+bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[3]).setShowNegativeAxis(false).setColor(COLOR_3));
+bernsteinGroup.translateX(1.5).translateY(1.5);
+bernsteinGroup.scale.set(0.5, 0.5, 0.5);
+
 
 let bezierArrowOrigin = new Vector3(1, -0.2);
 
@@ -36,7 +67,7 @@ export class CasteljauScene extends InteractiveScene{
     super(domElementId, (sceneObject) => {
       sceneObject.removeAllObjects();
 
-      sceneObject.addDeCasteljau();
+      sceneObject.addDeCasteljau(1);
       sceneObject.addOther();
 
       sceneObject.renderCasteljauLines();
@@ -46,6 +77,7 @@ export class CasteljauScene extends InteractiveScene{
 
     this.camera.move(1,0.5);
     this.showBezierOrOther = "casteljau"; // casteljau or other
+    bernsteinGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
   }
 
   render(){
@@ -66,47 +98,48 @@ export class CasteljauScene extends InteractiveScene{
   }
 
   addOuterLines(){
-    this.addElements([linie0, linie1, linie2]);
+    this.addElements([outerLine0, outerLine1, outerLine2]);
   }
 
   addCasteljauPointStep1(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    sceneObjects.push(new Ring(casteljauPoints[0]).setColor(COLOR_4));
-    sceneObjects.push(new Ring(casteljauPoints[1]).setColor(COLOR_4));
-    sceneObjects.push(new Ring(casteljauPoints[2]).setColor(COLOR_4));
+    sceneObjects.push(ring0.setPosition(casteljauPoints[0]));
+    sceneObjects.push(ring1.setPosition(casteljauPoints[1]));
+    sceneObjects.push(ring2.setPosition(casteljauPoints[2]));
   }
 
   addCasteljauLinesStep1(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    sceneObjects.push(new Linie().setPoints([casteljauPoints[0], casteljauPoints[1]]).setColor(COLOR_4));
-    sceneObjects.push(new Linie().setPoints([casteljauPoints[1], casteljauPoints[2]]).setColor(COLOR_4));
+    sceneObjects.push(casteljauLine0.setPoints([casteljauPoints[0], casteljauPoints[1]]));
+    sceneObjects.push(casteljauLine1.setPoints([casteljauPoints[1], casteljauPoints[2]]));
   }
 
   addCasteljauPointStep2(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    sceneObjects.push(new Ring(casteljauPoints[3]).setColor(COLOR_5));
-    sceneObjects.push(new Ring(casteljauPoints[4]).setColor(COLOR_5));
+    sceneObjects.push(ring3.setPosition(casteljauPoints[3]));
+    sceneObjects.push(ring4.setPosition(casteljauPoints[4]));
   }
 
   addCasteljauLinesStep2(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    sceneObjects.push(new Linie().setPoints([casteljauPoints[3], casteljauPoints[4]]).setColor(COLOR_5));
+    sceneObjects.push(casteljauLine2.setPoints([casteljauPoints[3], casteljauPoints[4]]));
   }
 
   addCasteljauPointStep3(){
     let casteljauPoints = deCasteljau(this.currentT, point0, point1, point2, point3);
-    sceneObjects.push(new Ring(casteljauPoints[5]).setColor(COLOR_6))
+    sceneObjects.push(ring5.setPosition(casteljauPoints[5]))
   }
 
-  addCasteljauCurve(){
+  addCasteljauCurve(overwriteT = null){
+    let sett = overwriteT === null ? this.currentT : overwriteT;
+
     let stepSize = 0.01;
     let curve = [];
-    for (let t = 0; t <= this.currentT; t+= stepSize) {
+    for (let t = 0; t <= sett; t+= stepSize) {
       let result = deCasteljau( t, point0, point1, point2, point3);
       curve.push(result[5]);
     }
-
-    sceneObjects.push(new Linie().setPoints(curve).setColor(COLOR_6));
+    sceneObjects.push(castelJauCurve.setPoints(curve).setColor(COLOR_6));
   }
 
   removeAllObjects(){
@@ -119,43 +152,32 @@ export class CasteljauScene extends InteractiveScene{
   }
 
   renderCasteljauLines() {
-    this.remove(linie0);
-    this.remove(linie1);
-    this.remove(linie2);
-    linie0 = new Linie().setPoints([point0.position,point1.position]);
-    linie1 = new Linie().setPoints([point1.position,point2.position]);
-    linie2 = new Linie().setPoints([point2.position,point3.position]);
-    this.add(linie0);
-    this.add(linie1);
-    this.add(linie2);
+    this.remove(outerLine0);
+    this.remove(outerLine1);
+    this.remove(outerLine2);
+    outerLine0.setPoints([point0.position,point1.position]);
+    outerLine1.setPoints([point1.position,point2.position]);
+    outerLine2.setPoints([point2.position,point3.position]);
+    this.add(outerLine0);
+    this.add(outerLine1);
+    this.add(outerLine2);
 
   }
 
   addBernsteinLines() {
-    let bernsteinPolynomes = getBernsteinPolynomes();
 
-    let bernsteinGroup = new Group();
-    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[0]).setShowNegativeAxis(false).setColor(COLOR_0));
-    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[1]).setShowNegativeAxis(false).setColor(COLOR_1));
-    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[2]).setShowNegativeAxis(false).setColor(COLOR_2));
-    bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[3]).setShowNegativeAxis(false).setColor(COLOR_3));
-
-    bernsteinGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
     bernsteinGroup.add(this.getMovingLine());
-
-    bernsteinGroup.translateX(1.5).translateY(1.5);
-    bernsteinGroup.scale.set(0.5, 0.5, 0.5);
 
     sceneObjects.push(bernsteinGroup);
   }
 
-   addDeCasteljau() {
+   addDeCasteljau(overWriteT = null) {
 
     if (this.showBezierOrOther === "other") return;
 
       switch (true) {
         case this.step > 6:
-          this.addCasteljauCurve();
+          this.addCasteljauCurve(overWriteT);
 
         case this.step > 5:
           this.addCasteljauLinesStep2();
@@ -168,6 +190,11 @@ export class CasteljauScene extends InteractiveScene{
         case this.step > 3:
           this.addCasteljauPointStep1();
           this.addOuterLines();
+      }
+
+      if(overWriteT !== null)
+      {
+        this.addCasteljauCurve(1);
       }
 
      this.addElements(sceneObjects);
@@ -208,18 +235,18 @@ export class CasteljauScene extends InteractiveScene{
     let bezierArrow2 = lerpVector(bezierArrowOrigin, point2.position, bezierArrowLengths[2]);
     let bezierArrow3 = lerpVector(bezierArrowOrigin, point3.position, bezierArrowLengths[3]);
 
-    let arrow0 = new Linie().setPoints([bezierArrowOrigin, bezierArrow0]).setColor(COLOR_0);
-    let arrow1 = new Linie().setPoints([bezierArrowOrigin, bezierArrow1]).setColor(COLOR_1);
-    let arrow2 = new Linie().setPoints([bezierArrowOrigin, bezierArrow2]).setColor(COLOR_2);
-    let arrow3 = new Linie().setPoints([bezierArrowOrigin, bezierArrow3]).setColor(COLOR_3);
+    arrowLine0.setPoints([bezierArrowOrigin, bezierArrow0]);
+    arrowLine1.setPoints([bezierArrowOrigin, bezierArrow1]);
+    arrowLine2.setPoints([bezierArrowOrigin, bezierArrow2]);
+    arrowLine3.setPoints([bezierArrowOrigin, bezierArrow3]);
 
     if(joinArrows){
-      arrow1.move(bezierArrow0.x-bezierArrowOrigin.x, bezierArrow0.y-bezierArrowOrigin.y);
-      arrow2.move(bezierArrow1.x-2*bezierArrowOrigin.x+bezierArrow0.x, bezierArrow1.y-2*bezierArrowOrigin.y+bezierArrow0.y);
-      arrow3.move(bezierArrow2.x-3*bezierArrowOrigin.x+bezierArrow0.x+bezierArrow1.x, bezierArrow2.y-3*bezierArrowOrigin.y+bezierArrow0.y+bezierArrow1.y);
+      arrowLine1.setPosition(bezierArrow0.x-bezierArrowOrigin.x, bezierArrow0.y-bezierArrowOrigin.y);
+      arrowLine2.setPosition(bezierArrow1.x-2*bezierArrowOrigin.x+bezierArrow0.x, bezierArrow1.y-2*bezierArrowOrigin.y+bezierArrow0.y);
+      arrowLine3.setPosition(bezierArrow2.x-3*bezierArrowOrigin.x+bezierArrow0.x+bezierArrow1.x, bezierArrow2.y-3*bezierArrowOrigin.y+bezierArrow0.y+bezierArrow1.y);
     }
-    sceneObjects.push(arrow0,arrow1,arrow2,arrow3);
-    this.addElements([arrow0,arrow1,arrow2,arrow3]);
+    sceneObjects.push(arrowLine0,arrowLine1,arrowLine2,arrowLine3);
+    this.addElements([arrowLine0,arrowLine1,arrowLine2,arrowLine3]);
   }
 
   getBezierArrowLengths(){
