@@ -24,11 +24,11 @@ export class AnimatedScene extends Szene{
   togglePause(e, sceneObject) {
     sceneObject.pause = !sceneObject.pause;
     if(sceneObject.pause){
-      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined")) {
+      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined paused")) {
         pauseButton.innerHTML = "play_arrow";
       }
     } else {
-      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined")) {
+      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined paused")) {
         pauseButton.innerHTML = "pause";
       }
       sceneObject.animate(sceneObject);
@@ -49,7 +49,7 @@ export class AnimatedScene extends Szene{
     if(this.currentT > 1) {
       this.currentT = 0;
 
-      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined")) {
+      for (const pauseButton of document.getElementsByClassName("material-symbols-outlined paused")) {
         pauseButton.innerHTML = "play_arrow";
       }
     }
