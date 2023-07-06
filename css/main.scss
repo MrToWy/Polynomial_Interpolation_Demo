@@ -50,7 +50,8 @@ span {
 }
 
 canvas{
-  border: var(--canvas-border-color) solid 2px;
+  border: var(--canvas-border-color) solid 5px;
+  box-shadow: rgba(255,250,250,0.1) 10px 0 10px;
 }
 
 .slider {
