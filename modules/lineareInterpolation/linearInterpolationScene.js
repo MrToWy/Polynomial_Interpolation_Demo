@@ -101,16 +101,6 @@ export class LinearInterpolationScene extends InteractiveScene{
     document.getElementById("grad").innerHTML = "Das aktuell dargestellte Polynom hat " + polynomArray.length.toString() + " Kontrollpunkte, also wird ein Polynom vom Grad " + (polynomArray.length -1).toString() + " benötigt.";
 
 
-    //document.getElementById("defaultpolynom").innerHTML = allgemeineFormel;
-
-    document.getElementById("polynomarray").replaceChildren()
-    for (let i = 0; i < polynomArray.length; i++) {
-      document.getElementById("polynomarray").appendChild(document.createTextNode(String.fromCharCode(97 + i) + " = " + polynomArray[i].toFixed(nachKommaStellen)))
-      document.getElementById("polynomarray").appendChild(document.createElement('br'));
-    }
-
-
-
     let latexDivs = document.getElementsByClassName("body")
     for (const katex of latexDivs) {
       try {
@@ -124,7 +114,7 @@ export class LinearInterpolationScene extends InteractiveScene{
 
     }
 
-    let polynomText = "$"
+    let polynomText = "$ \\large{ p(x) = "
     for (let i = 0; i < polynomArray.length; i++) {
 
       let currentValue = polynomArray[i].toFixed(nachKommaStellen);
@@ -142,7 +132,7 @@ export class LinearInterpolationScene extends InteractiveScene{
         polynomText += currentValue + "x^" + (i);
       }
     }
-    polynomText =  polynomText + "$";
+    polynomText =  polynomText + "}$";
 
 
     generator = latexjs.parse(polynomText, { generator: generator })
