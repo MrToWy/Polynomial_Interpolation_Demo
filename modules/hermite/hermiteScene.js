@@ -2,16 +2,28 @@ import {
   calcY, calcYAbleitung,
   getHermitePolynomes,
   interpolate, interpolateX,
-  lerpVector
+  lerpVector, normalizeVec3
 } from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
-import {COLOR_0, COLOR_1, COLOR_2, COLOR_3, DRAW_STEP_SIZE, POINT_SIZE, X_AXIS_SIZE} from "../../js/constants";
+import {
+  ARROW_COLOR,
+  COLOR_0,
+  COLOR_1,
+  COLOR_2,
+  COLOR_3,
+  DRAW_STEP_SIZE,
+  POINT_SIZE,
+  RED,
+  WHITE,
+  X_AXIS_SIZE
+} from "../../js/constants";
 import {Point} from "../../js/classes/Point";
-import {Group, Vector3} from "three";
+import {ArrowHelper, Group, Vector3} from "three";
 import {Ring} from "../../js/classes/Ring";
 import {AnimatedScene} from "../../js/classes/AnimatedScene";
 import {Linie} from "../../js/classes/Linie";
 import {Axis} from "../../js/classes/Axis";
+import * as mathjs from "mathjs";
 
 let hermiteArrowOrigin = new Vector3(0.7, 0.3);
 
@@ -30,31 +42,44 @@ export class HermiteScene extends AnimatedScene{
   }
 
   addResultLine(){
-    this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, this.polynomArray, this.polynomArrayX).setShowNegativeAxis(false).setColor(0xff0000).setBoundarys(this.points[0].x, this.points[2].x));
+    this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, this.polynomArray, this.polynomArrayX).setShowNegativeAxis(false).setColor(RED).setBoundarys(this.points[0].x, this.points[2].x));
   }
 
   addTRing(y){
     this.add(new Ring(new Vector3(calcY(this.currentT, this.polynomArrayX), calcY(this.currentT, this.polynomArray))))
   }
 
-  addAbleitungsvektor(){
-
-    let linieStart = new Linie().setPoints([new Vector3(), this.points[1]]);
-    this.add(linieStart);
-
-    let linieEnd = new Linie().setPoints([new Vector3(), this.points[3]]);
-    linieEnd.move(this.points[2].x, this.points[2].y);
-    this.add(linieEnd);
+  addAbleitungsvektorStartEnd(){
+    this.addAbleitungsArrow(0);
+    this.addAbleitungsArrow(1);
   }
 
   addAbleitunsgvektorT(){
-    let x = calcY(this.currentT, this.polynomArrayX)
-    let y = calcY(this.currentT, this.polynomArray)
-    let xAbleitung = calcYAbleitung(this.currentT, this.polynomArrayX)
-    let yAbleitung = calcYAbleitung(this.currentT, this.polynomArray)
-    let linieT = new Linie().setPoints([new Vector3(), new Vector3(xAbleitung, yAbleitung)]);
-    linieT.move(x, y);
-    this.add(linieT);
+    this.addAbleitungsArrow(this.currentT);
+  }
+
+  addAbleitungsArrow(t){
+    let x = calcY(t, this.polynomArrayX);
+    let y = calcY(t, this.polynomArray);
+    let origin = new Vector3(x,y);
+
+    let xAbleitung = calcYAbleitung(t, this.polynomArrayX);
+    let yAbleitung = calcYAbleitung(t, this.polynomArray);
+    let dir = new Vector3(xAbleitung, yAbleitung);
+
+    this.addArrowLine(dir, origin);
+    this.addArrowHead(dir, origin);
+  }
+
+  addArrowHead(dir, origin){
+    let spitze = new ArrowHelper(normalizeVec3(dir),origin, dir.length(), ARROW_COLOR,0.05, 0.08);
+    this.add(spitze);
+  }
+
+  addArrowLine(dir, origin){
+    let linie = new Linie().setPoints([new Vector3(), dir]).setColor(ARROW_COLOR);
+    linie.move(origin.x, origin.y);
+    this.add(linie);
   }
 
   addArrowLines(addLinesTogether){
@@ -131,7 +156,7 @@ export class HermiteScene extends AnimatedScene{
         //TODO: Resultline nicht komplett zeichnen nur bis T
 
       case this.step > 1:
-        this.addAbleitungsvektor();
+        this.addAbleitungsvektorStartEnd();
     }
 
     this.addControlPoints();

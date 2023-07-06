@@ -18,3 +18,6 @@ export const COLOR_6 = 0x0fe9f0;
 export const CLEAR_COLOR = 0x141C24;
 export const GREY = 0x999999;
 export const WHITE = 0xFFFFFF;
+export const RED = 0xFF0000;
+export const ARROW_COLOR = 0xFFFFFF;
+export const LINE_COLOR = 0xFFFFFF;

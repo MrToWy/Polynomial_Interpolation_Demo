@@ -1,6 +1,7 @@
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
+import {LINE_COLOR, WHITE} from "../constants";
 
 export class Linie extends Line2{
   constructor() {
@@ -8,7 +9,7 @@ export class Linie extends Line2{
     this.geometry = new LineGeometry();
     this.material = new LineMaterial();
     this.material.linewidth = 0.0025;
-    this.material.color.set(0xeeeeee);
+    this.material.color.set(LINE_COLOR);
 
     this.scale.set(1, 1, 1);
   }

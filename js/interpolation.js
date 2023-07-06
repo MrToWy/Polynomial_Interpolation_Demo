@@ -146,3 +146,13 @@ export function getHermitePolynomes(points) {
 
   return trans;
 }
+
+export function normalizeVec3(vec){
+  let normalizedVec = new Vector3();
+  let length = vec.length();
+  normalizedVec.x = vec.x / length;
+  normalizedVec.y = vec.y / length;
+  normalizedVec.z = vec.z / length;
+
+  return normalizedVec;
+}
