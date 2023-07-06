@@ -1,16 +1,20 @@
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
+import {Vector3} from "three";
 
 export class Linie extends Line2{
   constructor() {
     super();
+    this.positionVector = new Vector3();
     this.geometry = new LineGeometry();
     this.material = new LineMaterial();
     this.material.linewidth = 0.0025;
     this.material.color.set(0xeeeeee);
 
     this.scale.set(1, 1, 1);
+
+    console.log(this.id)
   }
 
   setColor(color){
@@ -32,6 +36,20 @@ export class Linie extends Line2{
   move(x, y){
     this.translateX(x);
     this.translateY(y);
+
+    return this;
+  }
+
+  setPosition(x, y){
+    // move to origin
+    this.translateX(-this.positionVector.x);
+    this.translateY(-this.positionVector.y);
+
+    // move to desired location
+    this.translateX(x);
+    this.translateY(y);
+
+    this.positionVector = new Vector3(x, y)
 
     return this;
   }

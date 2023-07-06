@@ -1,7 +1,7 @@
-import {RingGeometry, Mesh, MeshBasicMaterial} from "three";
+import {RingGeometry, Mesh, MeshBasicMaterial, Vector3} from "three";
 
 export class Ring extends Mesh{
-  constructor(positionVector) {
+  constructor(positionVector = new Vector3()) {
     super();
     this.positionVector = positionVector;
 
@@ -11,6 +11,19 @@ export class Ring extends Mesh{
     this.translateX(positionVector.x);
     this.translateY(positionVector.y);
     this.translateY(positionVector.z);
+  }
+
+  setPosition(positionVector){
+    // move back to origin
+    this.translateX(-this.positionVector.x)
+    this.translateY(-this.positionVector.y)
+
+    this.positionVector = positionVector;
+
+    // move to desired position
+    this.translateX(positionVector.x)
+    this.translateY(positionVector.y)
+    return this;
   }
 
   setColor(color){

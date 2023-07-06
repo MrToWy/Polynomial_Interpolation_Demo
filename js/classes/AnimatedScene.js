@@ -17,6 +17,8 @@ export class AnimatedScene extends Szene{
         this.render();
       });
     }
+
+    this.movingLine = new Linie();
   }
 
   togglePause(e, sceneObject) {
@@ -33,7 +35,7 @@ export class AnimatedScene extends Szene{
   getMovingLine(){
     let startOfWhiteLine = new Vector3(this.currentT, -0.3);
     let endOfWhiteLine = new Vector3(this.currentT, 1.2);
-    return new Linie().setPoints([startOfWhiteLine, endOfWhiteLine]).setColor(GREY);
+    return this.movingLine.setPoints([startOfWhiteLine, endOfWhiteLine]).setColor(GREY);
   }
 
   animate(sceneObject, runBetweenClearAndRender = null){
