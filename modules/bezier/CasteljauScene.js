@@ -216,9 +216,11 @@ export class CasteljauScene extends InteractiveScene{
     switch (true) {
       case this.step > 4:
         this.addCasteljauCurve();
+        this.addCasteljauPointStep3();
 
       case this.step > 3:
         joinArrows = true;
+
         //TODO: Ring am Ende der Verkettung anzeigen.
 
       case this.step > 2:
