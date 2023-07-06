@@ -1,6 +1,7 @@
 import {Point} from "../../js/classes/Point";
 import {Group,  Vector3} from "three";
 import {
+  BASISFUNKTIONS_LINE_WIDTH,
   COLOR_0,
   COLOR_1,
   COLOR_2,
@@ -53,10 +54,10 @@ let ring5 = new Ring().setColor(COLOR_6);
 
 let bernsteinPolynomes = getBernsteinPolynomes();
 let bernsteinGroup = new Group();
-bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[0]).setShowNegativeAxis(false).setColor(COLOR_0));
-bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[1]).setShowNegativeAxis(false).setColor(COLOR_1));
-bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[2]).setShowNegativeAxis(false).setColor(COLOR_2));
-bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[3]).setShowNegativeAxis(false).setColor(COLOR_3));
+bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[0]).setShowNegativeAxis(false).setColor(COLOR_0).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[1]).setShowNegativeAxis(false).setColor(COLOR_1).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[2]).setShowNegativeAxis(false).setColor(COLOR_2).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[3]).setShowNegativeAxis(false).setColor(COLOR_3).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
 bernsteinGroup.translateX(1.5).translateY(1.5);
 bernsteinGroup.scale.set(0.5, 0.5, 0.5);
 

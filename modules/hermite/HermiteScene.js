@@ -6,7 +6,7 @@ import {
 } from "../../js/interpolation";
 import {Polynom} from "../../js/classes/Polynom";
 import {
-  ARROW_COLOR,
+  ARROW_COLOR, BASISFUNKTIONS_LINE_WIDTH,
   COLOR_0,
   COLOR_1,
   COLOR_2,
@@ -41,10 +41,10 @@ export class HermiteScene extends AnimatedScene{
   initBernsteinGroup(){
     this.bernsteinGroup = new Group();
     let polynomMatrix = getHermitePolynomes(this.points);
-    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[0]).setShowNegativeAxis(false).setColor(COLOR_0));
-    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[1]).setShowNegativeAxis(false).setColor(COLOR_1));
-    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2));
-    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3));
+    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[0]).setShowNegativeAxis(false).setColor(COLOR_0).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[1]).setShowNegativeAxis(false).setColor(COLOR_1).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[2]).setShowNegativeAxis(false).setColor(COLOR_2).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
+    this.bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, polynomMatrix[3]).setShowNegativeAxis(false).setColor(COLOR_3).setLineWidth(BASISFUNKTIONS_LINE_WIDTH));
 
     this.bernsteinGroup.add(new Axis().setAxisSize(this.xAxisSize, this.yAxisSize));
 
