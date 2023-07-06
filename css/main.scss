@@ -105,6 +105,14 @@ canvas{
 
 .backButton {
   margin: 5% 3% 5% auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+
+  .material-symbols-outlined{
+    margin: 2%;
+  }
 }
 
 .wrapper {
@@ -258,6 +266,10 @@ canvas{
 
 .card7 {
   background-color: var(--info-card7-color);
+}
+
+.cardSlider {
+  background-color: var(--info-cardSlider-color);
 }
 
 .cardEnde {
