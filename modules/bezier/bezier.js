@@ -1,5 +1,5 @@
 import "regenerator-runtime/runtime";
-import {CasteljauScene} from "./casteljauScene";
+import {CasteljauScene} from "./CasteljauScene";
 import {addCardClickListener} from "../../js/uiHelpers";
 
 

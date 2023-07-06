@@ -1,5 +1,5 @@
 import "regenerator-runtime/runtime";
-import {LinearInterpolationScene} from "./linearInterpolationScene";
+import {LinearInterpolationScene} from "./LinearInterpolationScene";
 import {addCardClickListener} from "../../js/uiHelpers";
 
 let scene = new LinearInterpolationScene("canvasLeft").render();

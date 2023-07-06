@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 import {Vector3} from "three";
-import {HermiteScene} from "./hermiteScene";
+import {HermiteScene} from "./HermiteScene";
 import {addCardClickListener} from "../../js/uiHelpers";
 
 let punkt0 = new Vector3(0,0.3,0);
