@@ -92,6 +92,7 @@ canvas{
     width: 1rem;
     border-radius: 0.2rem;
     background-color: var(--bt-font-color);
+
     &:hover{
     background-color: var(--bt-font-color-hover)
     }
@@ -202,7 +203,13 @@ canvas{
       text-decoration: none;
     }
   }
+}
 
+#namen {
+  position: absolute;
+  left: 2%;
+  bottom: 2%;
+  color: white;
 }
 
 
