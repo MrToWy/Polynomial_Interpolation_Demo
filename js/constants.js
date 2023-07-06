@@ -5,7 +5,7 @@ export const DRAW_STEP_SIZE = 0.01;
 export const ANIMATION_SPEED = 0.003;
 export const WINDOW_HEIGHT = window.innerHeight*0.985;
 export const WINDOW_WIDTH = window.innerWidth/2;
-export const WINDOW_WIDTH_FULL = window.innerWidth;
+export const LINE_WIDTH = 0.005;
 
 // COLORS
 export const COLOR_0 = 0xFF0000;
