@@ -181,13 +181,13 @@ export class CasteljauScene extends InteractiveScene{
     sceneObjects.push(bernsteinGroup);
   }
 
-   addDeCasteljau(overWriteT = null) {
+   addDeCasteljau() {
 
     if (this.showBezierOrOther === "other") return;
 
       switch (true) {
         case this.step > 6:
-          this.addCasteljauCurve(overWriteT);
+          this.addCasteljauCurve();
 
         case this.step > 5:
           this.addCasteljauLinesStep2();
@@ -200,11 +200,6 @@ export class CasteljauScene extends InteractiveScene{
         case this.step > 3:
           this.addCasteljauPointStep1();
           this.addOuterLines();
-      }
-
-      if(overWriteT !== null)
-      {
-        this.addCasteljauCurve();
       }
 
      this.addElements(sceneObjects);
