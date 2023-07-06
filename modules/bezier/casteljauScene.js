@@ -20,6 +20,13 @@ let point1 = new Point(new Vector3(0.2,0.9,0)).setRadius(POINT_SIZE).setColor(CO
 let point2 = new Point(new Vector3(1.8,0.9,0)).setRadius(POINT_SIZE).setColor(COLOR_2);
 let point3 = new Point(new Vector3(1.9,-0.5,0)).setRadius(POINT_SIZE).setColor(COLOR_3);
 
+let bezierArrowOrigin = new Vector3(1, -0.2);
+
+let point0Vec = new Linie().setPoints([point0.position,bezierArrowOrigin]).setColor(COLOR_0);
+let point1Vec = new Linie().setPoints([point1.position,bezierArrowOrigin]).setColor(COLOR_1);
+let point2Vec = new Linie().setPoints([point2.position,bezierArrowOrigin]).setColor(COLOR_2);
+let point3Vec = new Linie().setPoints([point3.position,bezierArrowOrigin]).setColor(COLOR_3);
+
 let outerLine0 = new Linie().setPoints([point0.position,point1.position]).setColor(WHITE);
 let outerLine1 = new Linie().setPoints([point1.position,point2.position]).setColor(WHITE);
 let outerLine2 = new Linie().setPoints([point2.position,point3.position]).setColor(WHITE);
@@ -28,7 +35,6 @@ let casteljauLine0 = new Linie().setColor(COLOR_4);
 let casteljauLine1 = new Linie().setColor(COLOR_4);
 let casteljauLine2 = new Linie().setColor(COLOR_5);
 let castelJauCurve = new Linie().setColor(COLOR_6);
-
 
 let arrowLine0 = new Linie().setColor(COLOR_0);
 let arrowLine1 = new Linie().setColor(COLOR_1);
@@ -54,8 +60,6 @@ bernsteinGroup.add(new Polynom(DRAW_STEP_SIZE,X_AXIS_SIZE,bernsteinPolynomes[3])
 bernsteinGroup.translateX(1.5).translateY(1.5);
 bernsteinGroup.scale.set(0.5, 0.5, 0.5);
 
-
-let bezierArrowOrigin = new Vector3(1, -0.2);
 
 let sceneObjects = [];
 
@@ -99,6 +103,13 @@ export class CasteljauScene extends InteractiveScene{
 
   addOuterLines(){
     this.addElements([outerLine0, outerLine1, outerLine2]);
+  }
+
+  addPointVecs(){
+    sceneObjects.push(point0Vec.setPoints([point0.position,bezierArrowOrigin]));
+    sceneObjects.push(point1Vec.setPoints([point1.position,bezierArrowOrigin]));
+    sceneObjects.push(point2Vec.setPoints([point2.position,bezierArrowOrigin]));
+    sceneObjects.push(point3Vec.setPoints([point3.position,bezierArrowOrigin]));
   }
 
   addCasteljauPointStep1(){
@@ -212,13 +223,13 @@ export class CasteljauScene extends InteractiveScene{
 
       case this.step > 2:
         this.addBezierArrows(joinArrows);
+        break;
 
       case this.step > 1:
         this.addBernsteinLines();
 
-      case this.step > 0:
-        //TODO: Punkte als Vektoren darstellen
-
+      case this.step === 1:
+        this.addPointVecs();
     }
 
     this.addElements(sceneObjects);
