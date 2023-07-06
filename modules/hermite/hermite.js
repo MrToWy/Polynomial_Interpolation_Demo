@@ -3,7 +3,7 @@ import {Vector3} from "three";
 import {HermiteScene} from "./hermiteScene";
 import {addCardClickListener} from "../../js/uiHelpers";
 
-let punkt0 = new Vector3(0,0.,0);
+let punkt0 = new Vector3(0,0.3,0);
 let punkt1 = new Vector3(1,1.4,0);
 let ableitung0 = new Vector3(0, 0.8,0);
 let ableitung1 = new Vector3(1,-1.2,0);
