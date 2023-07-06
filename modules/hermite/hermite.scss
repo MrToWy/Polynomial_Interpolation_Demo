@@ -1,9 +1,3 @@
-input[type=checkbox]{
-  height: 0;
-  width: 0;
-  visibility: hidden;
-}
-
 .switchWrapper{
   display: flex;
   justify-content: start;
@@ -12,7 +6,23 @@ input[type=checkbox]{
   span{
     margin: 3%;
   }
+
+  #switch{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+
+    &:checked + #switchLabel{
+      background: var(--switch-bg-color);
+    }
+
+    &:checked + #switchLabel:after {
+      left: calc(100% - 5px);
+      transform: translateX(-100%);
+    }
+  }
 }
+
 
 #switchLabel {
   cursor: pointer;
@@ -23,25 +33,16 @@ input[type=checkbox]{
   display: block;
   border-radius: 100px;
   position: relative;
-}
 
-#switchLabel:after {
-  content: '';
-  position: absolute;
-  top: 0.4rem;
-  left: 0.4rem;
-  width: 1.8rem;
-  height: 1.8rem;
-  background: #fff;
-  border-radius: 9rem;
-  transition: 0.3s;
-}
-
-input:checked + #switchLabel {
-  background: #bada55;
-}
-
-input:checked + #switchLabel:after {
-  left: calc(100% - 5px);
-  transform: translateX(-100%);
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    background: #fff;
+    border-radius: 9rem;
+    transition: 0.3s;
+  }
 }
