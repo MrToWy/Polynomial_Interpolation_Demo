@@ -11,7 +11,7 @@ import {
   COLOR_1,
   COLOR_2,
   COLOR_3,
-  DRAW_STEP_SIZE, ORIGIN_COLOR,
+  DRAW_STEP_SIZE, HERMITE_LINE, HERMITE_ORIGIN, LINE_COLOR, ORIGIN_COLOR,
   POINT_SIZE,
   RED,
   WHITE,
@@ -59,11 +59,12 @@ export class HermiteScene extends AnimatedScene{
   }
 
   addResultLine(){
-    this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, this.polynomArray, this.polynomArrayX).setShowNegativeAxis(false).setColor(RED).setBoundarys(this.points[0].x, this.points[2].x));
+    this.add(new Polynom(DRAW_STEP_SIZE, X_AXIS_SIZE, this.polynomArray, this.polynomArrayX).setShowNegativeAxis(false).setColor(HERMITE_LINE).setBoundarys(this.points[0].x, this.points[2].x));
   }
 
   addTRing(y){
-    this.add(new Ring(new Vector3(calcY(this.currentT, this.polynomArrayX), calcY(this.currentT, this.polynomArray))))
+    this.add(new Ring(new Vector3(calcY(this.currentT, this.polynomArrayX), calcY(this.currentT, this.polynomArray))).setColor(HERMITE_LINE));
+
   }
 
   addAbleitungsvektorStartEnd(){
@@ -107,7 +108,7 @@ export class HermiteScene extends AnimatedScene{
     let hermiteArrow1 = lerpVector(new Vector3(),this.points[1], hermiteArrowLengths[1]);
     let hermiteArrow2 = lerpVector(hermiteArrowOrigin, this.points[2], hermiteArrowLengths[2]);
     let hermiteArrow3 = lerpVector(new Vector3() ,this.points[3], hermiteArrowLengths[3]);
-    this.add(new Point(hermiteArrowOrigin));
+    this.add(new Point(hermiteArrowOrigin).setColor(HERMITE_ORIGIN));
 
     let arrowLine0 = new Linie().setPoints([hermiteArrowOrigin, hermiteArrow0]).setColor(COLOR_0);
     let arrowLine1 = new Linie().setPoints([new Vector3(), hermiteArrow1]).setColor(COLOR_1);
@@ -153,11 +154,6 @@ export class HermiteScene extends AnimatedScene{
     let y = calcY(this.currentT, this.polynomArray);
 
     switch (true) {
-      case this.step > 6:
-
-      case this.step > 5:
-      //TODO: Arrows als eigene Karten aufsplitten
-
       case this.step > 4:
         this.addArrowLines();
 
@@ -168,7 +164,6 @@ export class HermiteScene extends AnimatedScene{
         this.addAbleitunsgvektorT();
         this.addTRing(y);
         this.addResultLine();
-        //TODO: Resultline nicht komplett zeichnen nur bis T
 
       case this.step > 1:
         this.addAbleitungsvektorStartEnd();

@@ -22,8 +22,10 @@ export const WHITE = 0xFFFFFF;
 export const RED = 0xFF0000;
 export const ARROW_COLOR = 0xFFFFFF;
 export const LINE_COLOR = 0xb9daf6;
-export const ORIGIN_COLOR = 0x00beac;
+export const ORIGIN_COLOR = 0x104840;
 export const POINT_COLOR = 0xff0080;
 export const RUNGE_COLOR = 0xb9daf6;
 export const RUNGE2_COLOR = 0x08d37b;
+export const HERMITE_LINE = 0xff8b11;
+export const HERMITE_ORIGIN = 0xFFFFFF;
 
