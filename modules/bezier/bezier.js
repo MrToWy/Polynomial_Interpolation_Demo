@@ -12,15 +12,24 @@ for (let i = 1; i <= 7 ; i++) {
   addCardClickListener(casteljauScene, i);
 }
 
+for (const navButton of document.getElementsByClassName("navButton")) {
+  navButton.addEventListener('click',() => {
+    document.getElementById("cards").style.display = 'none';
+    document.getElementById("arrowCards").style.display = 'flex';
 
+    casteljauScene.showBezierOrOther = "other";
+    casteljauScene.step = 1;
+  });
+}
 
-document.getElementById("nextBezier").addEventListener('click',() => {
-  document.getElementById("cards").style.display = 'none';
-  document.getElementById("arrowCards").style.display = 'flex';
+document.getElementById("arrowNavButton").addEventListener('click',() => {
+    document.getElementById("cards").style.display = 'flex';
+    document.getElementById("arrowCards").style.display = 'none';
 
-  casteljauScene.showBezierOrOther = "other";
-  casteljauScene.step = 1;
+    casteljauScene.showBezierOrOther = "bezier";
+    casteljauScene.step = 1;
 });
+
 
 
 for (const pause of document.getElementsByClassName("pause")) {
