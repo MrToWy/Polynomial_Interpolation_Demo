@@ -87,13 +87,13 @@ export class HermiteScene extends AnimatedScene{
     this.addArrowHead(dir, origin);
   }
 
-  addArrowHead(dir, origin){
-    let spitze = new ArrowHelper(normalizeVec3(dir),origin, dir.length(), ARROW_COLOR,0.05, 0.08);
+  addArrowHead(dir, origin, color = ARROW_COLOR){
+    let spitze = new ArrowHelper(normalizeVec3(dir),origin, dir.length(), color,0.05, 0.08);
     this.add(spitze);
   }
 
-  addArrowLine(dir, origin){
-    let linie = new Linie().setPoints([new Vector3(), dir]).setColor(ARROW_COLOR);
+  addArrowLine(dir, origin, color = ARROW_COLOR){
+    let linie = new Linie().setPoints([new Vector3(), dir]).setColor(color);
     linie.move(origin.x, origin.y);
     this.add(linie);
   }
@@ -103,12 +103,11 @@ export class HermiteScene extends AnimatedScene{
 
     let hermiteArrowLengths = this.getHermiteArrowLengths(this.points)
 
-    let bezierArrow0 = lerpVector(hermiteArrowOrigin, this.points[0], hermiteArrowLengths[0]);
+    let bezierArrow0 = lerpVector(hermiteArrowOrigin,this.points[0], hermiteArrowLengths[0]);
     let bezierArrow1 = lerpVector(new Vector3(),this.points[1], hermiteArrowLengths[1]);
     let bezierArrow2 = lerpVector(hermiteArrowOrigin, this.points[2], hermiteArrowLengths[2]);
     let bezierArrow3 = lerpVector(new Vector3() ,this.points[3], hermiteArrowLengths[3]);
-    this.add(new Point(hermiteArrowOrigin))
-
+    this.add(new Point(hermiteArrowOrigin));
 
     let arrowLine0 = new Linie().setPoints([hermiteArrowOrigin, bezierArrow0]).setColor(COLOR_0);
     let arrowLine1 = new Linie().setPoints([new Vector3(), bezierArrow1]).setColor(COLOR_1);
